@@ -1,4 +1,4 @@
                        Zeit
-Sami                  |
+Sami                  | UML 1h; SQL 1.5
 Georg                 | UML 2h; Login HTML 30min; Dashboard 1.5h;
 Patrick               |
