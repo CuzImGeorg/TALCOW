@@ -32,7 +32,7 @@ abstract class AbstractBase
             $controller = get_class($this);
         }
 
-        $this->template = "src/view/$controller/$template.tpl.php";
+        $this->template = "view/$controller/$template.tpl.php";
     }
 
     protected function getTemplate()

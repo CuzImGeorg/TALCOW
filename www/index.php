@@ -1,6 +1,6 @@
 <?php 
-    require_once('src/funktionen.inc.php');
-    require_once ('src/model/dbconn.php');
+    require_once('model/funktionen.inc.php');
+    require_once ('model/dbconn.php');
 
     spl_autoload_register('autoloadEntities');
     spl_autoload_register('autoloadTraits');

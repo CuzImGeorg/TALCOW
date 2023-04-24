@@ -1,4 +1,4 @@
                        Zeit
 Sami                  |
-Georg                 | UML 2h;
+Georg                 | UML 2h; Login HTML 30min; Dashboard 1.5h;
 Patrick               |

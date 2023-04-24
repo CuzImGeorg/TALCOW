@@ -10,13 +10,12 @@ class IndexController extends AbstractBase {
             if(!$b)  {
 
             }else {
-                $this->addContext("benutzer", $b);
-                $this->setTemplate("chatAktion");
+                $this->addContext("user", $b);
+                $this->setTemplate("dashboard");
             }
         }
         else{
-            $b = new Benutzer(); $b->setNickname("Nickname"); $b->setPassword("Password");
-            $this->addContext("benutzer", $b);
+
         }
 
    }
@@ -37,7 +36,7 @@ class IndexController extends AbstractBase {
         }
    }
 
-   public function error() {
+   public function dashboard() {
 
    }
 

@@ -1,0 +1,40 @@
+
+:root {
+    --navbg: #3c3838;
+    --bg: #4d4848;
+}
+
+ul {
+    list-style-type: none;
+    margin: -8px;
+    padding: 5px;
+    width: 10%;
+    font-size: 24px;
+
+    background-color: var(--navbg);
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+li {
+    border: solid var(--navbg);
+    background-color: var(--bg);
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+
+}
+
+a:hover {
+    color: darkorange;
+}
+
+
+
+
+body {
+    background-color:  var(--bg);
+}
