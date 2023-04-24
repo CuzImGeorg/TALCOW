@@ -16,7 +16,11 @@
         <li><a href="index.phpa?aktion=mgruser">Users</a></li>
         <li><a href="index.php?">News</a></li>
         <li><a href="index.php?">Contact</a></li>
-        <li><a href="index.php?">About</a></li>
+
+
+
+
+        <li><a href="index.php?">System Info</a></li>
     </ul>
 
 
