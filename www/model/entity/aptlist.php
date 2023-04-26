@@ -5,7 +5,6 @@ class aptlist
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private string $name = '';
-    private bool $installed;
     private string $date;
     private int $uid;
     protected static $table = 'aptlist';
@@ -42,21 +41,6 @@ class aptlist
         $this->name = $name;
     }
 
-    /**
-     * @return bool
-     */
-    public function isInstalled(): bool
-    {
-        return $this->installed;
-    }
-
-    /**
-     * @param bool $installed
-     */
-    public function setInstalled(bool $installed)
-    {
-        $this->installed = $installed;
-    }
 
     /**
      * @return string
