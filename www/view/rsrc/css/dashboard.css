@@ -2,6 +2,7 @@
 :root {
     --navbg: #3c3838;
     --bg: #4d4848;
+    --acent: #ca7007
 }
 
 ul {
@@ -36,9 +37,31 @@ a:visited {
 
 }
 
+#maindiv {
+    margin-left: 11%;
+}
 
+#srvDate, #hostname, #srvTime, #uptime {
+    margin-top: -12px;
+}
+
+#rebootbtn {
+    font-size: 18px;
+    margin-left: 0.5%;
+    background-color: #660412;
+    border-style: none;
+}
+
+#rebootbtn:hover {
+    background-color: #920416;
+}
+
+#title {
+    color: var(--acent);
+}
 
 
 body {
     background-color:  var(--bg);
+    font-size: 18px;
 }
