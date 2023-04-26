@@ -40,9 +40,7 @@ class IndexController extends AbstractBase {
 
    }
 
-   public function mgruser() {
 
-   }
 
 
 

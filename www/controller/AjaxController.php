@@ -20,6 +20,10 @@ class AjaxController extends AbstractBase {
 
     }
 
+    public function mgruser() {
+
+    }
+
     private function upTime() {
         $str   = @file_get_contents('/proc/uptime');
         $num   = (int) $str;
