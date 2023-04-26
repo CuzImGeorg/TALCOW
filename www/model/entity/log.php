@@ -92,6 +92,13 @@ class log
         $this->level = $level;
     }
 
-
+    public static function findLogByUserID(int $id)
+    {
+        $sql = "SELECT * FROM `log` WHERE uid =(Select id from user where id =:uid)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('uid' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
+        return $abfrage->fetchAll();
+    }
 
 }

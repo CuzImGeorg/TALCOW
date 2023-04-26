@@ -25,4 +25,9 @@
    * Config IP/DNS
  * Basic Config(Date, Time)
  * Logging
- * 
+
+
+
+
+ZUSÄTZLICH:
+Ticket System zum kontaktieren des Admins.

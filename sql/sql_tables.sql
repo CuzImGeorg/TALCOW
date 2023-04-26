@@ -23,11 +23,13 @@ CREATE TABLE IF NOT EXISTS  aptlist(
 
                                        id serial PRIMARY KEY,
                                        name varchar(63),
-    date date,
+                                       updatedate timestamp default now(),
+    date timestamp default now(),
     uid int,
     FOREIGN KEY(uid) REFERENCES qser(id)
 
     );
+
 
 CREATE TABLE IF NOT EXISTS  m_servicemonitor(
 
