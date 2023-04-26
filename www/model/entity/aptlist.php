@@ -7,6 +7,7 @@ class aptlist
     private string $name = '';
     private string $date;
     private int $uid;
+    private string $update_date = '';
     protected static $table = 'aptlist';
 
     /**
@@ -74,6 +75,29 @@ class aptlist
         $this->uid = $uid;
     }
 
+    /**
+     * @return string
+     */
+    public function getUpdateDate(): string
+    {
+        return $this->update_date;
+    }
 
+    /**
+     * @param string $update_date
+     */
+    public function setUpdateDate(string $update_date): void
+    {
+        $this->update_date = $update_date;
+    }
+
+    public static function findAptlistByUserID(int $id)
+    {
+        $sql = "SELECT * FROM `aptlist` WHERE uid =(Select id from user where id =:uid)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('uid' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'aptlist');
+        return $abfrage->fetchAll();
+    }
 
 }

@@ -73,4 +73,13 @@ class log_action
         $this->modul = $modul;
     }
 
+    public static function findLog_ActionByModul(int $modul)
+    {
+        $sql = "SELECT * FROM `log_action` WHERE modul =(Select id from modul where id =:modul)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('modul' => $modul));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
+        return $abfrage->fetchAll();
+    }
+
 }
