@@ -1,15 +1,14 @@
 <?php
 
-class m_openvpn
+class Log_level
 {
+
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
-    private int $createqser = 0;
     private string $name = '';
     private string $description = '';
-    private string $createtime = '';
 
-    protected static $table = 'm_openvpn';
+    protected static $table = 'Log_level';
 
     /**
      * @return int
@@ -25,22 +24,6 @@ class m_openvpn
     public function setId(int $id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCreateqser(): int
-    {
-        return $this->createqser;
-    }
-
-    /**
-     * @param int $createqser
-     */
-    public function setCreateqser(int $createqser)
-    {
-        $this->createqser = $createqser;
     }
 
     /**
@@ -75,22 +58,13 @@ class m_openvpn
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
-    public function getCreatetime(): string
+    public static function findLog_LevelByModul(int $modul)
     {
-        return $this->createtime;
+        $sql = "SELECT * FROM `log_level` WHERE modul =(Select id from modul where id =:modul)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('modul' => $modul));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
+        return $abfrage->fetchAll();
     }
-
-    /**
-     * @param string $createtime
-     */
-    public function setCreatetime(string $createtime)
-    {
-        $this->createtime = $createtime;
-    }
-
-
 
 }

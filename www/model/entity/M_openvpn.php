@@ -1,13 +1,15 @@
 <?php
 
-class modul_value
+class M_openvpn
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
+    private int $createqser = 0;
     private string $name = '';
     private string $description = '';
+    private string $createtime = '';
 
-    protected static $table = 'modul_value';
+    protected static $table = 'M_openvpn';
 
     /**
      * @return int
@@ -23,6 +25,22 @@ class modul_value
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreateqser(): int
+    {
+        return $this->createqser;
+    }
+
+    /**
+     * @param int $createqser
+     */
+    public function setCreateqser(int $createqser)
+    {
+        $this->createqser = $createqser;
     }
 
     /**
@@ -55,6 +73,22 @@ class modul_value
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatetime(): string
+    {
+        return $this->createtime;
+    }
+
+    /**
+     * @param string $createtime
+     */
+    public function setCreatetime(string $createtime)
+    {
+        $this->createtime = $createtime;
     }
 
 

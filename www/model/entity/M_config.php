@@ -1,6 +1,6 @@
 <?php
 
-class m_config
+class M_config
 {
 
     use ActiveRecordable, Deletable, Findable, Persistable;
@@ -10,7 +10,7 @@ class m_config
     private int $uid = 0;
     private int $modul = 0;
 
-    protected static $tabel = 'm_config';
+    protected static $tabel = 'M_config';
 
     /**
      * @return int

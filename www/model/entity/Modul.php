@@ -1,14 +1,14 @@
 <?php
 
-class modul
+class Modul
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
-    private int $installedbyuid;
+    private int $installedbyuid = 0;
     private string $name = '';
     private int $valueid = 0;
 
-    protected static $table = 'modul';
+    protected static $table = 'Modul';
 
     /**
      * @return int
@@ -72,6 +72,15 @@ class modul
     public function setValueid(int $valueid)
     {
         $this->valueid = $valueid;
+    }
+
+    public static function selectAllFromModulWhereNameIsInstalled()
+    {
+        $sql = "SELECT * FROM `modul` WHERE valueid =(Select id from modul_value where name = 'installed')";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array());
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
+        return $abfrage->fetchAll();
     }
 
 }

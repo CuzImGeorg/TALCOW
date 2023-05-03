@@ -1,13 +1,13 @@
 <?php
 
-class m_servicemonitor
+class M_servicemonitor
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private string $servicename = '';
     private string $description = '';
     private int $uid = 0;
-    protected static $table = 'm_servicemonitor';
+    protected static $table = 'M_servicemonitor';
 
     /**
      * @return int

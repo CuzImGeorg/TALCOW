@@ -1,6 +1,6 @@
 <?php
 
-class qser
+class Qser
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
@@ -8,8 +8,9 @@ class qser
     private string $password = '';
     private string $description = '';
     private bool $active;
+    private string $createdate = '';
     //private int $bid = 0;
-    protected static $table = 'qser';
+    protected static $table = 'Qser';
 
     /**
      * @return int
@@ -89,6 +90,22 @@ class qser
     public function setActive(bool $active)
     {
         $this->active = $active;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedate(): string
+    {
+        return $this->createdate;
+    }
+
+    /**
+     * @param string $createdate
+     */
+    public function setCreatedate(string $createdate): void
+    {
+        $this->createdate = $createdate;
     }
 
     public static function findUserByBerechtigungID(int $id)

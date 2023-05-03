@@ -1,12 +1,13 @@
 <?php
 
-class berechtigung
+class Log_action
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private string $name = '';
     private string $description = '';
-    protected static $table = 'berechtigung';
+    private int $modul = 0;
+    protected static $table = 'Log_action';
 
     /**
      * @return int
@@ -56,12 +57,28 @@ class berechtigung
         $this->description = $description;
     }
 
-    public static function findBerechtigungByUserID(int $id)
+    /**
+     * @return int
+     */
+    public function getModul(): int
     {
-        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE uid =(Select id from quser where id =:uid)";
+        return $this->modul;
+    }
+
+    /**
+     * @param int $modul
+     */
+    public function setModul(int $modul)
+    {
+        $this->modul = $modul;
+    }
+
+    public static function findLog_ActionByModul(int $modul)
+    {
+        $sql = "SELECT * FROM `log_action` WHERE modul =(Select id from modul where id =:modul)";
         $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('uid' => $id));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
+        $abfrage->execute(array('modul' => $modul));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
         return $abfrage->fetchAll();
     }
 

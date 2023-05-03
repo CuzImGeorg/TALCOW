@@ -1,14 +1,12 @@
 <?php
 
-class log_level
+class Berechtigung
 {
-
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private string $name = '';
     private string $description = '';
-
-    protected static $table = 'log_level';
+    protected static $table = 'Berechtigung';
 
     /**
      * @return int
@@ -58,12 +56,12 @@ class log_level
         $this->description = $description;
     }
 
-    public static function findLog_LevelByModul(int $modul)
+    public static function findBerechtigungByUserID(int $id)
     {
-        $sql = "SELECT * FROM `log_level` WHERE modul =(Select id from modul where id =:modul)";
+        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE uid =(Select id from quser where id =:uid)";
         $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('modul' => $modul));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
+        $abfrage->execute(array('uid' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
         return $abfrage->fetchAll();
     }
 
