@@ -91,28 +91,16 @@ class Qserhatberechtigung
         $this->createtime = $createtime;
     }
 
-    public function findeNachUid() {
-        $sql = "SELECT * FROM Qser WHERE id =:uid";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('$uid' =>$this->uid));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'Qser');
-        return $abfrage->fetchAll();
+    public function findeUser() {
+        Qser::finde($this->uid);
     }
 
-    public function findeNachBid() {
-        $sql = "SELECT * FROM Berechtigung WHERE id =:bid";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('$bid' =>$this->bid));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'Berechtigung');
-        return $abfrage->fetchAll();
+    public function findeBerechtigung() {
+        Berechtigung::finde($this->bid);
     }
 
     public function findeNachUseredit() {
-        $sql = "SELECT * FROM Qser WHERE id =:useredit";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('$useredit' =>$this->useredit));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'Qser');
-        return $abfrage->fetchAll();
+        Qser::finde($this->useredit);
     }
-
+//select * from
 }

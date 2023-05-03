@@ -83,11 +83,7 @@ class Log_action
     }
 
     public function getModulIOI(){
-        $sql=("Select * From Modul Where id = :modul");
-        $abfrage=DB::getDB()->prepare($sql);
-        $abfrage->execute(array('modul'=>$this->modul));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Modul');
-        return $abfrage->FetchAll();
+        Modul::finde($this->modul);
     }
 
 }

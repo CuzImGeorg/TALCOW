@@ -92,12 +92,8 @@ class Unhistory
     }
 
 
-    public function getUser(){
-        $sql=("Select * From Qser Where id = :uid");
-        $abfrage=DB::getDB()->prepare($sql);
-        $abfrage->execute(array('uid' =>$this->uid));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Qser');
-        return $abfrage->FetchAll();
+    public function findeUser() {
+        Qser::finde($this->uid);
     }
 
 
