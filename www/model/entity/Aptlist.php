@@ -99,14 +99,8 @@ class Aptlist
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'aptlist');
         return $abfrage->fetchAll();
     }
-    public function getUser()
-    {
-        $sql = "SELECT * FROM Qser WHERE id = :uid)";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('uid' => $this->uid));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'Qser');
-        return $abfrage->fetchAll();
-
+    public function findeUser() {
+        Qser::finde($this->uid);
     }
 
 
