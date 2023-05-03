@@ -93,7 +93,7 @@ class qser
 
     public static function findUserByBerechtigungID(int $id)
     {
-        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE bid =(Select id from berechtigung where id =:bid)";
+        $sql = "SELECT * FROM qser_hat_berechtigung WHERE bid =(Select id from berechtigung where id =:bid)";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('bid' => $id));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
