@@ -73,6 +73,13 @@ class M_servicemonitor
         $this->uid = $uid;
     }
 
-
+    public function getUser()
+    {
+        $sql = "SELECT * FROM Qser WHERE id = :uid)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('uid' =>$this->uid));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'M_servicemonitor');
+        return $abfrage->fetchAll();
+    }
 
 }

@@ -60,7 +60,7 @@ class Log_level
 
     public static function findLog_LevelByModul(int $modul)
     {
-        $sql = "SELECT * FROM `log_level` WHERE modul =(Select id from modul where id =:modul)";
+        $sql = "SELECT * FROM log_level WHERE modul =(Select id from modul where id =:modul)";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('modul' => $modul));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');

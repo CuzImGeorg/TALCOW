@@ -94,11 +94,36 @@ class Log
 
     public static function findLogByUserID(int $id)
     {
-        $sql = "SELECT * FROM `log` WHERE uid =(Select id from user where id =:uid)";
+        $sql = "SELECT * FROM log WHERE uid =(Select id from user where id =:uid)";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('uid' => $id));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
         return $abfrage->fetchAll();
     }
+
+    public function getUser(){
+        $sql=("Select * From Qser Where id = :uid");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('uid' =>$this->uid));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Qser');
+        return $abfrage->FetchAll();
+    }
+    public function getLog_action(){
+        $sql=("Select * From Log_action Where id = :action");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('action' =>$this->action));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Log_action');
+        return $abfrage->FetchAll();
+    }
+
+    public function getLog_level(){
+        $sql=("Select * From Log_level Where id = :level");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('level' =>$this->level));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Log_level');
+        return $abfrage->FetchAll();
+    }
+
+
 
 }

@@ -91,6 +91,13 @@ class M_openvpn
         $this->createtime = $createtime;
     }
 
-
+    public function getUser()
+    {
+        $sql = "SELECT * FROM Qser WHERE id = :createqser)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('createqser' => $this->createqser));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'M_openvpn');
+        return $abfrage->fetchAll();
+    }
 
 }

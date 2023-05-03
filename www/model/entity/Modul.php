@@ -76,11 +76,19 @@ class Modul
 
     public static function selectAllFromModulWhereNameIsInstalled()
     {
-        $sql = "SELECT * FROM `modul` WHERE valueid =(Select id from modul_value where name = 'installed')";
+        $sql = "SELECT * FROM modul WHERE valueid =(Select id from modul_value where name = 'installed')";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array());
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
         return $abfrage->fetchAll();
+    }
+
+    public function getValue(){
+        $sql=("Select * From Modul_value Where id = :value");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('value'=>$this->value));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Modul_value');
+        return $abfrage->FetchAll();
     }
 
 }

@@ -92,4 +92,23 @@ class M_config
         $this->modul = $modul;
     }
 
+    public function getUser(){
+        $sql=("Select * From Qser Where id = :uid");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('uid'=>$this->uid));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Qser');
+        return $abfrage->FetchAll();
+    }
+
+
+        public function getModulIOI(){
+        $sql=("Select * From Modul Where id = :modul");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('modul'=>$this->modul));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Modul');
+        return $abfrage->FetchAll();
+    }
+
+
+
 }

@@ -58,7 +58,7 @@ class Berechtigung
 
     public static function findBerechtigungByUserID(int $id)
     {
-        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE uid =(Select id from quser where id =:uid)";
+        $sql = "SELECT * FROM qser_hat_berechtigung WHERE uid =(Select id from qser where id =:uid)";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('uid' => $id));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
