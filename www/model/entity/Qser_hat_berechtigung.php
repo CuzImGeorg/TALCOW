@@ -102,5 +102,5 @@ class Qserhatberechtigung
     public function findeNachUseredit() {
         Qser::finde($this->useredit);
     }
-//select * from
+
 }

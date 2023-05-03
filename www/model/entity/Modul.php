@@ -84,11 +84,7 @@ class Modul
     }
 
     public function getValue(){
-        $sql=("Select * From Modul_value Where id = :value");
-        $abfrage=DB::getDB()->prepare($sql);
-        $abfrage->execute(array('value'=>$this->value));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Modul_value');
-        return $abfrage->FetchAll();
+        Modul_value::finde($this->valueid);
     }
 
 }
