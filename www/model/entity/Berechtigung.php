@@ -1,13 +1,12 @@
 <?php
 
-class modul_value
+class Berechtigung
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private string $name = '';
     private string $description = '';
-
-    protected static $table = 'modul_value';
+    protected static $table = 'Berechtigung';
 
     /**
      * @return int
@@ -57,6 +56,13 @@ class modul_value
         $this->description = $description;
     }
 
-
+    public static function findBerechtigungByUserID(int $id)
+    {
+        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE uid =(Select id from quser where id =:uid)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('uid' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
+        return $abfrage->fetchAll();
+    }
 
 }

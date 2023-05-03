@@ -1,15 +1,13 @@
 <?php
 
-class qser
+class Log_action
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private string $name = '';
-    private string $password = '';
     private string $description = '';
-    private bool $active;
-    //private int $bid = 0;
-    protected static $table = 'qser';
+    private int $modul = 0;
+    protected static $table = 'Log_action';
 
     /**
      * @return int
@@ -46,22 +44,6 @@ class qser
     /**
      * @return string
      */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -76,27 +58,27 @@ class qser
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isActive(): bool
+    public function getModul(): int
     {
-        return $this->active;
+        return $this->modul;
     }
 
     /**
-     * @param bool $active
+     * @param int $modul
      */
-    public function setActive(bool $active)
+    public function setModul(int $modul)
     {
-        $this->active = $active;
+        $this->modul = $modul;
     }
 
-    public static function findUserByBerechtigungID(int $id)
+    public static function findLog_ActionByModul(int $modul)
     {
-        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE bid =(Select id from berechtigung where id =:bid)";
+        $sql = "SELECT * FROM `log_action` WHERE modul =(Select id from modul where id =:modul)";
         $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('bid' => $id));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
+        $abfrage->execute(array('modul' => $modul));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
         return $abfrage->fetchAll();
     }
 

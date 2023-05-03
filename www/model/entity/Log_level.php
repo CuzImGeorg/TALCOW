@@ -1,13 +1,14 @@
 <?php
 
-class m_servicemonitor
+class Log_level
 {
+
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
-    private string $servicename = '';
+    private string $name = '';
     private string $description = '';
-    private int $uid = 0;
-    protected static $table = 'm_servicemonitor';
+
+    protected static $table = 'Log_level';
 
     /**
      * @return int
@@ -28,17 +29,17 @@ class m_servicemonitor
     /**
      * @return string
      */
-    public function getServicename(): string
+    public function getName(): string
     {
-        return $this->servicename;
+        return $this->name;
     }
 
     /**
-     * @param string $servicename
+     * @param string $name
      */
-    public function setServicename(string $servicename)
+    public function setName(string $name)
     {
-        $this->servicename = $servicename;
+        $this->name = $name;
     }
 
     /**
@@ -57,22 +58,13 @@ class m_servicemonitor
         $this->description = $description;
     }
 
-    /**
-     * @return int
-     */
-    public function getUid(): int
+    public static function findLog_LevelByModul(int $modul)
     {
-        return $this->uid;
+        $sql = "SELECT * FROM `log_level` WHERE modul =(Select id from modul where id =:modul)";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('modul' => $modul));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
+        return $abfrage->fetchAll();
     }
-
-    /**
-     * @param int $uid
-     */
-    public function setUid(int $uid)
-    {
-        $this->uid = $uid;
-    }
-
-
 
 }

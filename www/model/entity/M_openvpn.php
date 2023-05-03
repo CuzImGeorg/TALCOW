@@ -1,6 +1,6 @@
 <?php
 
-class m_openvpn
+class M_openvpn
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
@@ -9,7 +9,7 @@ class m_openvpn
     private string $description = '';
     private string $createtime = '';
 
-    protected static $table = 'm_openvpn';
+    protected static $table = 'M_openvpn';
 
     /**
      * @return int

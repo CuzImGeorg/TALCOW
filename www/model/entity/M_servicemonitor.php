@@ -1,12 +1,13 @@
 <?php
 
-class berechtigung
+class M_servicemonitor
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
-    private string $name = '';
+    private string $servicename = '';
     private string $description = '';
-    protected static $table = 'berechtigung';
+    private int $uid = 0;
+    protected static $table = 'M_servicemonitor';
 
     /**
      * @return int
@@ -27,17 +28,17 @@ class berechtigung
     /**
      * @return string
      */
-    public function getName(): string
+    public function getServicename(): string
     {
-        return $this->name;
+        return $this->servicename;
     }
 
     /**
-     * @param string $name
+     * @param string $servicename
      */
-    public function setName(string $name)
+    public function setServicename(string $servicename)
     {
-        $this->name = $name;
+        $this->servicename = $servicename;
     }
 
     /**
@@ -56,13 +57,22 @@ class berechtigung
         $this->description = $description;
     }
 
-    public static function findBerechtigungByUserID(int $id)
+    /**
+     * @return int
+     */
+    public function getUid(): int
     {
-        $sql = "SELECT * FROM `qser_hat_berechtigung` WHERE uid =(Select id from quser where id =:uid)";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('uid' => $id));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
-        return $abfrage->fetchAll();
+        return $this->uid;
     }
+
+    /**
+     * @param int $uid
+     */
+    public function setUid(int $uid)
+    {
+        $this->uid = $uid;
+    }
+
+
 
 }

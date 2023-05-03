@@ -1,6 +1,6 @@
 <?php
 
-class log
+class Log
 {
 
     use ActiveRecordable, Deletable, Findable, Persistable;
@@ -10,7 +10,7 @@ class log
     private string $timestamp = '';
     private int $level = 0;
 
-    protected static $table = 'log';
+    protected static $table = 'Log';
 
     /**
      * @return int

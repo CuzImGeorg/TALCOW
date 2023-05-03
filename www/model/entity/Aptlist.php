@@ -1,6 +1,6 @@
 <?php
 
-class aptlist
+class Aptlist
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
@@ -8,7 +8,7 @@ class aptlist
     private string $date;
     private int $uid;
     private string $update_date = '';
-    protected static $table = 'aptlist';
+    protected static $table = 'Aptlist';
 
     /**
      * @return int
