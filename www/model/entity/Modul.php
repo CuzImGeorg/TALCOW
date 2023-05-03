@@ -82,7 +82,6 @@ class Modul
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
         return $abfrage->fetchAll();
     }
-
     public static function selectAllFromModulWhereNameIsActive()
     {
         $sql = "SELECT * FROM modul WHERE valueid =(Select id from modul_value where name = 'active')";
@@ -90,6 +89,15 @@ class Modul
         $abfrage->execute(array());
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
         return $abfrage->fetchAll();
+    }
+
+
+    public function getValue(){
+        $sql=("Select * From Modul_value Where id = :value");
+        $abfrage=DB::getDB()->prepare($sql);
+        $abfrage->execute(array('value'=>$this->value));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS,'Modul_value');
+        return $abfrage->FetchAll();
     }
 
 }
