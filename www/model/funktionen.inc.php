@@ -10,7 +10,6 @@ function autoloadControllers($controllerName)
 
 function autoloadEntities($entityName)
 {
-    $entityName = lcfirst($entityName);
     $entityFile = 'model/entity/' . $entityName . '.php';
     if (file_exists($entityFile)) {
         require_once $entityFile;

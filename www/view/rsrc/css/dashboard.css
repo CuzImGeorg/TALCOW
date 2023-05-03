@@ -65,3 +65,41 @@ body {
     background-color:  var(--bg);
     font-size: 18px;
 }
+
+/*
+* TAB: USER
+ */
+
+.usertable > tbody > tr > td {
+    width: 5%;
+
+}
+
+/*
+* TAB USER PERMISSIONS
+*/
+
+.userpermissiontable > tbody > tr > td:nth-child(2) {
+    width:15%;
+
+}
+
+.userpermissiontable > tbody > tr > td {
+    width: 3%;
+    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions");
+}
+
+
+/*
+* TAB PERMISSIONS
+ */
+
+.permissiontable > tbody > tr > td:nth-child(2) {
+    width:15%;
+
+}
+
+.permissiontable > tbody > tr > td {
+    width: 3%;
+}
+

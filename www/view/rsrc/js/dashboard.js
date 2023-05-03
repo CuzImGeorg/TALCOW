@@ -24,3 +24,17 @@ function loadMrgUser() {
 function loadSysInfo() {
     loadDoc("index.php?controller=ajax&aktion=sysInfo");
 }
+
+function loadUserPermissions() {
+    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions");
+}
+
+function loadUserPermissionsByUserId(uid) {
+    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&uid=" + uid );
+}
+
+function loadPermissions() {
+    loadDoc("index.php?controller=ajax&aktion=loadPermissions");
+}
+
+

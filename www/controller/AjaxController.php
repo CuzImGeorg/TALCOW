@@ -21,7 +21,8 @@ class AjaxController extends AbstractBase {
     }
 
     public function mgruser() {
-            $user = qser::findeALL();
+
+            $user = Qser::findeALL();
             $this->addContext("user", $user);
 
     }
@@ -38,6 +39,29 @@ class AjaxController extends AbstractBase {
         $days  = $num;
 
         return $days . ":" . $hours. ":". $mins;
+    }
+
+    public function loadPermissions() {
+
+        if(isset($_GET["uid"])) {
+            $permissions = Berechtigung::findBerechtigungByUserID($_GET["uid"]);
+        } else {
+            $permissions = Berechtigung::findeALL();
+        }
+        $this->addContext("perms", $permissions);
+
+
+    }
+    public function loadUserPermissions() {
+
+        if(isset($_GET["uid"])) {
+            $permissions = 1;
+        } else {
+            $permissions = 1;
+        }
+        $this->addContext("perms", $permissions);
+
+
     }
 
 

@@ -28,6 +28,8 @@ INSERT INTO modul_value(name, description) VALUES('installed', 'installed but no
 INSERT INTO modul_value(name, description) VALUES('active', 'installed and active');
 INSERT INTO modul_value(name, description) VALUES('not installed', 'the module is not installed');
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'global', 2);
+INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'openvpn', 2);
+
 INSERT INTO log_level(name, description) VALUES('warning', 'this log is a warning. You may consider to look into it');
 INSERT INTO log_level(name, description) VALUES('error', 'this log is an error, try to solve it immediatly');
 INSERT INTO log_level(name, description) VALUES('critical', 'this log is a critical error, write a ticket to our team');

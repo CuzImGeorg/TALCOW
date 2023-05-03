@@ -14,6 +14,11 @@
     <ul>
         <li><a href="index.phpa?">Home</a></li>
         <li><a onclick="loadMrgUser();">Users</a></li>
+        <li><a onclick="loadPermissions();">Permissions</a></li>
+        <li><a onclick="loadUserPermissions();">User Permissions</a></li>
+
+
+
         <li><a href="index.php?">News</a></li>
         <li><a href="index.php?">Contact</a></li>
 
