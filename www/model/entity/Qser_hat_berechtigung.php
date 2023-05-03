@@ -1,6 +1,6 @@
 <?php
 
-class Qserhatberechtigung
+class Qser_hat_berechtigung
 {
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
@@ -9,7 +9,7 @@ class Qserhatberechtigung
     private int $useredit = 0;
     private string $createtime = '';
 
-    protected static $table = 'Qserhatberechtigung';
+    protected static $table = 'Qser_hat_berechtigung';
 
     /**
      * @return int

@@ -1,11 +1,13 @@
 <h1>User Permission</h1>
 <br>
+<?php var_dump($perms);?>
 <table class="userpermissiontable">
     <tr>
-        <td>Name</td><td>Description</td><td>User</td><td>Remove</td>
+        <td>User Name</td><td>Permission Name</td><td>Create Time</td><td>Created By User </td><td>Remove</td>
     </tr>
     <?php foreach ($perms as $p) { ?>
-        <td><?=$p->getname()?></td><td><?=$p->getDescription()?></td><td>Todo User</td><td>Todo Remove </td>
+
+        <td><?=$p->findeUser()->getname()?></td><td><?=$p->findeBerechtigung()->getName()?></td><td><?=$p->getCreateTime() ?></td><td>Todo User</td><td>Todo Remove </td>
 
     <?php  } ?>
 

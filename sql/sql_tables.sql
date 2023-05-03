@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS  qser_hat_berechtigung(
                                                      id serial PRIMARY KEY,
                                                      uid int,
                                                      bid int,
+                                                     useredit int,
+                                                     createtime timestamp,
                                                      FOREIGN KEY(uid) REFERENCES qser(id),
     FOREIGN KEY(bid) REFERENCES berechtigung(id)
 

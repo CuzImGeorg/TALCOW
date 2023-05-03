@@ -5,7 +5,7 @@
         <td>Name</td><td>Description</td><td>User</td><td>Remove</td>
     </tr>
     <?php foreach ($perms as $p) { ?>
-        <td><?=$p->getname()?></td><td><?=$p->getDescription()?></td><td>Todo User</td>
+        <td><?=$p->getName()?></td><td><?=$p->getDescription()?></td><td>Todo User</td>
 
     <?php  } ?>
 
