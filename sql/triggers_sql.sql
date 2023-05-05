@@ -137,7 +137,7 @@ CREATE OR REPLACE FUNCTION user_delete_prevention_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.id,' someone tried to delete the user ' || OLD.name ,4,2);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.id,' someone tried to delete the user ' || OLD.name ,5,2);
 
     RETURN null;
 END;
@@ -157,7 +157,7 @@ EXECUTE FUNCTION user_delete_prevention_trigger_function();
 CREATE OR REPLACE FUNCTION modul_value_insert_delete_prevention_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
-        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to delete / insert a module value! ' ,4,2);
+        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to delete / insert a module value! ' ,6,2);
 
     RETURN null;
 END;
@@ -177,7 +177,7 @@ CREATE OR REPLACE FUNCTION log_level_insert_delete_prevention_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
 
-        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to insert / delete a log level'  ,4,2);
+        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to insert / delete a log level'  ,7,2);
 
 
     RETURN null;
@@ -199,7 +199,7 @@ CREATE OR REPLACE FUNCTION user_add_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
 
-    INSERT INTO log(uid,description, action, level) VALUES(NEW.id,' A new user was created! User: ' || NEW.name ,4,1);
+    INSERT INTO log(uid,description, action, level) VALUES(NEW.id,' A new user was created! User: ' || NEW.name ,8,1);
 
 
     RETURN null;
@@ -211,3 +211,30 @@ CREATE OR REPLACE TRIGGER user_add_trigger
     BEFORE INSERT ON qser
     FOR EACH ROW
 EXECUTE FUNCTION user_add_trigger_function();
+
+/*
+ Trigger for table log to alert if a new user is added
+*/
+
+CREATE OR REPLACE FUNCTION modul_update_trigger_function()
+    RETURNS TRIGGER AS $$
+BEGIN
+
+    IF TG_OP = 'UPDATE' AND OLD.valueid != NEW.valueid THEN
+    INSERT INTO log(uid,description, action, level) VALUES(2,' A module was Installed/Deinstalled' ,9,1);
+
+    END IF;
+
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE TRIGGER modul_update_trigger
+    BEFORE UPDATE ON modul
+    FOR EACH ROW
+EXECUTE FUNCTION modul_update_trigger_function();
+
+
+
