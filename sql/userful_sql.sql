@@ -35,9 +35,11 @@ INSERT INTO modul_value(name, description) VALUES('not installed', 'the module i
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'global', 2);
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'openvpn', 2);
 
+INSERT INTO log_level(name, description) VALUES('debug', 'this log is a debug. You may just ignore it');
 INSERT INTO log_level(name, description) VALUES('warning', 'this log is a warning. You may consider to look into it');
 INSERT INTO log_level(name, description) VALUES('error', 'this log is an error, try to solve it immediatly');
 INSERT INTO log_level(name, description) VALUES('critical', 'this log is a critical error, write a ticket to our team');
+
 INSERT INTO aptlist(name, uid) VALUES ('whatsapp',1);
 INSERT INTO aptlist(name, uid) VALUES ('snapchat',1);
 INSERT INTO aptlist(name, uid) VALUES ('firefox',1);
@@ -57,5 +59,8 @@ INSERT INTO log_action(name, description, modul) VALUES('modul_value prevention'
 INSERT INTO log_action(name, description, modul) VALUES('ll', 'Log level insert/delete prevention', 1);
 INSERT INTO log_action(name, description, modul) VALUES('ua', 'a User was added!', 1);
 INSERT INTO log_action(name, description, modul) VALUES('module update', 'a module was installed/deinstalled!', 1);
+INSERT INTO log_action(name, description, modul) VALUES('reboot', 'reboot syste,', 1);
+
+
 
 

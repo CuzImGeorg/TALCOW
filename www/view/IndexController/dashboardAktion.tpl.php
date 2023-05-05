@@ -1,6 +1,7 @@
 <?php
-    session_start();
-    $_SESSION["user"] = $user;
+
+    $_SESSION["userid"] = $user->getID();
+
 ?>
 
 <html>
@@ -13,7 +14,10 @@
     </head>
     <body>
     <ul>
-        <li><a href="index.phpa?">Home</a></li>
+        <li><a href="index.php?">Home</a></li>
+        <li><a onclick="loadLogs();">Logs</a></li>
+        <li><a onclick="loadlogAktions();">Log Actions</a></li>
+
         <li><a onclick="loadMrgUser();">Users</a></li>
         <li><a onclick="loadPermissions();">Permissions</a></li>
         <li><a onclick="loadUserPermissions();">User Permissions</a></li>
