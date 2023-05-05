@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+    session_start();
     require_once('model/funktionen.inc.php');
     require_once ('model/dbconn.php');
 

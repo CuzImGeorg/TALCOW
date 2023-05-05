@@ -37,8 +37,7 @@ trait Persistable
             'INSERT INTO %s (%s) VALUES (%s)',
             $daten
         );
-        var_dump($sql);
-        var_dump($attribute);
+
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute($attribute);
 

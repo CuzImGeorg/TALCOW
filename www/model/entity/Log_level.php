@@ -67,4 +67,11 @@ class Log_level
         return $abfrage->fetchAll();
     }
 
+    public static function getByName(string $name){
+        $sql = "SELECT * FROM log_level WHERE name = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_level');
+        return $abfrage->fetch();
+    }
+
 }

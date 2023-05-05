@@ -86,4 +86,10 @@ class Log_action
         Modul::finde($this->modul);
     }
 
+    public static function findeByName($name) {
+        $sql = "SELECT * FROM log_action WHERE name = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log_action');
+        return $abfrage->fetch();
+    }
 }
