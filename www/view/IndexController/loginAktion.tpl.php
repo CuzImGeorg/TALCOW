@@ -13,6 +13,9 @@
         <script src="src/rsrc/js/registry.js"></script>
     </head>
     <body>
+
+    <img src="../pics/talcow_logo_clear_without_slogan.png" alt="logo" class="logo">
+
        <form class="login-container" action="index.php?aktion=login" method="POST" >
 
             <label  for="nickname">Nickname<br></label>
@@ -26,5 +29,6 @@
 
 
        </form>
+
     </body>
 </html>
