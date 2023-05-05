@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS  qser_hat_berechtigung(
                                                      uid int,
                                                      bid int,
                                                      useredit int,
-                                                     createtime timestamp,
+                                                     createtime timestamp default now(),
                                                      FOREIGN KEY(uid) REFERENCES qser(id),
     FOREIGN KEY(bid) REFERENCES berechtigung(id)
 

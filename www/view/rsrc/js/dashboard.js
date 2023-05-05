@@ -37,4 +37,8 @@ function loadPermissions() {
     loadDoc("index.php?controller=ajax&aktion=loadPermissions");
 }
 
+function reboot() {
+
+}
+
 

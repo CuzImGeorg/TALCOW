@@ -55,7 +55,7 @@ class AjaxController extends AbstractBase {
     public function loadUserPermissions() {
 
         if(isset($_GET["uid"])) {
-            $permissions = Qser_hat_berechtigung::findeALL();
+            $permissions = Qser_hat_berechtigung::findByUid($_GET["uid"]);
         } else {
             $permissions = Qser_hat_berechtigung::findeALL();
         }
@@ -63,6 +63,8 @@ class AjaxController extends AbstractBase {
 
 
     }
+
+
 
 
 

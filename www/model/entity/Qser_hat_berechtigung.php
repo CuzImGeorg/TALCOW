@@ -92,15 +92,22 @@ class Qser_hat_berechtigung
     }
 
     public function findeUser() {
-        Qser::finde($this->uid);
+       return  Qser::finde($this->uid);
     }
 
     public function findeBerechtigung() {
-        Berechtigung::finde($this->bid);
+        return Berechtigung::finde($this->bid);
     }
 
     public function findeNachUseredit() {
-        Qser::finde($this->useredit);
+        return   Qser::finde($this->useredit);
+    }
+
+    public static function findByUid(int $uid) {
+        $sql = "SELECT * FROM qser_hat_berechtigung WHERE uid = $uid";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
+        return $abfrage->fetchAll();
     }
 
 }
