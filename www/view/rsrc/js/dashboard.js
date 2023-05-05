@@ -10,6 +10,16 @@ function loadDoc(str) {
     xhttp.open("GET", str, true);
     xhttp.send();
 }
+function exce(str) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+        }
+    };
+    xhttp.open("GET", str, true);
+    xhttp.send();
+}
 
 function reboot() {
     //TODO make reboot btn work
@@ -38,6 +48,7 @@ function loadPermissions() {
 }
 
 function reboot() {
+    loadDoc("index.php?controller=execute&aktion=reboot");
 
 }
 

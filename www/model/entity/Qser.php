@@ -117,4 +117,11 @@ class Qser
         return $abfrage->fetchAll();
     }
 
+    public static function getByNickNameAndPassword($name, $password) {
+        $sql = "SELECT * FROM qser WHERE name = '$name' and password = '$password'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'Qser');
+        return $a->fetch();
+    }
+
 }

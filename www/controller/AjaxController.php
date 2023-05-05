@@ -20,6 +20,8 @@ class AjaxController extends AbstractBase {
 
     }
 
+
+
     public function mgruser() {
 
             $user = Qser::findeALL();

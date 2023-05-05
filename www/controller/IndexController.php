@@ -6,12 +6,12 @@ class IndexController extends AbstractBase {
 
    public function login() {
         if($_POST){
-            $b = Benutzer::getByNickNameAndPassword($_POST['nickname'], $_POST['password']);
-            if(!$b)  {
+            $user = Qser::getByNickNameAndPassword($_POST['nickname'], $_POST['password']);
+            if(!$user)  {
 
             }else {
-                $this->addContext("user", $b);
-                $this->setTemplate("dashboard");
+                $this->addContext("user", $user);
+                $this->setTemplate("dashboardAktion");
             }
         }
         else{
