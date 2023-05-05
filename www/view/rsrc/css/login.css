@@ -1,6 +1,5 @@
 body {
     background: #53c6c5 url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10l10-10h30v30l-10 10H0V10zm22 18l-4-4 4-4v8zM18 8l4 4-4 4V8zm12 12l-4-4 4-4v8zm-4-12l4 4-4 4V8z" fill="%23ffffff" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E') repeat;
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -8,16 +7,31 @@ body {
 
 
 .login-container {
+
     background-color: #42bcbb;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
-    max-width: 400px;
+    max-width: 500px;
+    min-width: 300px;
     margin: auto;
     text-align: center;
-    position: relative;
-    top: 50%;
+    position: relative ;
+    left: -20%;
+    float: right;
+    top: 55%;
     transform: translateY(-70%);
+}
+
+.logo {
+    width: 1000px;
+    height: 700px;
+    position: absolute;
+    align-content: center;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 h2 {
@@ -32,8 +46,10 @@ form {
 }
 
 label {
-    font-size: 16px;
+    font-family: 'Ebrima', serif;
+    font-size: 30px;
     font-weight: bold;
+    line-height: 1;
     margin-bottom: 10px;
 }
 
@@ -82,4 +98,10 @@ input[type="submit"]:hover:before {
     width: 300px;
     height: 300px;
     transition: all 0.3s ease-in-out;
+}
+input{
+    font-family: 'Ebrima', serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
 }
