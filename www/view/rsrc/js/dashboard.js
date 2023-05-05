@@ -47,9 +47,18 @@ function loadPermissions() {
     loadDoc("index.php?controller=ajax&aktion=loadPermissions");
 }
 
-function reboot() {
-    loadDoc("index.php?controller=execute&aktion=reboot");
+function loadLogs() {
+    loadDoc("index.php?controller=ajax&aktion=log");
+}
 
+
+function reboot() {
+    exce("index.php?controller=execute&aktion=reboot");
+
+}
+
+function loadlogAktions() {
+    loadDoc("index.php?controller=ajax&aktion=logAktions");
 }
 
 

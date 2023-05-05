@@ -66,6 +66,18 @@ class AjaxController extends AbstractBase {
 
     }
 
+    public function log() {
+        $logs = Log::findeALL();
+        $this->addContext("logs", $logs);
+
+
+    }
+
+    public function logAktions() {
+        $akt = Log_action::findeALL();
+        $this->addContext("akt", $akt);
+
+    }
 
 
 

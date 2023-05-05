@@ -7,6 +7,7 @@ class Log
     private int $id = 0;
     private int $uid = 0;
     private int $action = 0;
+    private string $description = "";
     private string $timestamp = '';
     private int $level = 0;
 
@@ -92,6 +93,21 @@ class Log
         $this->level = $level;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
     public static function findLogByUserID(int $id)
     {
         $sql = "SELECT * FROM log WHERE uid =(Select id from user where id =:uid)";
@@ -102,14 +118,14 @@ class Log
     }
 
     public function findeUser() {
-        Qser::finde($this->uid);
+       return Qser::finde($this->uid);
     }
     public function getLog_action(){
-        Log_action::finde($this->action);
+        return Log_action::finde($this->action);
     }
 
     public function getLog_level(){
-        Log_level::finde($this->level);
+        return Log_level::finde($this->level);
     }
 
 

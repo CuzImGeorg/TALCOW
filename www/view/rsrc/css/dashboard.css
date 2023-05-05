@@ -86,7 +86,6 @@ body {
 
 .userpermissiontable > tbody > tr > td {
     width: 3%;
-    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions");
 }
 
 
@@ -103,3 +102,16 @@ body {
     width: 3%;
 }
 
+/*
+* TAB LOGS
+ */
+
+
+.logtable > tbody > tr:nth-child(2) > td {
+    width:15%;
+
+}
+
+.logtable > tbody > tr > td {
+    width: 3%;
+}
