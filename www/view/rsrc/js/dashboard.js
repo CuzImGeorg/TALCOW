@@ -10,20 +10,12 @@ function loadDoc(str) {
     xhttp.open("GET", str, true);
     xhttp.send();
 }
-function exce(str) {
+function exec(str) {
     let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-
-        }
-    };
     xhttp.open("GET", str, true);
     xhttp.send();
 }
 
-function reboot() {
-    //TODO make reboot btn work
-}
 
 function loadMrgUser() {
 
@@ -66,7 +58,7 @@ function loadLogs() {
 
 
 function reboot() {
-    exce("index.php?controller=execute&aktion=reboot");
+    exec("index.php?controller=execute&aktion=reboot");
 
 }
 
