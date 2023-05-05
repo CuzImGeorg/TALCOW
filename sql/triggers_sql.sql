@@ -208,7 +208,7 @@ $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE TRIGGER user_add_trigger
-    BEFORE INSERT ON qser
+    AFTER INSERT ON qser
     FOR EACH ROW
 EXECUTE FUNCTION user_add_trigger_function();
 

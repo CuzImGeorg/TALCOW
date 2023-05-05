@@ -17,6 +17,7 @@
         <li><a href="index.php?">Home</a></li>
         <li><a onclick="loadLogs();">Logs</a></li>
         <li><a onclick="loadlogAktions();">Log Actions</a></li>
+        <li><a onclick="loadloglevel();">Log Levels</a></li>
 
         <li><a onclick="loadMrgUser();">Users</a></li>
         <li><a onclick="loadPermissions();">Permissions</a></li>

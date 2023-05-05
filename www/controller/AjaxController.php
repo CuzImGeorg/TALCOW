@@ -24,8 +24,16 @@ class AjaxController extends AbstractBase {
 
     public function mgruser() {
 
-            $user = Qser::findeALL();
-            $this->addContext("user", $user);
+            if(isset($_GET["uid"])) {
+                $user = array(  Qser::finde((int) $_GET["uid"]));
+                $this->addContext("user", $user);
+            }
+            else {
+                $user = Qser::findeALL();
+                $this->addContext("user", $user);
+
+            }
+
 
     }
 
@@ -64,6 +72,11 @@ class AjaxController extends AbstractBase {
         $this->addContext("perms", $permissions);
 
 
+    }
+
+    public function logLevel() {
+        $logs = Log_level::findeALL();
+        $this->addContext("logs", $logs);
     }
 
     public function log() {

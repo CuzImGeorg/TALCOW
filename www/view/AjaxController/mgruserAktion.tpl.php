@@ -7,7 +7,7 @@
 </tr>
     <?php foreach ($user as $u) { ?>
         <tr>
-        <td><?=$u->getName()?></td><td><?=$u->getDescription()?></td><td><?=$u->getCreatedate()?></td><td><?=$u->isActive()?></td><td><button onclick="loadUserPermissionsByUserId(<?=$u->getId()?>)"> Perms </button> </td><td>TODO deactivate</td>
+            <td><?=$u->getName()?></td><td><?=$u->getDescription()?></td><td><?=$u->getCreatedate()?></td><td><?=$u->isActive()?></td><td><button onclick="b1 = false; loadUserPermissionsByUserId(<?=$u->getId()?>)"> Perms </button> </td><td>TODO deactivate</td>
         </tr>
     <?php  } ?>
 

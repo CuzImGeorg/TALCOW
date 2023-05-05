@@ -31,6 +31,10 @@ function loadMrgUser() {
 
 }
 
+function loadMrgUserById(uid) {
+    loadDoc("index.php?controller=ajax&aktion=mgruser&uid=" + uid);
+}
+
 function loadSysInfo() {
     loadDoc("index.php?controller=ajax&aktion=sysInfo");
 }
@@ -39,8 +43,17 @@ function loadUserPermissions() {
     loadDoc("index.php?controller=ajax&aktion=loadUserPermissions");
 }
 
+let b1 = false;
 function loadUserPermissionsByUserId(uid) {
-    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&uid=" + uid );
+    if(b1) {
+        loadUserPermissions();
+        b1 = false;
+    }else {
+        loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&uid=" + uid );
+        b1 = true;
+    }
+
+
 }
 
 function loadPermissions() {
@@ -59,6 +72,10 @@ function reboot() {
 
 function loadlogAktions() {
     loadDoc("index.php?controller=ajax&aktion=logAktions");
+}
+
+function loadloglevel() {
+    loadDoc("index.php?controller=ajax&aktion=logLevel");
 }
 
 

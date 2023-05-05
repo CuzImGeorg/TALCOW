@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS qser(
                                    name varchar(63),
     password varchar(63),
     description varchar(255),
-    createdate timestamp,
+    createdate timestamp default now(),
     active boolean
 
     );

@@ -83,7 +83,7 @@ class Log_action
     }
 
     public function getModulIOI(){
-        Modul::finde($this->modul);
+       return Modul::finde($this->modul);
     }
 
     public static function findeByName($name) {
