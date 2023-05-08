@@ -124,4 +124,11 @@ class Qser
         return $a->fetch();
     }
 
+    public  static function  findeUserByNameWithWildcard(string $name) {
+        $sql = "SELECT * FROM qser WHERE name like '%$name%'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'Qser');
+        return $a->fetchAll();
+    }
+
 }

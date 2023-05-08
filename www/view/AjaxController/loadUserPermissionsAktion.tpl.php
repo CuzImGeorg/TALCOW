@@ -1,8 +1,14 @@
 <h1>User Permission</h1>
-<br>
+<datalist id="dl" >
+
+</datalist>
 <table class="userpermissiontable">
-    <tr><td><button class="btnnewUserPermission">+</button></td></tr>
-    <tr class="newUserPermission"><td><input type="text" placeholder="User Name"></td><td><input type="text" placeholder="Permission"></td><tr>
+    <tr><td><button class="btnnewUserPermission"  id="btnup" onclick="newUserPermission()">+</button></td></tr>
+    <tr class="newUserPermission">
+
+       <td><input id="upun" list="dl" onclick="updateUsernameList()" hidden name="unsel" id="unsel" placeholder="Name"></td>
+        <td><input type="text" id="upp" hidden placeholder="Permission"></td>
+    <tr>
     <tr>
         <td>User Name</td><td>Permission Name</td><td>Create Time</td><td>Created By User </td><td>Remove</td>
     </tr>

@@ -11,6 +11,8 @@
         <title>Dashboard</title>
         <link rel="stylesheet" href="view/rsrc/css/dashboard.css">
         <script src="view/rsrc/js/dashboard.js"></script>
+        <script src="view/rsrc/js/fun.js"></script>
+
     </head>
     <body>
     <ul>
