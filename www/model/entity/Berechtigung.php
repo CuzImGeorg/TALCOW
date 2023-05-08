@@ -65,4 +65,11 @@ class Berechtigung
         return $abfrage->fetchAll();
     }
 
+    public  static function  findeBerechtigungByNameWithWildcard(string $name) {
+        $sql = "SELECT * FROM berechtigung WHERE name like '%$name%'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'berechtigung');
+        return $a->fetchAll();
+    }
+
 }

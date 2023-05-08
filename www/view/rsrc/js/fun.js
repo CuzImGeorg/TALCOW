@@ -1,6 +1,6 @@
 
 
-function loadDocWithElementID(str, elementid, args) {
+function loadDocWithElementID(str, elementid) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -10,7 +10,7 @@ function loadDocWithElementID(str, elementid, args) {
     };
 
     xhttp.open("POST", str, true);
-    xhttp.send(args);
+    xhttp.send();
 }
 
 
@@ -30,7 +30,9 @@ function newUserPermission() {
 }
 
 function updateUsernameList () {
-    let data = new FormData();
-    data.append('name', document.getElementById("upun").value);
-    loadDocWithElementID("index.php?controller=ajax&aktion=updateUsernameList", "dl", data);
+    loadDocWithElementID("index.php?controller=ajax&aktion=updateUsernameList", "dl", );
+}
+
+function updatePermissionList() {
+    loadDocWithElementID("index.php?controller=ajax&aktion=updatePermissionList", "dl2");
 }

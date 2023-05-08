@@ -93,8 +93,14 @@ class AjaxController extends AbstractBase {
     }
 
     public function updateUsernameList() {
-        $user = Qser::findeUserByNameWithWildcard($_POST["name"]);
+        $user = Qser::findeALL();
         $this->addContext("user", $user);
+
+    }
+
+    public function updatePermissionList() {
+        $perm = Berechtigung::findeALL();
+        $this->addContext("perm", $perm);
 
     }
 
