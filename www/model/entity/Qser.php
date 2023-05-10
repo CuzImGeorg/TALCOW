@@ -131,4 +131,6 @@ class Qser
         return $a->fetchAll();
     }
 
+
+
 }

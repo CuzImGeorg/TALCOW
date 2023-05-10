@@ -58,5 +58,23 @@ class Modul_value
     }
 
 
+    public static function selectAllFromModulWhereNameIsInstalled()
+    {
+        $sql = "SELECT * FROM modul WHERE valueid =(Select id from modul_value where name = 'installed')";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array());
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
+        return $abfrage->fetchAll();
+    }
+    public static function selectAllFromModulWhereNameIsActive()
+    {
+        $sql = "SELECT * FROM modul WHERE valueid =(Select id from modul_value where name = 'active')";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array());
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
+        return $abfrage->fetchAll();
+    }
+
+
 
 }

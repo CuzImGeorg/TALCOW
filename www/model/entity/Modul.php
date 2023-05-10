@@ -93,7 +93,7 @@ class Modul
 
 
     public function getValue(){
-        Modul_value::finde($this->valueid);
+        return Modul_value::finde($this->valueid);
     }
 
 }

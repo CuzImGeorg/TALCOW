@@ -98,9 +98,27 @@ class M_config
 
 
         public function getModulIOI(){
-        Modul::finde($this->modul);
+        return Modul::finde($this->modul);
+
     }
 
+    public static function findM_ConfigByuid(int $id)
+    {
+        $sql = "SELECT * FROM m_config WHERE uid =:id";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('id' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'm_config');
+        return $abfrage->fetchAll();
+    }
+
+    public static function findM_ConfigBymodul(int $id)
+    {
+        $sql = "SELECT * FROM m_config WHERE modul =:id";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('id' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'm_config');
+        return $abfrage->fetchAll();
+    }
 
 
 }

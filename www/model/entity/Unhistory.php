@@ -93,7 +93,7 @@ class Unhistory
 
 
     public function findeUser() {
-        Qser::finde($this->uid);
+        return Qser::finde($this->uid);
     }
 
 

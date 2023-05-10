@@ -93,14 +93,14 @@ class Aptlist
 
     public static function findAptlistByUserID(int $id)
     {
-        $sql = "SELECT * FROM aptlist WHERE uid =(Select id from user where id =:uid)";
+        $sql = "SELECT * FROM aptlist WHERE uid =:uid)";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('uid' => $id));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'aptlist');
         return $abfrage->fetchAll();
     }
     public function findeUser() {
-        Qser::finde($this->uid);
+        return Qser::finde($this->uid);
     }
 
 
