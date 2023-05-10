@@ -19,4 +19,14 @@ class ExecuteController extends AbstractBase {
         }
     }
 
+    public function removeLog() {
+        if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "deletepermission") || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){
+            Log::finde($_GET["lid"])->loesche();
+            var_dump($_GET["lid"]);
+            exit();
+        } else {
+            $info = "No Permissions to Perform reboot";
+        }
+    }
+
 }

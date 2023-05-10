@@ -1,19 +1,30 @@
+<?php if(!isset($_GET["lvl"])) { ?>
 <h1>Log Actions</h1>
 
-<table class="logtable">
+<table >
+    <tr><td><input id="cb-1" type="checkbox" onclick="cbAllcheck()" checked/></td></tr>
+    <tr><td><input id="cb0" type="checkbox" onclick="loadLogByLogLevel()" checked/><label for="cb0"> show debug</label></td></tr>
+    <tr><td><input id="cb1" type="checkbox" onclick="loadLogByLogLevel()" checked/> <label for="cb1">warning</label></td></tr>
+    <tr><td><input id="cb2" type="checkbox" onclick="loadLogByLogLevel()" checked/><label for="cb2"> error</label></td></tr>
+    <tr><td><input id="cb3" type="checkbox" onclick="loadLogByLogLevel()" checked/><label for="cb3"> critical</label></td></tr>
+</table>
 
-    <tr><td><input type="checkbox" checked> show debug</input></td></tr>
-    <tr><td><input type="checkbox" checked> show warning</input></td></tr>
-    <tr><td><input type="checkbox" checked> show error</input></td></tr>
-    <tr><td><input type="checkbox" checked> show critical</input></td></tr>
+<table class="logtable" id="logtable">
+
+<?php } ?>
+
+
+
     <tr>
         <td>User Name</td><td>Action Name</td><td> Level</td><td>Description</td><td>Time</td><td>Delete</td>
     </tr>
     <?php foreach ($logs as $l) { ?>
         <tr>
-        <td><button onclick="loadMrgUserById(<?=$l->findeUser()->getId()?>)"><?=$l->findeUser()->getName()?></button></td><td><?=$l->getLog_action()->getName()?></td><td><?=$l->getLog_level()->getName()?></td><td><?=$l->getDescription()?></td><td><?=$l->getTimestamp() ?></td><td>Todo Remove </td>
+            <td><button onclick="loadLogByUserId(<?=$l->findeUser()->getId()?>)"><?=$l->findeUser()->getName()?></button></td><td><?=$l->getLog_action()->getName()?></td><td><?=$l->getLog_level()->getName()?></td><td><?=$l->getDescription()?></td><td><?=$l->getTimestamp() ?></td><td><button onclick="removeLog(<?=$l->getId()?>)">Remove</button> </td>
         </tr>
     <?php  } ?>
 
-</table>
+ <?php if(!isset($_GET["lvl"])) { ?>
+    </table>
 
+<?php } ?>

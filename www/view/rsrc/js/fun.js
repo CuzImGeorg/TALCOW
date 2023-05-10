@@ -1,19 +1,4 @@
 
-
-function loadDocWithElementID(str, elementid) {
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById(elementid).innerHTML = this.responseText;
-            console.log(this.responseText);
-        }
-    };
-
-    xhttp.open("POST", str, true);
-    xhttp.send();
-}
-
-
 function newUserPermission() {
     if(!document.getElementById("upun").hasAttribute("hidden")) {
         document.getElementById("upun").setAttribute("hidden", "");
@@ -23,10 +8,13 @@ function newUserPermission() {
         document.getElementById("upun").removeAttribute("hidden");
         document.getElementById("upp").removeAttribute("hidden");
         document.getElementById("btnup").innerHTML = "-";
-
-
     }
+}
 
+function exec(str) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", str, true);
+    xhttp.send();
 }
 
 function updateUsernameList () {
@@ -35,4 +23,14 @@ function updateUsernameList () {
 
 function updatePermissionList() {
     loadDocWithElementID("index.php?controller=ajax&aktion=updatePermissionList", "dl2");
+}
+
+function reboot() {
+    exec("index.php?controller=execute&aktion=reboot");
+}
+
+function removeLog(lid) {
+    console.log("a");
+    exec("index.php?controller=execute&aktion=removeLog&lid=" + lid );
+    loadLogByLogLevel();
 }

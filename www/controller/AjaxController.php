@@ -80,17 +80,34 @@ class AjaxController extends AbstractBase {
     }
 
     public function log() {
-        $logs = Log::findeALL();
+        if(isset($_GET['uid'])){
+            $logs = Log::findLogByUserID($_GET['uid']);
+        }elseif (isset($_GET['lvl'])){
+            $bits = $_GET['lvl'];
+            $subSql = "";
+            $subSql .= $bits[0] == 1 ? "'debug' OR name LIKE " : "";
+            $subSql .= $bits[1] == 1 ? "'warning' OR name LIKE " : "";
+            $subSql .= $bits[2] == 1 ? "'error' OR name LIKE " : "";
+            $subSql .= $bits[3] == 1 ? "'critical'" : "''";
+
+            $logs = Log::fineLogsByLogAnyLevel($subSql);
+        }
+        else {
+            $logs = Log::findeALL();
+        }
         $this->addContext("logs", $logs);
 
 
     }
+
 
     public function logAktions() {
         $akt = Log_action::findeALL();
         $this->addContext("akt", $akt);
 
     }
+
+
 
     public function updateUsernameList() {
         $user = Qser::findeALL();
