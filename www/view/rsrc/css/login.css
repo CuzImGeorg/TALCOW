@@ -24,15 +24,15 @@ body {
 }
 
 .logo {
-    width: 1000px;
-    height: 700px;
+    max-width: 50%;
+    height: auto;
     position: absolute;
-    align-content: center;
     top: 50%;
-    left: 30%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
 }
+
 
 h2 {
     text-align: center;
@@ -106,4 +106,28 @@ input{
     font-size: 30px;
     font-weight: bold;
     line-height: 1;
+}
+@media only screen and (max-width: 768px) {
+    .login-container {
+        max-width: 100%;
+        padding: 10px;
+        left: 0;
+        float: none;
+        top: 0;
+        transform: none;
+    }
+    .logo {
+        width: 300px;
+        height: 200px;
+        left: 50%;
+        top: 10%;
+        transform: translateX(-50%);
+    }
+    label {
+        font-size: 20px;
+    }
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+    }
 }
