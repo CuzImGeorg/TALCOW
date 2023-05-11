@@ -29,4 +29,14 @@ class ExecuteController extends AbstractBase {
         }
     }
 
+    public function btnAddUserBerechtigung() {
+       $q = new Qser_hat_berechtigung();
+       $q->setUid(Qser::findeUserByName($_GET["name"])->getId());
+       $q->setBid(Berechtigung::findeBerechtigungByNamed($_GET["perm"])->getId());
+       $q->setUseredit($_SESSION["userid"]);
+       $q->setCreatetime((date("Y-m-d H:i:s")));
+       $q->speichere();
+
+    }
+
 }

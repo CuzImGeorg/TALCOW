@@ -11,11 +11,13 @@ function newUserPermission() {
     }
 }
 
-function exec(str) {
+function execGet(str) {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", str, true);
     xhttp.send();
 }
+
+
 
 function updateUsernameList () {
     loadDocWithElementID("index.php?controller=ajax&aktion=updateUsernameList", "dl", );
@@ -26,11 +28,15 @@ function updatePermissionList() {
 }
 
 function reboot() {
-    exec("index.php?controller=execute&aktion=reboot");
+    execGet("index.php?controller=execute&aktion=reboot");
 }
 
 function removeLog(lid) {
-    console.log("a");
-    exec("index.php?controller=execute&aktion=removeLog&lid=" + lid );
+    execGet("index.php?controller=execute&aktion=removeLog&lid=" + lid );
     loadLogByLogLevel();
+}
+
+function btnAddUserBerechtigung() {
+    execGet("index.php?controller=execute&aktion=btnAddUserBerechtigung&name=" + document.getElementById("upun").value +"&perm=" + document.getElementById("upp").value);
+    loadUserPermissions();
 }
