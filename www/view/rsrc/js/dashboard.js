@@ -99,7 +99,26 @@ function cbAllcheck() {
     loadLogByLogLevel()
 }
 
+let b3 = true;
+function updateCbLogLevel(checkName) {
+    if(b3) {
+        console.log(document.getElementById("lcb0").innerHTML);
+        document.getElementById("cb0").checked = document.getElementById("lcb0").innerHTML === checkName;
+        document.getElementById("cb1").checked = document.getElementById("lcb1").innerHTML === checkName;
+        document.getElementById("cb2").checked = document.getElementById("lcb2").innerHTML === checkName;
+        document.getElementById("cb3").checked = document.getElementById("lcb3").innerHTML === checkName;
+        b3 = false;
+    }else {
+        document.getElementById("cb0").checked = true;
+        document.getElementById("cb1").checked = true;
+        document.getElementById("cb2").checked = true;
+        document.getElementById("cb3").checked = true;
+        b3 = true;
+    }
 
+    loadLogByLogLevel()
+
+}
 
 function loadlogAktions() {
     loadDoc("index.php?controller=ajax&aktion=logAktions");

@@ -1,10 +1,13 @@
 
 function newUserPermission() {
+
     if(!document.getElementById("upun").hasAttribute("hidden")) {
+        document.getElementById("btnsub").setAttribute("hidden", "");
         document.getElementById("upun").setAttribute("hidden", "");
         document.getElementById("upp").setAttribute("hidden", "");
         document.getElementById("btnup").innerHTML = "+";
     }else {
+        document.getElementById("btnsub").removeAttribute("hidden");
         document.getElementById("upun").removeAttribute("hidden");
         document.getElementById("upp").removeAttribute("hidden");
         document.getElementById("btnup").innerHTML = "-";
@@ -40,3 +43,4 @@ function btnAddUserBerechtigung() {
     execGet("index.php?controller=execute&aktion=btnAddUserBerechtigung&name=" + document.getElementById("upun").value +"&perm=" + document.getElementById("upp").value);
     loadUserPermissions();
 }
+
