@@ -111,7 +111,7 @@ class M_config
         return $abfrage->fetchAll();
     }
 
-    public static function findM_ConfigBymodul(int $id)
+    public static function findM_ConfigByModul(int $id)
     {
         $sql = "SELECT * FROM m_config WHERE modul =:id";
         $abfrage = DB::getDB()->prepare($sql);

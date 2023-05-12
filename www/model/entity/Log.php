@@ -110,7 +110,7 @@ class Log
     }
     public static function findLogByUserID(int $id)
     {
-        $sql = "SELECT * FROM log WHERE uid = $id";
+        $sql = "SELECT * FROM log WHERE uid = :id";
         $abfrage = DB::getDB()->query($sql);
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
         return $abfrage->fetchAll();
@@ -129,7 +129,7 @@ class Log
 
     public static function findLogByLog_Action(int $id)
     {
-        $sql = "SELECT * FROM log WHERE action =:id)";
+        $sql = "SELECT * FROM log WHERE action =:id";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('id' => $id));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
@@ -138,7 +138,7 @@ class Log
 
     public static function findLogByLog_Level(int $id)
     {
-        $sql = "SELECT * FROM log WHERE level =:id)";
+        $sql = "SELECT * FROM log WHERE level =:id";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('id' => $id));
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
