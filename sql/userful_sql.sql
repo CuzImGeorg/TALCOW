@@ -12,7 +12,7 @@ ALTER SEQUENCE log_id_seq RESTART WITH 1;
 /*
  to test triggers:
  */
-UPDATE qser SET name = 'root' WHERE  id = 1;
+UPDATE qser SET name = 'admin' WHERE  id = 1;
 DELETE FROM qser WHERE id = 1;
 UPDATE aptlist SET name = 'boo' WHERE id =1;
 DELETE FROM log_level WHERE id = 1;

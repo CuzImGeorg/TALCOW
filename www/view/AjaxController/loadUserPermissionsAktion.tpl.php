@@ -8,8 +8,7 @@
 
         <td><input type="text" id="upun" list="dl" onclick="updateUsernameList()" hidden   placeholder="Name"></td>
         <td><input type="text" list="dl2" id="upp" onclick="updatePermissionList()" hidden placeholder="Permission"></td>
-        <td><button  id="btnsub" onclick="btnAddUserBerechtigung()"> Submit</button></td>
-
+        <td><button hidden="hidden" type="button"  id="btnsub" onclick="btnAddUserBerechtigung()"  >Submit</button</td>
     <tr>
     <tr>
         <td>User Name</td><td>Permission Name</td><td>Create Time</td><td>Created By User </td><td>Remove</td>

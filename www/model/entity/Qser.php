@@ -108,15 +108,6 @@ class Qser
         $this->createdate = $createdate;
     }
 
-    public static function findUserByBerechtigungID(int $id)
-    {
-        $sql = "SELECT * FROM qser_hat_berechtigung WHERE bid =:bid";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('bid' => $id));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
-        return $abfrage->fetchAll();
-    }
-
     public static function getByNickNameAndPassword($name, $password) {
         $sql = "SELECT * FROM qser WHERE name = '$name' and password = '$password'";
         $a = Db::getDB()->query($sql);
