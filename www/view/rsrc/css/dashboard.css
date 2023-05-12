@@ -45,12 +45,7 @@ a:visited {
     margin-top: -12px;
 }
 
-#rebootbtn {
-    font-size: 18px;
-    margin-left: 0.5%;
-    background-color: #660412;
-    border-style: none;
-}
+
 
 #rebootbtn:hover {
     background-color: #920416;
@@ -62,8 +57,36 @@ a:visited {
 
 
 body {
-    background-color:  var(--bg);
-    font-size: 18px;
+    background: #53c6c5 url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10l10-10h30v30l-10 10H0V10zm22 18l-4-4 4-4v8zM18 8l4 4-4 4V8zm12 12l-4-4 4-4v8zm-4-12l4 4-4 4V8z" fill="%23ffffff" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E') repeat;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+div {
+    background: #4d5d5d url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10l10-10h30v30l-10 10H0V10zm22 18l-4-4 4-4v8zM18 8l4 4-4 4V8zm12 12l-4-4 4-4v8zm-4-12l4 4-4 4V8z" fill="%23ffffff" fill-opacity="0.1" fill-rule="evenodd"/%3E%3C/svg%3E') repeat;
+    text-align: center;
+    height: 80%;
+
+}
+
+#title {
+    color: #2bc5c5;
+    font-size: 50px;
+}
+
+#rebootbtn{
+
+    background-color: #2bc5c5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+
 }
 
 /*
@@ -116,8 +139,6 @@ body {
     width: 3%;
 }
 
-.logtable {
 
 
 
-}
