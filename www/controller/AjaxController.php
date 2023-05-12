@@ -91,6 +91,8 @@ class AjaxController extends AbstractBase {
             $subSql .= $bits[3] == 1 ? "'critical'" : "''";
 
             $logs = Log::fineLogsByLogAnyLevel($subSql);
+        }else  if(isset($_GET['name'])){
+            $logs = Log::findLogByLog_ActionName($_GET['name']);
         }
         else {
             $logs = Log::findeALL();

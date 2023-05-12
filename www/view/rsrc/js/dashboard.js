@@ -78,7 +78,6 @@ function loadLogByLogLevel() {
                     Number(document.getElementById("cb1").checked) +
                     Number(document.getElementById("cb2").checked) +
                     Number(document.getElementById("cb3").checked);
-    console.log(sql);
     if( document.getElementById("cb0").checked &&
         document.getElementById("cb1").checked &&
         document.getElementById("cb2").checked &&
@@ -88,6 +87,11 @@ function loadLogByLogLevel() {
         document.getElementById("cb-1").checked = false;
     }
     loadDocWithElementID("index.php?controller=ajax&aktion=log&lvl=" + sql, "logtable");
+}
+
+function laodLogByName(name){
+    loadDocWithElementID("index.php?controller=ajax&aktion=log&name=" + name, "logtable");
+
 }
 
 function cbAllcheck() {

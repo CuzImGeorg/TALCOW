@@ -25,7 +25,7 @@ class ExecuteController extends AbstractBase {
             var_dump($_GET["lid"]);
             exit();
         } else {
-            $info = "No Permissions to Perform reboot";
+            $info = "No Permissions to Delete Logs";
         }
     }
 

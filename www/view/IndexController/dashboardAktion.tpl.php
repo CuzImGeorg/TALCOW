@@ -20,10 +20,18 @@
 
         <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
                 || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
-                 <li><a onclick="b2=false;loadLogs();">Logs</a></li>
+                 <li><a onclick="b2=false;b3 = true;loadLogs();">Logs</a></li>
         <?php } ?>
-        <li><a onclick="loadlogAktions();">Log Actions</a></li>
-        <li><a onclick="loadloglevel();">Log Levels</a></li>
+        <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
+            || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
+            <li><a onclick="loadlogAktions();">Log Actions</a></li>
+        <?php } ?>
+        <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
+            || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
+            <li><a onclick="loadloglevel();">Log Levels</a></li>
+        <?php } ?>
+
+
 
         <li><a onclick="loadMrgUser();">Users</a></li>
         <li><a onclick="loadPermissions();">Permissions</a></li>
