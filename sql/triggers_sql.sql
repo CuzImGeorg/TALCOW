@@ -8,7 +8,9 @@ CREATE OR REPLACE FUNCTION username_change_log_trigger_function()
 BEGIN
     IF TG_OP = 'UPDATE' AND OLD.name <> NEW.name THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.id,'changed the username from ' || OLD.name || ' to ' || NEW.name,1,1);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.id,'changed the username from ' || OLD.name || ' to ' || NEW.name, (SELECT id FROM log_action WHERE name = "namehistory") ,1);
+
+
 
 END IF;
 
@@ -35,13 +37,13 @@ CREATE OR REPLACE FUNCTION user_change_permission_trigger_function()
 BEGIN
     IF TG_OP = 'INSERT' THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,'changed the permission from the user: ' || (SELECT name FROM qser WHERE id = NEW.uid) || '! Following permission was added: ' ||(SELECT name FROM berechtigung WHERE id = NEW.bid),2,1);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,'changed the permission from the user: ' || (SELECT name FROM qser WHERE id = NEW.uid) || '! Following permission was added: ' ||(SELECT name FROM berechtigung WHERE id = NEW.bid), (SELECT id FROM log_action WHERE name = "permission change"),1);
 
     END IF;
 
     IF TG_OP = 'DELETE' THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,' permission from the user: ' || (SELECT name FROM qser WHERE id = OLD.uid) || ' was taken! Following permission was taken: ' ||(SELECT name FROM berechtigung WHERE id = OLD.bid),2,1);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,' permission from the user: ' || (SELECT name FROM qser WHERE id = OLD.uid) || ' was taken! Following permission was taken: ' ||(SELECT name FROM berechtigung WHERE id = OLD.bid),(SELECT id FROM log_action WHERE name = "permission change"),1);
 
     END IF;
 
@@ -69,19 +71,19 @@ CREATE OR REPLACE FUNCTION user_installed_updated_deleted_apt_list_trigger_funct
 BEGIN
     IF TG_OP = 'INSERT' THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(NEW.uid,' user: ' || (SELECT name FROM qser WHERE id = NEW.uid) || ' has deleted an apt package! Following apt package was deleted: ' ||(SELECT name FROM aptlist WHERE id = NEW.id),3,1);
+        INSERT INTO log(uid,description, action, level) VALUES(NEW.uid,' user: ' || (SELECT name FROM qser WHERE id = NEW.uid) || ' has deleted an apt package! Following apt package was deleted: ' ||(SELECT name FROM aptlist WHERE id = NEW.id),(SELECT id FROM log_action WHERE name = "apt_list change"),1);
 
     END IF;
 
     IF TG_OP = 'UPDATE' AND OLD.name != NEW.name THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,' user: ' || (SELECT name FROM qser WHERE id = OLD.uid) || ' has updated an apt package! Following apt package was updated: ' ||(SELECT name FROM aptlist WHERE id = OLD.id),3,1);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,' user: ' || (SELECT name FROM qser WHERE id = OLD.uid) || ' has updated an apt package! Following apt package was updated: ' ||(SELECT name FROM aptlist WHERE id = OLD.id),(SELECT id FROM log_action WHERE name = "permission change"),1);
 
     END IF;
 
     IF TG_OP = 'DELETE' THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,' user: ' || (SELECT name FROM qser WHERE id = OLD.uid) || ' has deleted an apt package! Following apt package was deleted: ' ||(SELECT name FROM aptlist WHERE id = OLD.id),3,1);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.uid,' user: ' || (SELECT name FROM qser WHERE id = OLD.uid) || ' has deleted an apt package! Following apt package was deleted: ' ||(SELECT name FROM aptlist WHERE id = OLD.id),(SELECT id FROM log_action WHERE name = "permission change"),1);
 
     END IF;
 
@@ -109,7 +111,7 @@ CREATE OR REPLACE FUNCTION insert_servicemonitor_trigger_function()
 BEGIN
     IF TG_OP = 'INSERT'  THEN
 
-        INSERT INTO log(uid,description, action, level) VALUES(NEW.uid,' a servicemonitor was added! service: ' || NEW.servicename ,4,1);
+        INSERT INTO log(uid,description, action, level) VALUES(NEW.uid,' a servicemonitor was added! service: ' || NEW.servicename ,(SELECT id FROM log_action WHERE name = "smt"),1);
 
     END IF;
 
@@ -137,7 +139,7 @@ CREATE OR REPLACE FUNCTION user_delete_prevention_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
 
-        INSERT INTO log(uid,description, action, level) VALUES(OLD.id,' someone tried to delete the user ' || OLD.name ,5,2);
+        INSERT INTO log(uid,description, action, level) VALUES(OLD.id,' someone tried to delete the user ' || OLD.name ,(SELECT id FROM log_action WHERE name = "udp"),2);
 
     RETURN null;
 END;
@@ -157,7 +159,7 @@ EXECUTE FUNCTION user_delete_prevention_trigger_function();
 CREATE OR REPLACE FUNCTION modul_value_insert_delete_prevention_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
-        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to delete / insert a module value! ' ,6,2);
+        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to delete / insert a module value! ' ,(SELECT id FROM log_action WHERE name = "modul_value prevention"),2);
 
     RETURN null;
 END;
@@ -177,7 +179,7 @@ CREATE OR REPLACE FUNCTION log_level_insert_delete_prevention_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
 
-        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to insert / delete a log level'  ,7,2);
+        INSERT INTO log(uid,description, action, level) VALUES(2,' someone tried to insert / delete a log level'  ,(SELECT id FROM log_action WHERE name = "ll"),2);
 
 
     RETURN null;
@@ -199,7 +201,7 @@ CREATE OR REPLACE FUNCTION user_add_trigger_function()
     RETURNS TRIGGER AS $$
 BEGIN
 
-    INSERT INTO log(uid,description, action, level) VALUES(NEW.id,' A new user was created! User: ' || NEW.name ,8,1);
+    INSERT INTO log(uid,description, action, level) VALUES(NEW.id,' A new user was created! User: ' || NEW.name ,(SELECT id FROM log_action WHERE name = "ua"),1);
 
 
     RETURN null;
@@ -221,7 +223,7 @@ CREATE OR REPLACE FUNCTION modul_update_trigger_function()
 BEGIN
 
     IF TG_OP = 'UPDATE' AND OLD.valueid != NEW.valueid THEN
-    INSERT INTO log(uid,description, action, level) VALUES(2,' A module was Installed/Deinstalled' ,9,1);
+    INSERT INTO log(uid,description, action, level) VALUES(2,' A module was Installed/Deinstalled' ,(SELECT id FROM log_action WHERE name = "module update"),1);
 
     END IF;
 
