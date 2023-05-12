@@ -45,7 +45,7 @@
 
 
 
-        <li><a onclick="loadSysInfo();">System Info</a></li>
+        <li ><a onclick="loadSysInfo();">System Info</a></li>
 
     </ul>
 
