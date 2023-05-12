@@ -21,7 +21,7 @@
     <?php foreach ($logs as $l) { ?>
         <tr>
             <td><button onclick="loadLogByUserId(<?=$l->findeUser()->getId()?>)"><?=$l->findeUser()->getName()?></button></td>
-            <td><button onclick="laodLogByName(<?=$l->getLog_action()->getName()?>)"><?=$l->getLog_action()->getName()?></button></td>
+            <td><button onclick='laodLogByName("<?=$l->getLog_action()->getName()?>")'><?=$l->getLog_action()->getName()?></button></td>
             <td><button  onclick='updateCbLogLevel("<?=$l->getLog_level()->getName()?>")'><?=$l->getLog_level()->getName()?></button></td>
             <td><?=$l->getDescription()?></td>
             <td><?=$l->getTimestamp() ?></td>

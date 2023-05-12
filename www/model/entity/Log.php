@@ -153,7 +153,7 @@ class Log
 
     public static function findLogByLog_ActionName(string $name)
     {
-        $sql = "SELECT * FROM log WHERE action = (SELECT id FROM log_action WHERE name = $name )";
+        $sql = "SELECT * FROM log WHERE action = (SELECT id FROM log_action WHERE name = '$name' )";
         $abfrage = DB::getDB()->query($sql);
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
         return $abfrage->fetchAll();
