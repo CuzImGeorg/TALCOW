@@ -72,4 +72,11 @@ class Berechtigung
         return $a->fetchAll();
     }
 
+    public  static function  findeBerechtigungByNamed(string $name) {
+        $sql = "SELECT * FROM berechtigung WHERE name = '$name'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'berechtigung');
+        return $a->fetch();
+    }
+
 }

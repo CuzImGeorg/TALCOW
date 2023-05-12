@@ -3,7 +3,7 @@
     $_SESSION["userid"] = $user->getID();
 
 ?>
-
+<!DOCTYPE html>
 <html>
 
     <head>
@@ -17,7 +17,11 @@
     <body>
     <ul>
         <li><a href="index.php?">Home</a></li>
-        <li><a onclick="loadLogs();">Logs</a></li>
+
+        <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
+                || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
+                 <li><a onclick="b2=false;loadLogs();">Logs</a></li>
+        <?php } ?>
         <li><a onclick="loadlogAktions();">Log Actions</a></li>
         <li><a onclick="loadloglevel();">Log Levels</a></li>
 

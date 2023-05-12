@@ -131,6 +131,13 @@ class Qser
         return $a->fetchAll();
     }
 
+    public static function findeUserByName(string $name) {
+        $sql = "SELECT * FROM qser WHERE name = '$name'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'Qser');
+        return $a->fetch();
+    }
+
 
 
 }

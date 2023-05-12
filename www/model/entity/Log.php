@@ -110,9 +110,8 @@ class Log
     }
     public static function findLogByUserID(int $id)
     {
-        $sql = "SELECT * FROM log WHERE uid =:uid)";
-        $abfrage = DB::getDB()->prepare($sql);
-        $abfrage->execute(array('uid' => $id));
+        $sql = "SELECT * FROM log WHERE uid = $id";
+        $abfrage = DB::getDB()->query($sql);
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
         return $abfrage->fetchAll();
     }
@@ -142,6 +141,12 @@ class Log
         $sql = "SELECT * FROM log WHERE level =:id)";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('id' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
+        return $abfrage->fetchAll();
+    }
+    public static function fineLogsByLogAnyLevel(string $names) {
+        $sql = " SELECT * FROM log WHERE level = ANY(SELECT id FROM Log_level WHERE name like $names );";
+        $abfrage = DB::getDB()->query($sql);
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
         return $abfrage->fetchAll();
     }
