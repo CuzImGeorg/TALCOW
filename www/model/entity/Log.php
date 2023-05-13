@@ -110,7 +110,7 @@ class Log
     }
     public static function findLogByUserID(int $id)
     {
-        $sql = "SELECT * FROM log WHERE uid = :id";
+        $sql = "SELECT * FROM log WHERE uid = $id";
         $abfrage = DB::getDB()->query($sql);
         $abfrage->setFetchMode(PDO::FETCH_CLASS, 'log');
         return $abfrage->fetchAll();

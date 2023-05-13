@@ -19,7 +19,6 @@ function loadDocWithElementID(str, elementid) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById(elementid).innerHTML = this.responseText;
-            console.log(this.responseText);
         }
     };
 
@@ -106,7 +105,6 @@ function cbAllcheck() {
 let b3 = true;
 function updateCbLogLevel(checkName) {
     if(b3) {
-        console.log(document.getElementById("lcb0").innerHTML);
         document.getElementById("cb0").checked = document.getElementById("lcb0").innerHTML === checkName;
         document.getElementById("cb1").checked = document.getElementById("lcb1").innerHTML === checkName;
         document.getElementById("cb2").checked = document.getElementById("lcb2").innerHTML === checkName;
