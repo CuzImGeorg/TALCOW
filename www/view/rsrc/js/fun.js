@@ -14,13 +14,28 @@ function newUserPermission() {
     }
 }
 
+function newUser() {
+    if(!document.getElementById("nun").hasAttribute("hidden")) {
+        document.getElementById("nun").setAttribute("hidden", "");
+        document.getElementById("up").setAttribute("hidden", "");
+        document.getElementById("btnnusub").setAttribute("hidden", "");
+        document.getElementById("ud").setAttribute("hidden", "");
+
+        document.getElementById("btnu").innerHTML = "+";
+    }else {
+        document.getElementById("nun").removeAttribute("hidden");
+        document.getElementById("up").removeAttribute("hidden");
+        document.getElementById("btnnusub").removeAttribute("hidden");
+        document.getElementById("ud").removeAttribute("hidden");
+        document.getElementById("btnu").innerHTML = "-";
+    }
+}
+
 function execGet(str) {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", str, true);
     xhttp.send();
 }
-
-
 
 function updateUsernameList () {
     loadDocWithElementID("index.php?controller=ajax&aktion=updateUsernameList", "dl", );
@@ -42,5 +57,10 @@ function removeLog(lid) {
 function btnAddUserBerechtigung() {
     execGet("index.php?controller=execute&aktion=btnAddUserBerechtigung&name=" + document.getElementById("upun").value +"&perm=" + document.getElementById("upp").value);
     loadUserPermissions();
+}
+
+function newUserSubmit(){
+    execGet("index.php?controller=execute&aktion=newUser&name=" + document.getElementById("nun").value + "&pw=" + document.getElementById("up").value + "&desc=" + document.getElementById("ud").value);
+    loadMrgUser();
 }
 

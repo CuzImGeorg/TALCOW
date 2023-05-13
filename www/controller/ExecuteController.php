@@ -34,9 +34,19 @@ class ExecuteController extends AbstractBase {
        $q->setUid(Qser::findeUserByName($_GET["name"])->getId());
        $q->setBid(Berechtigung::findeBerechtigungByNamed($_GET["perm"])->getId());
        $q->setUseredit($_SESSION["userid"]);
-       $q->setCreatetime((date("Y-m-d H:i:s")));
+       $q->setCreatetime(date("Y-m-d H:i:s"));
        $q->speichere();
 
+    }
+
+    public function newUser(){
+        $u = new Qser();
+        $u->setName($_GET["name"]);
+        $u->setPassword($_GET["pw"]); //TODO hash PW
+        $u->setActive(true);
+        $u->setCreatedate(date("Y-m-d H:i:s"));
+        $u->setDescription($_GET["desc"]);
+        $u->speichere();
     }
 
 }

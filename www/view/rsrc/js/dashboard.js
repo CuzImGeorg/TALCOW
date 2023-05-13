@@ -132,4 +132,8 @@ function loadloglevel() {
     loadDoc("index.php?controller=ajax&aktion=logLevel");
 }
 
+function loadTerminal() {
+    loadDoc("index.php?controller=ajax&aktion=webTerminal");
+}
+
 

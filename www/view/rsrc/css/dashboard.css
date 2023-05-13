@@ -139,6 +139,21 @@ div {
     width: 3%;
 }
 
+/*
+* TERMINAL
+*/
+
+.terminalresults {
+    margin-top: 80px;
+    resize: none;
+    width: 80%;
+}
+
+.terminalinput {
+    width: 80%;
+    height: 10%;
+}
+
 
 
 

@@ -39,7 +39,8 @@
 
 
 
-        <li><a href="index.php?">News</a></li>
+
+        <li><a onclick="loadTerminal()"> >_ Terminal </a></li>
         <li><a href="index.php?">Contact</a></li>
 
 
