@@ -54,6 +54,10 @@ function loadUserPermissionsByUserId(uid) {
     }
 }
 
+function loadUserPermissionsByBerechtigungsName(name) {
+    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&bname=" + name );
+}
+
 function loadPermissions() {
     loadDoc("index.php?controller=ajax&aktion=loadPermissions");
 }

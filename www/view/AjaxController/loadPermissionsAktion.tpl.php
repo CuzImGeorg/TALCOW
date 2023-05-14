@@ -6,7 +6,7 @@
     </tr>
     <?php foreach ($perms as $p) { ?>
     <tr>
-        <td><?=$p->getName()?></td><td><?=$p->getDescription()?></td>
+        <td><button onclick="loadUserPermissionsByBerechtigungsName('<?=$p->getName()?>')"><?=$p->getName()?></button></td><td><?=$p->getDescription()?></td>
     </tr>
     <?php  } ?>
 

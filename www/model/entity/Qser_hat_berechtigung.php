@@ -126,4 +126,11 @@ class Qser_hat_berechtigung
         return $abfrage->fetchAll();
     }
 
+    public static function findeUserByBerechtigungName(string $name) {
+        $sql = "SELECT * FROM qser_hat_berechtigung WHERE bid = (SELECT id FROM berechtigung WHERE name = '$name')";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'qser_hat_berechtigung');
+        return $abfrage->fetchAll();
+    }
+
 }
