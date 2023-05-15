@@ -64,3 +64,15 @@ function newUserSubmit(){
     loadMrgUser();
 }
 
+async function loadLogThenLoadByLevel (name) {
+    b3 = true;
+    loadLogs();
+    await delay(50).then();
+    updateCbLogLevel(name);
+}
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+

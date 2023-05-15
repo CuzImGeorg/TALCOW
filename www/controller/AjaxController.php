@@ -132,6 +132,9 @@ class AjaxController extends AbstractBase {
 
 
 
+    public function demonMonitor() {
+
+    }
 
 
 

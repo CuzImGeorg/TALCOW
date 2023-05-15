@@ -25,6 +25,18 @@ function loadDocWithElementID(str, elementid) {
     xhttp.open("POST", str, true);
     xhttp.send();
 }
+
+function loadDocAndAddWithElementID(str, elementid) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(elementid).innerHTML += this.responseText;
+        }
+    };
+
+    xhttp.open("POST", str, true);
+    xhttp.send();
+}
 function loadMrgUser() {
 
     loadDoc("index.php?controller=ajax&aktion=mgruser");

@@ -1,7 +1,7 @@
-<?php if(!isset($_GET["lvl"])) { ?>
+<?php if(!isset($_GET["lvl"]) && !isset($_GET["name"])) { ?>
 <h1>Log</h1>
 
-<table >
+<table>
     <tr><td><input id="cb-1" type="checkbox" onclick="b3 = true;cbAllcheck()" checked/></td></tr>
     <tr><td><input id="cb0" type="checkbox" onclick="b3 = true;loadLogByLogLevel()" checked/><label id="lcb0" for="cb0">debug</label></td></tr>
     <tr><td><input id="cb1" type="checkbox" onclick="b3 = true;loadLogByLogLevel()" checked/><label  id="lcb1" for="cb1">warning</label></td></tr>
@@ -29,7 +29,10 @@
         </tr>
     <?php  } ?>
 
- <?php if(!isset($_GET["lvl"])) { ?>
+ <?php if(!isset($_GET["lvl"]) && !isset($_GET["name"])) { ?>
     </table>
 
-<?php } ?>
+<?php } //TODO make reverse click
+?>
+
+

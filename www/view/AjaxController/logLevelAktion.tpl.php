@@ -7,7 +7,7 @@
     </tr>
     <?php foreach ($logs as $l) { ?>
         <tr>
-            <td><?=$l->getName()?></td><td><?=$l->getDescription()?></td>
+            <td><button  onclick="loadLogThenLoadByLevel('<?=$l->getName()?>')"><?=$l->getName()?></button></td><td><?=$l->getDescription()?></td>
         </tr>
     <?php  } ?>
 
