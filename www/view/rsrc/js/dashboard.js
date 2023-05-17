@@ -150,4 +150,7 @@ function loadTerminal() {
     loadDoc("index.php?controller=ajax&aktion=webTerminal");
 }
 
+function loadServiceMonitor() {
+    loadDoc("index.php?controller=ajax&aktion=loadServiceMonitor");
+}
 

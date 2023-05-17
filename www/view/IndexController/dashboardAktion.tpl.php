@@ -41,7 +41,7 @@
 
 
         <li><a onclick="loadTerminal()"> >_ Terminal </a></li>
-        <li><a onclick="">Demon Monitor</a></li>
+        <li><a onclick="loadServiceMonitor()">Daemon Monitor</a></li>
 
 
 

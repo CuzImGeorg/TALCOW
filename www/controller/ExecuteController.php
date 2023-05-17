@@ -49,4 +49,13 @@ class ExecuteController extends AbstractBase {
         $u->speichere();
     }
 
+    public function addServiceMontor() {
+        $m = new M_servicemonitor();
+        $m->setServicename($_GET["name"]);
+        $m->setDescription($_GET["desc"]);
+        $m->setUid($_SESSION["userid"]);
+        $m->setServicetype($_GET["st"]);
+    }
+
+
 }

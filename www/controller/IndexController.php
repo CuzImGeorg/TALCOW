@@ -40,10 +40,6 @@ class IndexController extends AbstractBase {
 
    }
 
-
-
-
-
 }
 
 

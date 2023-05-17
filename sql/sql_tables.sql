@@ -34,9 +34,10 @@ CREATE TABLE IF NOT EXISTS  aptlist(
 
 CREATE TABLE IF NOT EXISTS  m_servicemonitor(
 
-                                                id serial PRIMARY KEY,
-                                                uid int,
-                                                servicename varchar(63),
+    id serial PRIMARY KEY,
+    uid int,
+    servicename varchar(63),
+    servicetype boolean,
     description varchar(63),
     FOREIGN KEY(uid) REFERENCES qser(id)
 

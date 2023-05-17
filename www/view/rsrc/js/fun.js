@@ -31,6 +31,35 @@ function newUser() {
     }
 }
 
+function newService(){
+    if(!document.getElementById("sn").hasAttribute("hidden")) {
+        document.getElementById("sn").setAttribute("hidden", "");
+        document.getElementById("sd").setAttribute("hidden", "");
+        document.getElementById("btnas").setAttribute("hidden", "");
+        document.getElementById("st").setAttribute("hidden", "");
+        document.getElementById("r1").setAttribute("hidden", "");
+        document.getElementById("r2").setAttribute("hidden", "");
+        document.getElementById("l1").setAttribute("hidden", "");
+        document.getElementById("l2").setAttribute("hidden", "");
+        document.getElementById("btnsrv").innerHTML = "+";
+
+
+
+    }else {
+        document.getElementById("sn").removeAttribute("hidden");
+        document.getElementById("sd").removeAttribute("hidden");
+        document.getElementById("st").removeAttribute("hidden");
+        document.getElementById("btnas").removeAttribute("hidden");
+        document.getElementById("r1").removeAttribute("hidden");
+        document.getElementById("r2").removeAttribute("hidden");
+        document.getElementById("l1").removeAttribute("hidden");
+        document.getElementById("l2").removeAttribute("hidden");
+        document.getElementById("btnsrv").innerHTML = "-";
+
+
+    }
+}
+
 function execGet(str) {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", str, true);
@@ -75,4 +104,10 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+function addServiceMontor() {
+    execGet("index.php?controller=execute&aktion=addServiceMontor&name=" + document.getElementById("sn").value + "&desc=" + document.getElementById("sd").value + "&st=" + document.getElementById("r1").checked);
+}
 
+function updateServiceList() {
+    loadDocWithElementID("index.php?controller=ajax&aktion=updateServiceList","dl")
+}

@@ -6,6 +6,7 @@ class M_servicemonitor
     private int $id = 0;
     private string $servicename = '';
     private string $description = '';
+    private bool $servicetype;
     private int $uid = 0;
     protected static $table = 'M_servicemonitor';
 
@@ -76,6 +77,23 @@ class M_servicemonitor
     public function findeUser() {
         Qser::finde($this->uid);
     }
+
+    /**
+     * @return bool
+     */
+    public function isServicetype(): bool
+    {
+        return $this->servicetype;
+    }
+
+    /**
+     * @param bool $servicetype
+     */
+    public function setServicetype(bool $servicetype): void
+    {
+        $this->servicetype = $servicetype;
+    }
+
 
     public static function findUserByM_ServicemonitorID(int $id)
     {

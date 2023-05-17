@@ -136,10 +136,63 @@ class AjaxController extends AbstractBase {
 
     }
 
+    public function loadServiceMonitor() {
+        $srvs = M_servicemonitor::findeALL();
+        $monitor = array();
+        foreach ($srvs as $srv) {
+            $rs = "ihassphp";
+            if($srv->isServicetype()) {
+               $rs = shell_exec("systemctl status ". $srv->getServicename());
+
+            }else {
+
+            }
+            $active = "geathnetxD";
+            $color = "#fff";
+            $btn = "Error567";
+            if(str_contains($rs, "Active: active")) {
+                $active = "running";
+                $color = "#128a20";
+                $btn = "Stop";
+            }else if(str_contains($rs, "Active: inactive")){
+                $active = "inactive";
+                $color = "#d97914";
+                $btn = "Start";
+            } else if(str_contains($rs, "Active: activating")) {
+                $active = "activating";
+                $color = "#71ad58";
+                $btn = "Stop";
+            } else  if(str_contains($rs, "Active: deactivating")) {
+                $active = "deactivating";
+                $color = "#ba4141";
+                $btn = "Start";
+
+            } else  if(str_contains($rs, "Active: failed")) {
+                $active = "failed";
+                $color = "#5e5757";
+                $btn = "Start";
+
+            } else  if(str_contains($rs, "Active: not-found")) {
+                $active = "not-found";
+                $color = "#403a3a";
+                $btn = "N/A";
+            } else  if(str_contains($rs, "Active: dead")) {
+                $active = "dead";
+                $color = "#5e5757";
+                $btn = "N/A";
+            }
+
+            $monitor[] = array("service" => $srv, "active" => $active, "color" => $color, "btn" => $btn );
+
+        }
+        $this->addContext("monitors", $monitor);
 
 
+    }
 
+    public function updateServiceList() {
 
+    }
 
 
 }
