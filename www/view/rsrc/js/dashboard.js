@@ -154,3 +154,6 @@ function loadServiceMonitor() {
     loadDoc("index.php?controller=ajax&aktion=loadServiceMonitor");
 }
 
+function loadSystemUser() {
+    loadDoc("index.php?controller=ajax&aktion=loadSystemUser")
+}
