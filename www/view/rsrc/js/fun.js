@@ -66,6 +66,13 @@ function execGet(str) {
     xhttp.send();
 }
 
+function execPost(str, data) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", str, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(data);
+}
+
 function updateUsernameList () {
     loadDocWithElementID("index.php?controller=ajax&aktion=updateUsernameList", "dl", );
 }
@@ -79,17 +86,17 @@ function reboot() {
 }
 
 function removeLog(lid) {
-    execGet("index.php?controller=execute&aktion=removeLog&lid=" + lid );
+    execPost("index.php?controller=execute&aktion=removeLog", "lid=" +lid);
     loadLogByLogLevel();
 }
 
 function btnAddUserBerechtigung() {
-    execGet("index.php?controller=execute&aktion=btnAddUserBerechtigung&name=" + document.getElementById("upun").value +"&perm=" + document.getElementById("upp").value);
+    execPost("index.php?controller=execute&aktion=btnAddUserBerechtigung", "name=" + document.getElementById("upun").value +"&perm=" + document.getElementById("upp").value );
     loadUserPermissions();
 }
 
 function newUserSubmit(){
-    execGet("index.php?controller=execute&aktion=newUser&name=" + document.getElementById("nun").value + "&pw=" + document.getElementById("up").value + "&desc=" + document.getElementById("ud").value);
+    execPost("index.php?controller=execute&aktion=newUser", "name=" +document.getElementById("nun").value + "&pw=" + document.getElementById("up").value + "&desc=" + document.getElementById("ud").value)
     loadMrgUser();
 }
 
@@ -105,9 +112,57 @@ function delay(time) {
 }
 
 function addServiceMontor() {
-    execGet("index.php?controller=execute&aktion=addServiceMontor&name=" + document.getElementById("sn").value + "&desc=" + document.getElementById("sd").value + "&st=" + document.getElementById("r1").checked);
+    execPost("index.php?controller=execute&aktion=addServiceMontor", "name=" + document.getElementById("sn").value + "&desc=" + document.getElementById("sd").value + "&st=" + document.getElementById("r1").checked );
 }
 
 function updateServiceList() {
     loadDocWithElementID("index.php?controller=ajax&aktion=updateServiceList","dl")
+}
+
+function dluser(name) {
+    execPost("index.php?controller=execute&aktion=deluser", "name=" +name);
+}
+
+async function usernameChange(index, uid) {
+    let btn = document.getElementById("btnunc"+ index);
+    if(btn.innerHTML !== "Submit") {
+        btn.innerHTML = "Submit";
+        btn.style.background = "#4ace1f";
+        document.getElementById("inun" + index).removeAttribute("hidden");
+    }
+    else {
+        btn.innerHTML = "Change Name";
+        btn.style.background = "#d0d0d7";
+        let input = document.getElementById("inun" + index);
+        if(input.value.length > 0 && input.value !== "New Username") {
+            console.log("test");
+            execPost("index.php?controller=execute&aktion=changeUserName" , "uid=" + uid +"&name=" + input.value);
+            await delay(5);
+            loadMrgUser();
+        }
+        input.value = "";
+        input.setAttribute("hidden", "");
+    }
+}
+
+async function userpwChange() {
+    let btn = document.getElementById("btnp"+ index);
+    if(btn.innerHTML !== "Submit") {
+        btn.innerHTML = "Submit";
+        btn.style.background = "#4ace1f";
+        document.getElementById("inp" + index).removeAttribute("hidden");
+    }
+    else {
+        btn.innerHTML = "Change Password";
+        btn.style.background = "#d0d0d7";
+        let input = document.getElementById("inp" + index);
+        if(input.value.length > 0 && input.value !== "New Password") {
+            console.log("test");
+            execPost("index.php?controller=execute&aktion=changeUserpw" , "uid=" + uid +"&pw=" + input.value);
+            await delay(5);
+            loadMrgUser();
+        }
+        input.value = "";
+        input.setAttribute("hidden", "");
+    }
 }

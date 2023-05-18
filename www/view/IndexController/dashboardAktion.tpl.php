@@ -34,8 +34,17 @@
 
 
         <li><a onclick="loadMrgUser();">Users</a></li>
-        <li><a onclick="loadPermissions();">Permissions</a></li>
-        <li><a onclick="loadUserPermissions();">User Permissions</a></li>
+
+        <?php if($this->hasPermission("viewpermission") || $this->hasPermission("sudo")) { ?>
+            <li><a onclick="loadPermissions();">Permissions</a></li>
+
+        <?php } ?>
+
+        <?php if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) { ?>
+            <li><a onclick="loadUserPermissions();">User Permissions</a></li>
+
+        <?php } ?>
+
         <li><a onclick="loadSystemUser()">SystemUser</a></li>
 
 
@@ -50,8 +59,9 @@
 
     </ul>
 
-    <div class="test123" id="maindiv"></div>
 
+
+    <div class="test123" id="maindiv"></div>
     </body>
 
 </html>

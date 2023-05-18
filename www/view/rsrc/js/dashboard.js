@@ -1,8 +1,3 @@
-/*
-* TAB LOGS
- */
-
-
 function loadDoc(str) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -13,8 +8,28 @@ function loadDoc(str) {
     xhttp.open("GET", str, true);
     xhttp.send();
 }
-
+function loadDocPOST(str, data) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("maindiv").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("POST", str, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(data);
+}
 function loadDocWithElementID(str, elementid) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(elementid).innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", str, true);
+    xhttp.send();
+}
+function loadDocWithElementIDPOST(str, elementid, data) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -23,9 +38,9 @@ function loadDocWithElementID(str, elementid) {
     };
 
     xhttp.open("POST", str, true);
-    xhttp.send();
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(data);
 }
-
 function loadDocAndAddWithElementID(str, elementid) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -33,18 +48,35 @@ function loadDocAndAddWithElementID(str, elementid) {
             document.getElementById(elementid).innerHTML += this.responseText;
         }
     };
-
-    xhttp.open("POST", str, true);
+    xhttp.open("GET", str, true);
     xhttp.send();
 }
+
+function loadDocAndAddWithElementIDPOST(str, elementid, data) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(elementid).innerHTML += this.responseText;
+        }
+    };
+    xhttp.open("POST", str, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(data);
+}
+
+
+
+
+
+
+
 function loadMrgUser() {
-
-    loadDoc("index.php?controller=ajax&aktion=mgruser");
-
+     loadDoc("index.php?controller=ajax&aktion=mgruser");
 }
 
 function loadMrgUserById(uid) {
-    loadDoc("index.php?controller=ajax&aktion=mgruser&uid=" + uid);
+    // loadDoc("index.php?controller=ajax&aktion=mgruser&uid=" + uid);
+    loadDocPOST("index.php?controller=ajax&aktion=mgruser", "uid=" +uid);
 }
 
 function loadSysInfo() {
@@ -61,13 +93,15 @@ function loadUserPermissionsByUserId(uid) {
         loadUserPermissions();
         b1 = false;
     }else {
-        loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&uid=" + uid );
+       // loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&uid=" + uid );
+        loadDocPOST("index.php?controller=ajax&aktion=loadUserPermissions", "uid=" + uid);
         b1 = true;
     }
 }
 
 function loadUserPermissionsByBerechtigungsName(name) {
-    loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&bname=" + name );
+    // loadDoc("index.php?controller=ajax&aktion=loadUserPermissions&bname=" + name );
+    loadDocPOST("index.php?controller=ajax&aktion=loadUserPermissions" , "bname=" + name);
 }
 
 function loadPermissions() {
@@ -83,7 +117,8 @@ function loadLogByUserId(uid) {
         loadLogs();
         b2 =false;
     }else {
-        loadDoc("index.php?controller=ajax&aktion=log&uid=" + uid);
+        // loadDoc("index.php?controller=ajax&aktion=log&uid=" + uid);
+        loadDocPOST("index.php?controller=ajax&aktion=log",  "uid=" +uid);
         b2 = true;
     }
 }
@@ -101,12 +136,13 @@ function loadLogByLogLevel() {
     }else {
         document.getElementById("cb-1").checked = false;
     }
-    loadDocWithElementID("index.php?controller=ajax&aktion=log&lvl=" + sql, "logtable");
+    // loadDocWithElementID("index.php?controller=ajax&aktion=log&lvl=" + sql, "logtable");
+    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=log", "logtable", "lvl=" +sql)
 }
 
-function laodLogByName(name){
-    loadDocWithElementID("index.php?controller=ajax&aktion=log&name=" + name, "logtable");
-
+function loadLogByName(name){
+   // loadDocWithElementID("index.php?controller=ajax&aktion=log&name=" + name, "logtable");
+    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=log",  "logtable", "name=" +name );
 }
 
 function cbAllcheck() {

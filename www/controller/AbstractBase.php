@@ -50,4 +50,9 @@ abstract class AbstractBase
         extract($this->context);
         require_once $this->getTemplate();
     }
+
+    protected function hasPermission(string $name) : mixed
+    {
+        return Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], $name);
+    }
 }

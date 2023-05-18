@@ -3,7 +3,7 @@ require_once ('AbstractBase.php');
 class ExecuteController extends AbstractBase {
 
     public function reboot()  {
-        if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "rebootsystem") || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo") ) {
+        if($this->hasPermission("rebootsystem")|| $this->hasPermission("sudo") ) {
             $info = "Try Performing Reboot";
             $log = new Log();
             $log->setUid($_SESSION["userid"]);
@@ -17,45 +17,97 @@ class ExecuteController extends AbstractBase {
         }else {
             $info = "No Permissions to Perform reboot";
         }
+        $this->setTemplate("info");
+        $this->addContext("info" , $info);
+
     }
 
     public function removeLog() {
-        if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "deletepermission") || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){
-            Log::finde($_GET["lid"])->loesche();
-            var_dump($_GET["lid"]);
+        if($this->hasPermission("deletelog") || $this->hasPermission("sudo")){
+            Log::finde($_POST["lid"])->loesche();
+            var_dump($_POST["lid"]);
             exit();
         } else {
             $info = "No Permissions to Delete Logs";
         }
+        $this->setTemplate("info");
+        $this->addContext("info" , $info);
+
     }
 
     public function btnAddUserBerechtigung() {
-       $q = new Qser_hat_berechtigung();
-       $q->setUid(Qser::findeUserByName($_GET["name"])->getId());
-       $q->setBid(Berechtigung::findeBerechtigungByNamed($_GET["perm"])->getId());
-       $q->setUseredit($_SESSION["userid"]);
-       $q->setCreatetime(date("Y-m-d H:i:s"));
-       $q->speichere();
+        if($this->hasPermission("adduserpermission") || $this->hasPermission("sudo") ) {
+           $q = new Qser_hat_berechtigung();
+           $q->setUid(Qser::findeUserByName($_POST["name"])->getId());
+           $q->setBid(Berechtigung::findeBerechtigungByNamed($_POST["perm"])->getId());
+           $q->setUseredit($_SESSION["userid"]);
+           $q->setCreatetime(date("Y-m-d H:i:s"));
+           $q->speichere();
 
+        }else {
+            $info = "No Permissions to add permission";
+        }
+        $this->setTemplate("info");
+        $this->addContext("info" , $info);
     }
 
     public function newUser(){
-        $u = new Qser();
-        $u->setName($_GET["name"]);
-        $u->setPassword($_GET["pw"]); //TODO hash PW
-        $u->setActive(true);
-        $u->setCreatedate(date("Y-m-d H:i:s"));
-        $u->setDescription($_GET["desc"]);
-        $u->speichere();
+        if($this->hasPermission("createUser") ||$this->hasPermission("sudo")) {
+            $u = new Qser();
+            $u->setName($_POST["name"]);
+            $u->setPassword($_POST["pw"]);
+            $u->setActive(true);
+            $u->setCreatedate(date("Y-m-d H:i:s"));
+            $u->setDescription($_POST["desc"]);
+            $u->speichere();
+        } else {
+            $info = "No Permission";
+        }
+        $this->setTemplate("info");
+        $this->addContext("info" , $info);
+
     }
 
-    public function addServiceMontor() {
+    public function addServiceMontor()
+    {
         $m = new M_servicemonitor();
-        $m->setServicename($_GET["name"]);
-        $m->setDescription($_GET["desc"]);
+        $m->setServicename($_POST["name"]);
+        $m->setDescription($_POST["desc"]);
         $m->setUid($_SESSION["userid"]);
-        $m->setServicetype($_GET["st"]);
+        $m->setServicetype($_POST["st"]);
+        $this->setTemplate("info");
+
     }
+
+
+
+    public function dluser(){
+        shell_exec("deluser " . $_POST['name']);
+        $this->setTemplate("info");
+
+    }
+
+    public function changeUserName() {
+        $u = Qser::finde($_POST["uid"]);
+        $u->setName($_POST["name"]);
+        $u->speichere();
+        $this->setTemplate("info");
+
+    }
+    public function changeUserpw() {
+        $u = Qser::finde($_POST["uid"]);
+        $u->setPassword($_POST["pw"]);
+        $u->speichere();
+        $this->setTemplate("info");
+    }
+
+    public function changeSystemUserName() {
+        shell_exec("usermod -l " . $_POST["name"] . " " . Qser::finde($_POST["uid"]->getName()));
+        $this->setTemplate("info");
+    }
+
+
+
 
 
 }

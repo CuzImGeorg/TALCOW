@@ -1,4 +1,4 @@
-<?php if(!isset($_GET["lvl"]) && !isset($_GET["name"])) { ?>
+<?php if(!isset($_POST["lvl"]) && !isset($_POST["name"])) { ?>
 <h1>Log</h1>
 
 <table>
@@ -16,16 +16,26 @@
 
 
     <tr>
-        <td>User Name</td><td>Action Name</td><td> Level</td><td>Description</td><td>Time</td><td>Delete</td>
+        <td>User Name</td>
+        <td>Action Name</td>
+        <td> Level</td
+        ><td>Description</td>
+        <td>Time</td>
+        <?php if($this->hasPermission("deletelog") || $this->hasPermission("sudo")) { ?>
+            <td>Delete</td>
+        <?php } ?>
+
     </tr>
     <?php foreach ($logs as $l) { ?>
         <tr>
             <td><button onclick="loadLogByUserId(<?=$l->findeUser()->getId()?>)"><?=$l->findeUser()->getName()?></button></td>
-            <td><button onclick='laodLogByName("<?=$l->getLog_action()->getName()?>")'><?=$l->getLog_action()->getName()?></button></td>
+            <td><button onclick='loadLogByName("<?=$l->getLog_action()->getName()?>")'><?=$l->getLog_action()->getName()?></button></td>
             <td><button  onclick='updateCbLogLevel("<?=$l->getLog_level()->getName()?>")'><?=$l->getLog_level()->getName()?></button></td>
             <td><?=$l->getDescription()?></td>
             <td><?=$l->getTimestamp() ?></td>
-            <td><button onclick="removeLog(<?=$l->getId()?>)">Remove</button> </td>
+            <?php if($this->hasPermission("deletelog") || $this->hasPermission("sudo")) { ?>
+                <td><button onclick="removeLog(<?=$l->getId()?>)">Remove</button> </td>
+            <?php } ?>
         </tr>
     <?php  } ?>
 

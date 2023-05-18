@@ -23,18 +23,13 @@ class AjaxController extends AbstractBase {
 
 
     public function mgruser() {
-
-            if(isset($_GET["uid"])) {
-                $user = array(  Qser::finde((int) $_GET["uid"]));
-                $this->addContext("user", $user);
-            }
-            else {
-                $user = Qser::findeALL();
-                $this->addContext("user", $user);
-
-            }
-
-
+        if(isset($_POST["uid"])) {
+            $user = array(Qser::finde((int) $_POST["uid"]));
+        }
+        else {
+            $user = Qser::findeALL();
+        }
+        $this->addContext("user", $user);
     }
 
     private function upTime() {
@@ -64,10 +59,10 @@ class AjaxController extends AbstractBase {
     }
     public function loadUserPermissions() {
 
-        if(isset($_GET["uid"])) {
-            $permissions = Qser_hat_berechtigung::findByUid($_GET["uid"]);
-        } else if (isset($_GET["bname"])) {
-            $permissions = Qser_hat_berechtigung::findeUserByBerechtigungName($_GET["bname"]);
+        if(isset($_POST["uid"])) {
+            $permissions = Qser_hat_berechtigung::findByUid($_POST["uid"]);
+        } else if (isset($_POST["bname"])) {
+            $permissions = Qser_hat_berechtigung::findeUserByBerechtigungName($_POST["bname"]);
         }
         else {
             $permissions = Qser_hat_berechtigung::findeALL();
@@ -83,10 +78,10 @@ class AjaxController extends AbstractBase {
     }
 
     public function log() {
-        if(isset($_GET['uid'])){
-            $logs = Log::findLogByUserID($_GET['uid']);
-        }elseif (isset($_GET['lvl'])){
-            $bits = $_GET['lvl'];
+        if(isset($_POST['uid'])){
+            $logs = Log::findLogByUserID($_POST['uid']);
+        }elseif (isset($_POST['lvl'])){
+            $bits = $_POST['lvl'];
             $subSql = "";
             $subSql .= $bits[0] == 1 ? "'debug' OR name LIKE " : "";
             $subSql .= $bits[1] == 1 ? "'warning' OR name LIKE " : "";
@@ -94,8 +89,8 @@ class AjaxController extends AbstractBase {
             $subSql .= $bits[3] == 1 ? "'critical'" : "''";
 
             $logs = Log::fineLogsByLogAnyLevel($subSql);
-        }else  if(isset($_GET['name'])){
-            $logs = Log::findLogByLog_ActionName($_GET['name']);
+        }else  if(isset($_POST['name'])){
+            $logs = Log::findLogByLog_ActionName($_POST['name']);
         }
         else {
             $logs = Log::findeALL();

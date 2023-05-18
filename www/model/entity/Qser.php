@@ -55,7 +55,7 @@ class Qser
     /**
      * @param string $password
      */
-    public function setPassword(string $password)
+    public function setPassword(string $password) //TODO hash PW
     {
         $this->password = $password;
     }
