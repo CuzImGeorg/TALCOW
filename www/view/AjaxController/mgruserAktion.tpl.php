@@ -6,24 +6,26 @@
     <tr><td><button class="btnnewUser"  id="btnu" onclick="newUser()">+</button></td></tr>
     <tr class="newUserPermission">
 
-        <td><input type="text" hidden id="nun"  placeholder="Name"></td>
+        <td><input type="text" hidden id="nun" maxlength="32"  placeholder="Name"></td>
         <td><input type="text" hidden  id="up"   placeholder="Password"></td>
         <td><input type="text" hidden  id="ud"   placeholder="Description"></td>
         <td><button type="button" hidden id="btnnusub" onclick="newUserSubmit()"  >Submit</button</td>
     <tr>
-    <?php } ?> ?>
+    <?php } ?>
 <tr>
     <td>Name</td>
     <td>Description</td>
     <td>Create Date</td>
     <td>Active</td>
-        <?php if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) { ?>
-            <td>Permissions</td>
-        <?php } ?>
+    <td>Name History</td>
 
-        <?php if($this->hasPermission("changeusername") || $this->hasPermission("sudo")) { ?>
-            <td>Change Username</td>
-        <?php } ?>
+    <?php if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) { ?>
+        <td>Permissions</td>
+    <?php } ?>
+
+    <?php if($this->hasPermission("changeusername") || $this->hasPermission("sudo")) { ?>
+        <td>Change Username</td>
+    <?php } ?>
 
     <td>Change Password</td>
     <td>Deactivate</td>
@@ -35,7 +37,7 @@
             <td><?=$u->getDescription()?></td>
             <td><?=$u->getCreatedate()?></td>
             <td><?=$u->isActive()?></td>
-
+            <td><button onclick="loadNameHitory(<?=$u->getID()?>)">Name History</button</td>
             <?php if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) { ?>
                 <td><button onclick="b1 = false; loadUserPermissionsByUserId(<?=$u->getId()?>)"> Perms </button> </td>
             <?php } ?>

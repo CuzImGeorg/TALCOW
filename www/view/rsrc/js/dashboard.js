@@ -117,7 +117,6 @@ function loadLogByUserId(uid) {
         loadLogs();
         b2 =false;
     }else {
-        // loadDoc("index.php?controller=ajax&aktion=log&uid=" + uid);
         loadDocPOST("index.php?controller=ajax&aktion=log",  "uid=" +uid);
         b2 = true;
     }
@@ -140,10 +139,19 @@ function loadLogByLogLevel() {
     loadDocWithElementIDPOST("index.php?controller=ajax&aktion=log", "logtable", "lvl=" +sql)
 }
 
+let b4 = false;
 function loadLogByName(name){
-   // loadDocWithElementID("index.php?controller=ajax&aktion=log&name=" + name, "logtable");
-    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=log",  "logtable", "name=" +name );
+    if(b4) {
+        console.log("t")
+        loadLogs();
+        b4 =false;
+    } else {
+        console.log("f")
+        loadDocWithElementIDPOST("index.php?controller=ajax&aktion=log", "logtable", "name=" +name );
+        b4 =true;
+    }
 }
+
 
 function cbAllcheck() {
     let checkAll = document.getElementById("cb-1").checked;
@@ -191,5 +199,9 @@ function loadServiceMonitor() {
 }
 
 function loadSystemUser() {
-    loadDoc("index.php?controller=ajax&aktion=loadSystemUser")
+    loadDoc("index.php?controller=ajax&aktion=loadSystemUser");
+}
+
+function loadNameHitory(uid) {
+    loadDocPOST("index.php?controller=ajax&aktion=loadNameHitory" , "uid=" +uid);
 }

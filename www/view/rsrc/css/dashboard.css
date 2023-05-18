@@ -5,36 +5,28 @@
     --acent: #ca7007
 }
 
-ul {
+.dashboardnavlist  {
     list-style-type: none;
     margin: -8px;
     padding: 5px;
     width: 10%;
     font-size: 24px;
 
-    background-color: var(--navbg);
+    background: rgba(77, 79, 77, 0.41);
     height: 100%; /* Full height */
     position: fixed; /* Make it stick, even on scroll */
     overflow: auto; /* Enable scrolling if the sidenav has too much content */
 }
 
-li {
+.dashboardnavlist > li {
     border: solid var(--navbg);
     background-color: var(--bg);
 }
 
-a:link {
-    text-decoration: none;
-    color: black;
-
-}
-
-a:hover {
+.dashboardnavlist > li:hover {
+    border: solid var(--navbg);
+    background-color: #585252;
     color: darkorange;
-}
-
-a:visited {
-
 }
 
 #maindiv {
@@ -61,10 +53,14 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    color: #3a3838;
 }
 
 div {
+    /*
     background: #4d5d5d url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10l10-10h30v30l-10 10H0V10zm22 18l-4-4 4-4v8zM18 8l4 4-4 4V8zm12 12l-4-4 4-4v8zm-4-12l4 4-4 4V8z" fill="%23ffffff" fill-opacity="0.1" fill-rule="evenodd"/%3E%3C/svg%3E') repeat;
+   */
+    background: rgba(77, 79, 77, 0.41);
     text-align: left;
     height: 80%;
 
@@ -133,15 +129,25 @@ h1 {
 * TAB LOGS
  */
 
-
-.logtable > tbody > tr:nth-child(2) > td {
-    width:15%;
-
+.logtable{
+    margin-right: 5%;
 }
 
-.logtable > tbody > tr > td {
-    width: 3%;
+#ltun, #ltan, #ltt {
+    width: 15%;
+
 }
+#ltl {
+    width: 10%;
+}
+#ltd {
+    width: 43%;
+}
+
+
+
+
+
 
 /*
 * TERMINAL

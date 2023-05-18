@@ -15,47 +15,47 @@
 
     </head>
     <body>
-    <ul>
-        <li><a href="index.php?">Home</a></li>
+    <ul class="dashboardnavlist">
+        <li> <a href="index.php?">Home</a></li>
 
         <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
                 || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
-                 <li><a onclick="b2=false;b3 = true;loadLogs();">Logs</a></li>
+                 <li onclick="b2=false;b3 = true;b4 = false;loadLogs();">Logs</li>
         <?php } ?>
         <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
             || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
-            <li><a onclick="loadlogAktions();">Log Actions</a></li>
+            <li onclick="loadlogAktions();">Log Actions</li>
         <?php } ?>
         <?php if(Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "readlog")
             || Qser_hat_berechtigung::findeByUidAndBerechtigungsName($_SESSION["userid"], "sudo")){ ?>
-            <li><a onclick="loadloglevel();">Log Levels</a></li>
+            <li onclick="loadloglevel();">Log Levels</li>
         <?php } ?>
 
 
 
-        <li><a onclick="loadMrgUser();">Users</a></li>
+        <li onclick="loadMrgUser();">Users</li>
 
         <?php if($this->hasPermission("viewpermission") || $this->hasPermission("sudo")) { ?>
-            <li><a onclick="loadPermissions();">Permissions</a></li>
+            <li onclick="loadPermissions();">Permissions</li>
 
         <?php } ?>
 
         <?php if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) { ?>
-            <li><a onclick="loadUserPermissions();">User Permissions</a></li>
+            <li onclick="loadUserPermissions();">User Permissions</li>
 
         <?php } ?>
 
-        <li><a onclick="loadSystemUser()">SystemUser</a></li>
+        <li onclick="loadSystemUser()">SystemUser</li>
 
 
 
-        <li><a onclick="loadTerminal()"> >_ Terminal </a></li>
-        <li><a onclick="loadServiceMonitor()">Daemon Monitor</a></li>
+        <li onclick="loadTerminal()"> >_ Terminal </li>
+        <li onclick="loadServiceMonitor()">Daemon Monitor</li>
 
 
 
 
-        <li ><a onclick="loadSysInfo();">System Info</a></li>
+        <li onclick="loadSysInfo();">System Info </li>
 
     </ul>
 

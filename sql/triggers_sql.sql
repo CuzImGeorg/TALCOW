@@ -4,14 +4,12 @@
 
 
 CREATE OR REPLACE FUNCTION username_change_log_trigger_function()
-    RETURNS TRIGGER AS $$
+RETURNS TRIGGER AS $$
 BEGIN
     IF TG_OP = 'UPDATE' AND OLD.name <> NEW.name THEN
 
         INSERT INTO log(uid,description, action, level) VALUES(OLD.id,'changed the username from ' || OLD.name || ' to ' || NEW.name, (SELECT id FROM log_action WHERE name = 'namehistory') ,1);
-
-
-
+        INSERT INTO unhistory(uid, oldname, newname, changetime) VALUES (OLD.ID, OLD.name, NEW.name, now());
 END IF;
 
 

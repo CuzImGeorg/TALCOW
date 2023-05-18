@@ -54,7 +54,11 @@ class ExecuteController extends AbstractBase {
     public function newUser(){
         if($this->hasPermission("createUser") ||$this->hasPermission("sudo")) {
             $u = new Qser();
-            $u->setName($_POST["name"]);
+            if(strlen($_POST["name"]) > 32 ) {
+                $u->setName(substr($_POST["name"], 0, 32));
+            }else {
+                $u->setName($_POST["name"]);
+            }
             $u->setPassword($_POST["pw"]);
             $u->setActive(true);
             $u->setCreatedate(date("Y-m-d H:i:s"));

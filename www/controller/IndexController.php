@@ -10,28 +10,11 @@ class IndexController extends AbstractBase {
             if(!$user)  {
 
             }else {
-                $this->addContext("user", $user);
-                $this->setTemplate("dashboardAktion");
-            }
-        }
-        else{
-
-        }
-
-   }
-
-   public function registry() {
-        if($_POST) {
-            if($_POST['password'] === $_POST['confpassword']){
-                try {
-                    $b = new Benutzer($_POST);
-                    $b->speichere();
-                } catch (PDOException $e) {
-                    redirect("index.php?aktion=error&msg=ungültiger%20Nickname");
+                if($user->isActive()) {
+                    $this->addContext("user", $user);
+                    $this->setTemplate("dashboardAktion");
                 }
-                redirect("index.php?");
-            }else {
-                redirect("index.php?aktion=error&msg=Passwörter%20stimmen%20nicht%20überrein");
+
             }
         }
    }

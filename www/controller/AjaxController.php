@@ -206,6 +206,14 @@ class AjaxController extends AbstractBase {
 
     }
 
+    public function loadNameHitory() {
+        $unh = Unhistory::findeByUserid($_POST["uid"]);
+        $user = Qser::finde($_POST["uid"]);
+        $this->addContext("unh", $unh);
+        $this->addContext("user", $user);
+
+    }
+
 
 }
 

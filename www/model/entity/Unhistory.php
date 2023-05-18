@@ -92,9 +92,17 @@ class Unhistory
     }
 
 
-    public function findeUser() {
+    public function getUser() {
         return Qser::finde($this->uid);
     }
+
+    public  static function findeByUserid(int $userid) {
+        $sql = "SELECT * FROM unhistory WHERE uid = $userid";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'Unhistory');
+        return $a->fetchAll();
+    }
+
 
 
 }

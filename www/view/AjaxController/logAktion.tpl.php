@@ -12,19 +12,15 @@
 <table class="logtable" id="logtable">
 
 <?php } ?>
-
-
-
-    <tr>
-        <td>User Name</td>
-        <td>Action Name</td>
-        <td> Level</td
-        ><td>Description</td>
-        <td>Time</td>
+        <tr>
+        <td id="ltun">User Name</td>
+        <td id="ltan">Action Name</td>
+        <td id="ltl"> Level</td>
+        <td id="ltd">Description</td>
+        <td id="ltt">Time</td>
         <?php if($this->hasPermission("deletelog") || $this->hasPermission("sudo")) { ?>
             <td>Delete</td>
         <?php } ?>
-
     </tr>
     <?php foreach ($logs as $l) { ?>
         <tr>
@@ -42,7 +38,7 @@
  <?php if(!isset($_GET["lvl"]) && !isset($_GET["name"])) { ?>
     </table>
 
-<?php } //TODO make reverse click
+<?php }
 ?>
 
 
