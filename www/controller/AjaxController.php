@@ -206,6 +206,23 @@ class AjaxController extends AbstractBase {
 
     }
 
+    public function loadDockerPsMinusA() {
+        $handle = fopen("/etc/passwd/dockertmp.txt");
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+                $un = explode("  ", $line)[0];
+                if(file_exists("/home/".$un)){ //str_contains($line, "/home/") && str_contains($line,"/bin/")
+                    $users[] = $un;
+                }
+
+            }
+
+            fclose($handle);
+        }
+        $this->addContext("users", $users);
+
+    }
+
 
 }
 
