@@ -115,9 +115,7 @@ function addServiceMontor() {
     execPost("index.php?controller=execute&aktion=addServiceMontor", "name=" + document.getElementById("sn").value + "&desc=" + document.getElementById("sd").value + "&st=" + document.getElementById("r1").checked );
 }
 
-function updateServiceList() {
-    loadDocWithElementID("index.php?controller=ajax&aktion=updateServiceList","dl")
-}
+
 
 function dluser(name) {
     execPost("index.php?controller=execute&aktion=deluser", "name=" +name);

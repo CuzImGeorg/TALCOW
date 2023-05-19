@@ -6,5 +6,4 @@
 <p id="srvTime"> Time: <?=$time?> </p>
 <p id="uptime"> Uptime:  <?=$uptime?> <?php if($this->hasPermission("rebootsystem") || $this->hasPermission("sudo" )) { ?> <button id="rebootbtn" onclick="reboot()">Reboot</button> <?php } ?>   </p>
 
-
 </div>
