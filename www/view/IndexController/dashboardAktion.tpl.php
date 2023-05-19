@@ -44,7 +44,9 @@
             <li><a onclick="loadUserPermissions();">User Permissions</a></li>
 
         <?php } ?>
+        <li><a onclick="">Module</a></li>
 
+        <li><a onclick="loadDockerModule()">Docker</a></li>
         <li><a onclick="loadSystemUser()">SystemUser</a></li>
 
 

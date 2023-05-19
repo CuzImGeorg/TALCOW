@@ -191,5 +191,9 @@ function loadServiceMonitor() {
 }
 
 function loadSystemUser() {
-    loadDoc("index.php?controller=ajax&aktion=loadSystemUser")
+    loadDoc("index.php?controller=ajax&aktion=loadSystemUser");
+}
+
+function loadDockerModule() {
+    loadDoc("index.php?controller=ajax&aktion=docker");
 }

@@ -186,7 +186,18 @@ class AjaxController extends AbstractBase {
     }
 
     public function updateServiceList() {
+        $handle = fopen("view/rsrc/tmp/systemctl.txt", "r");
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+                 $s = explode(" ", $line);
+                //$s = $line;
+                $srv [] = $s;
+            }
 
+
+            fclose($handle);
+        }
+        $this->addContext("services", $srv);
     }
 
     public function loadSystemUser() {
