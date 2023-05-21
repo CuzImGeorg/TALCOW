@@ -138,54 +138,50 @@ class AjaxController extends AbstractBase {
             $rs = "ihassphp";
             if($srv->isServicetype()) {
                $rs = shell_exec("systemctl status ". $srv->getServicename());
+                $active = "geathnetxD";
+                $color = "#fff";
+                $btn = "Error567";
+                if(str_contains($rs, "Active: active")) {
+                    $active = "running";
+                    $color = "#128a20";
+                    $btn = "Stop";
+                }else if(str_contains($rs, "Active: inactive")){
+                    $active = "inactive";
+                    $color = "#d97914";
+                    $btn = "Start";
+                } else if(str_contains($rs, "Active: activating")) {
+                    $active = "activating";
+                    $color = "#71ad58";
+                    $btn = "Stop";
+                } else  if(str_contains($rs, "Active: deactivating")) {
+                    $active = "deactivating";
+                    $color = "#ba4141";
+                    $btn = "Start";
 
+                } else  if(str_contains($rs, "Active: failed")) {
+                    $active = "failed";
+                    $color = "#5e5757";
+                    $btn = "Start";
+
+                } else  if(str_contains($rs, "Active: not-found")) {
+                    $active = "not-found";
+                    $color = "#403a3a";
+                    $btn = "N/A";
+                } else  if(str_contains($rs, "Active: dead")) {
+                    $active = "dead";
+                    $color = "#5e5757";
+                    $btn = "N/A";
+                }
             }else {
-
+                $rs = shell_exec("service status ". $srv->getServicename());
             }
-            $active = "geathnetxD";
-            $color = "#fff";
-            $btn = "Error567";
-            if(str_contains($rs, "Active: active")) {
-                $active = "running";
-                $color = "#128a20";
-                $btn = "Stop";
-            }else if(str_contains($rs, "Active: inactive")){
-                $active = "inactive";
-                $color = "#d97914";
-                $btn = "Start";
-            } else if(str_contains($rs, "Active: activating")) {
-                $active = "activating";
-                $color = "#71ad58";
-                $btn = "Stop";
-            } else  if(str_contains($rs, "Active: deactivating")) {
-                $active = "deactivating";
-                $color = "#ba4141";
-                $btn = "Start";
 
-            } else  if(str_contains($rs, "Active: failed")) {
-                $active = "failed";
-                $color = "#5e5757";
-                $btn = "Start";
-
-            } else  if(str_contains($rs, "Active: not-found")) {
-                $active = "not-found";
-                $color = "#403a3a";
-                $btn = "N/A";
-            } else  if(str_contains($rs, "Active: dead")) {
-                $active = "dead";
-                $color = "#5e5757";
-                $btn = "N/A";
-            }
 
             $monitor[] = array("service" => $srv, "active" => $active, "color" => $color, "btn" => $btn );
 
         }
         $this->addContext("monitors", $monitor);
 
-
-    }
-
-    public function updateServiceList() {
 
     }
 
@@ -197,12 +193,24 @@ class AjaxController extends AbstractBase {
                 if(file_exists("/home/".$un)){ //str_contains($line, "/home/") && str_contains($line,"/bin/")
                     $users[] = $un;
                 }
+            }
+            fclose($handle);
+        }
+        $this->addContext("users", $users);
 
+    }
+
+    public function loadDockerPsMinusA() {
+        $handle = fopen("view/rsrc/tmp/dockertmp.txt", "r");
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+                $un = explode("  ", $line)[0];
+                $users[] = $un;
             }
 
             fclose($handle);
         }
-        $this->addContext("users", $users);
+        $this->addContext("output", $users);
 
     }
 

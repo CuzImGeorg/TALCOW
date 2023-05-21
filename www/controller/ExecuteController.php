@@ -79,6 +79,7 @@ class ExecuteController extends AbstractBase {
         $m->setDescription($_POST["desc"]);
         $m->setUid($_SESSION["userid"]);
         $m->setServicetype($_POST["st"]);
+        $m->speichere();
         $this->setTemplate("info");
 
     }

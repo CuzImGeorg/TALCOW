@@ -117,6 +117,7 @@ function loadLogByUserId(uid) {
         loadLogs();
         b2 =false;
     }else {
+        // loadDoc("index.php?controller=ajax&aktion=log&uid=" + uid);
         loadDocPOST("index.php?controller=ajax&aktion=log",  "uid=" +uid);
         b2 = true;
     }

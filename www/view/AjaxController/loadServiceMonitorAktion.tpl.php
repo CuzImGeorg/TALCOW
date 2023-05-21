@@ -3,7 +3,7 @@
 <h4>Add Service To Monitor</h4>
 
 <button style="margin-left: 5px; margin-bottom: 4px;" class="btnnewService"  id="btnsrv" onclick="newService()">+</button> <br>
-<input  id="sn" list="dl" onclick="updateServiceList()" type="text" hidden style="margin-left: 5px; margin-bottom: 2px; " placeholder="Service Name">
+<input  id="sn" list="dl" type="text" hidden style="margin-left: 5px; margin-bottom: 2px; " placeholder="Service Name">
 <input id="sd" type="text" hidden placeholder="Description">
 <button id="btnas" type="button" hidden onclick="addServiceMontor()">Add Service</button>
 <br>

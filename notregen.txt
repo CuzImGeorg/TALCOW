@@ -1,0 +1,5 @@
+loadDocWithElementID (src, elementid)
+ shell_exec command übergibt response und diese in html text
+
+ //neue Funktion de im Ajax kontroller aufgerufen
+  de funktion gibt dor in response
