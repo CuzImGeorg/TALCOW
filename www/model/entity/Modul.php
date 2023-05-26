@@ -5,6 +5,7 @@ class Modul
     use ActiveRecordable, Deletable, Findable, Persistable;
     private int $id = 0;
     private int $installedbyuid = 0;
+    
     private string $name = '';
     private int $valueid = 0;
 
