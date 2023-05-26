@@ -94,8 +94,28 @@ class berechtigungsgruppe_berechtigung
         $sql = "SELECT * FROM berechtigungsgruppe_berechtigung WHERE bid =:id";
         $abfrage = DB::getDB()->prepare($sql);
         $abfrage->execute(array('id' => $id));
-        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'm_config');
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'berechtigungsgruppe_berechtigung');
         return $abfrage->fetchAll();
     }
+
+    public static function findberechtigungsgruppe_berechtigungBybgid(int $id)
+    {
+        $sql = "SELECT * FROM berechtigungsgruppe_berechtigung WHERE bgid =:id";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('id' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'berechtigungsgruppe_berechtigung');
+        return $abfrage->fetchAll();
+    }
+
+    public static function findberechtigungsgruppe_berechtigungByuseredit(int $id)
+    {
+        $sql = "SELECT * FROM berechtigungsgruppe_berechtigung WHERE useredit =:id";
+        $abfrage = DB::getDB()->prepare($sql);
+        $abfrage->execute(array('id' => $id));
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'berechtigungsgruppe_berechtigung');
+        return $abfrage->fetchAll();
+    }
+
+
 
 }
