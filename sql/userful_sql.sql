@@ -21,26 +21,19 @@ DELETE FROM log_level WHERE id = 1;
  test inserts
  */
 
-INSERT INTO berechtigung(name, description)  VALUES ('sudo','the user has sudo rights. He can execute every single feature!');
-INSERT INTO berechtigung(name, description)  VALUES ('rebootsystem','the user has the rights to perform a system reboot.');
-INSERT INTO berechtigung(name, description)  VALUES ('readlog','the user has the rights to read the log.');
-INSERT INTO berechtigung(name, description)  VALUES ('deletepermission','the user has the rights to deletepermission.');
-
-
-
-INSERT INTO qser_hat_berechtigung(uid, bid) VALUES(1,1);
 INSERT INTO qser(name, password, description, active) VALUES('root','root','root user', true);
 INSERT INTO qser(name, password, description, active) VALUES('unknown','unknown','unknown user', false);
 INSERT INTO qser(name, password, description, active) VALUES('trigger_test','root','root user', false);
 INSERT INTO qser(name, password, description, active) VALUES('system','t','nologin', false);
 INSERT INTO qser(name, password, description, active) VALUES('test','test','test user', true);
+INSERT INTO qser_hat_berechtigung(uid, bid,useredit) VALUES(1,1,1);
 
 
 INSERT INTO modul_value(name, description) VALUES('installed', 'installed but not active');
 INSERT INTO modul_value(name, description) VALUES('active', 'installed and active');
 INSERT INTO modul_value(name, description) VALUES('not installed', 'the module is not installed');
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'global', 2);
-INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'openvpn', 2);
+INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'openvpn', 1);
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'docker', 3);
 
 INSERT INTO log_level(name, description) VALUES('debug', 'this log is a debug. You may just ignore it');
@@ -69,6 +62,7 @@ INSERT INTO log_action(name, description, modul) VALUES('ua', 'a User was added!
 INSERT INTO log_action(name, description, modul) VALUES('module update', 'a module was installed/deinstalled!', 1);
 INSERT INTO log_action(name, description, modul) VALUES('reboot', 'reboot syste,', 1);
 
-
+INSERT INTO m_postgresql(pgdatabase, pguser, pghost, pgport, pgpw, description, useredit) VALUES ('talcow', 'postgres', 'localhost', 5432, 'adm', 'This is The Production Database u shoudlt delete it smile', 1);
+INSERT INTO m_postgresql(pgdatabase, pguser, pghost, pgport, pgpw, description, useredit) VALUES ('postgres', 'postgres', 'localhost', 5432, 'adm', 'This is The Test Database u can delete it smile', 1);
 
 

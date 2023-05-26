@@ -1,5 +1,5 @@
 <?php
-class berechtigungsgruppe_berechtigung
+class Berechtigungsgruppe_berechtigung
 {
 
     use ActiveRecordable, Deletable, Findable, Persistable;
@@ -8,7 +8,7 @@ class berechtigungsgruppe_berechtigung
     private int $bgid = 0;
     private int $useredit = 0;
 
-    protected static $tabel = 'berechtigungsgruppe_berechtigung';
+    protected static $table = 'berechtigungsgruppe_berechtigung';
 
     /**
      * @return int
@@ -74,20 +74,10 @@ class berechtigungsgruppe_berechtigung
         $this->useredit = $useredit;
     }
 
-    /**
-     * @return int
-     */
-
-
     public function findeUser() {
-        Qser::finde($this->uid);
+       return Qser::finde($this->useredit);
     }
 
-
-    public function getModulIOI(){
-        return Modul::finde($this->modul);
-
-    }
 
     public static function findberechtigungsgruppe_berechtigungBybid(int $id)
     {

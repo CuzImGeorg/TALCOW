@@ -87,7 +87,8 @@ class ExecuteController extends AbstractBase {
 
 
     public function dluser(){
-        shell_exec("deluser " . $_POST['name']);
+        $o = shell_exec("deluser " . $_POST['name']);
+        $this->addContext("info", $o);
         $this->setTemplate("info");
 
     }
@@ -111,6 +112,14 @@ class ExecuteController extends AbstractBase {
         $this->setTemplate("info");
     }
 
+    public function changesysuserpw() {
+        $cmd = sprintf("echo '%s:%s' | sudo chpasswd",
+            escapeshellarg($_POST["un"]),
+            escapeshellarg($_POST["pwd"]));
+        shell_exec( $cmd);
+        $this->setTemplate("info");
+
+    }
 
 
 

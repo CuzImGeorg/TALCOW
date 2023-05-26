@@ -14,21 +14,21 @@
     </head>
     <body>
 
-    <img src="../pics/talcow_logo_clear_without_slogan.png" alt="logo" class="logo">
+  <!--  <img src="../pics/talcow_logo_clear_without_slogan.png" alt="logo" class="logo"> --->
 
-       <form class="login-container" action="index.php?aktion=login" method="POST" >
+    <form class="login-container" action="index.php?aktion=login" method="POST" >
 
-            <label  for="nickname">Nickname<br></label>
-            <input class="inputs" type="text" name="nickname" id="nickname" placeholder="Nickname"  required />
+        <label  for="nickname">Nickname<br></label>
+        <input class="inputs" type="text" name="nickname" id="nickname" placeholder="Nickname"  required />
 
-            <br>
-            <label for="password">Password<br></label>
-            <input type="password" class="inputs" name="password" id="password"  placeholder="Password" required>
-            <br>
-            <input class="mainbtn" type="submit"  value="Login" />
+        <br>
+        <label for="password">Password<br></label>
+        <input type="password" class="inputs" name="password" id="password"  placeholder="Password" required>
+        <br>
+        <input class="mainbtn" type="submit"  value="Login" />
 
 
-       </form>
+    </form>
 
     </body>
 </html>

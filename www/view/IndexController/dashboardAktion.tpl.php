@@ -60,7 +60,7 @@
                 <li hidden name="m">Config</li>
                 <li hidden name="m">VPN</li>
                 <li hidden name="m">Docker</li>
-                <li hidden name="m">Docker</li>
+                <li hidden onclick="loadPostgreSQL()" name="m">PostgreSQL</li>
             </ul>
         </li>
         <?php } ?>

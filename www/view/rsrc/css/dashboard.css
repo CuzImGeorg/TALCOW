@@ -5,6 +5,18 @@
     --acent: #ca7007
 }
 
+body {
+    background: #53c6c5 url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10l10-10h30v30l-10 10H0V10zm22 18l-4-4 4-4v8zM18 8l4 4-4 4V8zm12 12l-4-4 4-4v8zm-4-12l4 4-4 4V8z" fill="%23ffffff" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E') repeat;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    color: #383333;
+}
+
+h1 {
+    margin-top: 0;
+}
+
 .dashboardnavlist  {
     list-style-type: none;
     margin: -8px;
@@ -16,6 +28,8 @@
     height: 100%; /* Full height */
     position: fixed; /* Make it stick, even on scroll */
     overflow: auto; /* Enable scrolling if the sidenav has too much content */
+    color: #847d7d;
+
 }
 
 .dashboardnavlist > li {
@@ -48,13 +62,7 @@
 }
 
 
-body {
-    background: #53c6c5 url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10l10-10h30v30l-10 10H0V10zm22 18l-4-4 4-4v8zM18 8l4 4-4 4V8zm12 12l-4-4 4-4v8zm-4-12l4 4-4 4V8z" fill="%23ffffff" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E') repeat;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    color: #3a3838;
-}
+
 
 div {
     /*
@@ -149,7 +157,13 @@ h1 {
 
 }
 
+/*
+* TAB SYSTEM USER
+ */
 
+#sysunp {
+    border-style: none;
+}
 
 /*
 * TAB LOG ACTIONS
@@ -236,7 +250,7 @@ h1 {
 }
 
 .submodlules:hover {
-    color: var(--navbg);
+    color: #847d7d;
 }
 
 .submodlules > li:hover {
@@ -294,6 +308,13 @@ h1 {
     width: 100%;
 }
 
+/*
+* MODULE POSTGRES
+ */
+
+.mpgschematable {
+    margin-left: 5%;
+}
 
 
 

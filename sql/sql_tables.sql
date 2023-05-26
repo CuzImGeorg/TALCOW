@@ -1,11 +1,13 @@
 CREATE TABLE IF NOT EXISTS qser(
-    id serial PRIMARY KEY,
-    name varchar(63) unique,
+
+                                   id serial PRIMARY KEY,
+                                   name varchar(63),
     password varchar(63),
     description varchar(255),
     createdate timestamp default now(),
     active boolean
-);
+
+    );
 
 CREATE TABLE IF NOT EXISTS unhistory(
     id serial PRIMARY KEY,
@@ -116,15 +118,27 @@ CREATE TABLE IF NOT EXISTS  berechtigungsgruppe(
     name varchar(63),
     description varchar(255),
     createuser int,
-    FOREIGN KEY(createuser) REFERENCES qser(id),
+    FOREIGN KEY(createuser) REFERENCES qser(id)
    );
 
 CREATE TABLE IF NOT EXISTS  berechtigungsgruppe_berechtigung(
-    id int PRIMARY KEY,
-    bid int;
-    bgid int;
-    useredit int;
+    id serial PRIMARY KEY,
+    bid int,
+    bgid int,
+    useredit int,
     FOREIGN KEY(bid) REFERENCES berechtigung(id),
     FOREIGN KEY(bgid) REFERENCES berechtigungsgruppe_berechtigung(id),
-    FOREIGN KEY(useredit) REFERENCES qser(id),
-    );
+    FOREIGN KEY(useredit) REFERENCES qser(id)
+);
+
+CREATE TABLE IF NOT EXISTS m_postgresql(
+   id serial  PRIMARY KEY,
+   pgdatabase varchar(63),
+   pguser varchar(63),
+   pghost varchar(255),
+   pgport int,
+   pgpw varchar(63),
+   description varchar(255),
+   useredit int,
+   FOREIGN KEY(useredit) REFERENCES qser(id)
+);

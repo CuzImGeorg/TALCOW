@@ -227,6 +227,14 @@ class AjaxController extends AbstractBase {
         $this->addContext("moduls", $m);
     }
 
+    public function loadPostgreSQL() {
+       $databases = M_postgresql::findeALL();
+       foreach ($databases as $database) {
+           $dbs[]  = array( "db" => $database, "tables" => $database->getDB()->query(" SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'")->fetchALL());
+       }
+       $this->addContext("databases", $dbs);
+
+    }
 
 
 }

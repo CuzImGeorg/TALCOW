@@ -69,6 +69,11 @@ function execGet(str) {
 function execPost(str, data) {
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", str, true);
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           console.log(xhttp.responseText);
+        }
+    };
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(data);
 }
@@ -117,8 +122,10 @@ function addServiceMontor() {
 
 
 
-function dluser(name) {
+async function dluser(name) {
     execPost("index.php?controller=execute&aktion=deluser", "name=" +name);
+    await delay(5);
+    loadSystemUser();
 }
 
 async function usernameChange(index, uid) {
@@ -143,7 +150,7 @@ async function usernameChange(index, uid) {
     }
 }
 
-async function userpwChange() {
+async function userpwChange(index) {
     let btn = document.getElementById("btnp"+ index);
     if(btn.innerHTML !== "Submit") {
         btn.innerHTML = "Submit";
@@ -155,7 +162,6 @@ async function userpwChange() {
         btn.style.background = "#d0d0d7";
         let input = document.getElementById("inp" + index);
         if(input.value.length > 0 && input.value !== "New Password") {
-            console.log("test");
             execPost("index.php?controller=execute&aktion=changeUserpw" , "uid=" + uid +"&pw=" + input.value);
             await delay(5);
             loadMrgUser();
@@ -174,3 +180,35 @@ function loadInstalledModules() {
         document.getElementById("btnm").innerHTML = "+";
     }
 }
+
+async function changesysuserpw(un, index) {
+    let input = document.getElementById("sysunp"+index);
+    let btn = document.getElementById("sysucp"+index);
+    if(input.hasAttribute("hidden")) {
+        input.removeAttribute("hidden");
+        btn.innerHTML = "Submit";
+        btn.style.background = "#4ace1f";
+    }else {
+        if(input.value.length > 0 && input.value !== "New Password") {
+            execPost("index.php?controller=execute&aktion=changesysuserpw" , "un=" + un + "&pwd=" + input.value);
+            await delay(5);
+            loadSystemUser();
+        }
+        input.value = "";
+        btn.innerHTML = "Change Password";
+        btn.style.background = "#d0d0d7";
+       input.setAttribute("hidden", "");
+    }
+}
+
+function databasetablehideshow(index) {
+    let table =  document.getElementById("mpgschematable"+index);
+    if(table.hasAttribute("hidden")){
+        document.getElementsByName("mpgschematable").forEach(value => value.setAttribute("hidden", ""))
+        table.removeAttribute("hidden");
+    }else {
+        table.setAttribute("hidden", "");
+    }
+}
+
+

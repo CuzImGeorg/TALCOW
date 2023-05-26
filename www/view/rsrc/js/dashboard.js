@@ -208,7 +208,11 @@ function loadNameHitory(uid) {
 }
 
 function loadModule() {
-    loadDoc("index.php?controller=ajax&aktion=loadModul")
+    loadDoc("index.php?controller=ajax&aktion=loadModul");
+}
+
+function loadPostgreSQL() {
+    loadDoc("index.php?controller=ajax&aktion=loadPostgreSQL");
 }
 
 
