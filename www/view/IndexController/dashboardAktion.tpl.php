@@ -32,8 +32,10 @@
         <?php } ?>
 
 
+        <?php if($this->hasPermission("showuser") || $this->hasPermission("sudo")) {?>
+            <li onclick="loadMrgUser();">Users</li>
+        <?php } ?>
 
-        <li onclick="loadMrgUser();">Users</li>
 
         <?php if($this->hasPermission("viewpermission") || $this->hasPermission("sudo")) { ?>
             <li onclick="loadPermissions();">Permissions</li>
@@ -45,19 +47,39 @@
 
         <?php } ?>
 
-        <li onclick="loadSystemUser()">SystemUser</li>
-        <li><a onclick="loadDockerModule()">Docker</a></li>
-        <li><a onclick="loadSystemUser()">SystemUser</a></li>
+
+        <?php if($this->hasPermission("showsysuser") || $this->hasPermission("sudo")) {?>
+            <li onclick="loadSystemUser()">SystemUser</li>
+        <?php } ?>
+
+        <?php if($this->hasPermission("managemodules") || $this->hasPermission("sudo")) {?>
+        <li  onclick="loadModule()">Module</li>
+        <li class="navmodule" style="border: none;background-color: rgba(0, 0, 0, 0);">
+            <ul class="submodlules">
+                <li class="loadsubmodules" id="btnm" onclick="loadInstalledModules()">+</li>
+                <li hidden name="m">Config</li>
+                <li hidden name="m">VPN</li>
+                <li hidden name="m">Docker</li>
+                <li hidden name="m">Docker</li>
+            </ul>
+        </li>
+        <?php } ?>
 
 
 
-        <li onclick="loadTerminal()"> >_ Terminal </li>
-        <li onclick="loadServiceMonitor()">Daemon Monitor</li>
+        <?php if($this->hasPermission("showterminal") || $this->hasPermission("sudo")) {?>
+            <li onclick="loadTerminal()"> >_ Terminal </li>
+        <?php } ?>
+
+        <?php if($this->hasPermission("servicemonitor") || $this->hasPermission("sudo")) {?>
+            <li onclick="loadServiceMonitor()">Daemon Monitor</li>
+        <?php } ?>
 
 
 
-
+        <?php if($this->hasPermission("showsysinfo") || $this->hasPermission("sudo")) {?>
         <li onclick="loadSysInfo();">System Info </li>
+        <?php } ?>
 
     </ul>
 

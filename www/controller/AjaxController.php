@@ -222,6 +222,12 @@ class AjaxController extends AbstractBase {
 
     }
 
+    public function loadModul(){
+        $m = Modul::findeALL();
+        $this->addContext("moduls", $m);
+    }
+
+
 
 }
 

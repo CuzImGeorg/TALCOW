@@ -10,7 +10,7 @@ class IndexController extends AbstractBase {
             if(!$user)  {
 
             }else {
-                if($user->isActive()) {
+                if($user->isActive() && $user->getName() != "system") {
                     $this->addContext("user", $user);
                     $this->setTemplate("dashboardAktion");
                 }

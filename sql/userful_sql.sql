@@ -32,11 +32,16 @@ INSERT INTO qser_hat_berechtigung(uid, bid) VALUES(1,1);
 INSERT INTO qser(name, password, description, active) VALUES('root','root','root user', true);
 INSERT INTO qser(name, password, description, active) VALUES('unknown','unknown','unknown user', false);
 INSERT INTO qser(name, password, description, active) VALUES('trigger_test','root','root user', false);
+INSERT INTO qser(name, password, description, active) VALUES('system','t','nologin', false);
+INSERT INTO qser(name, password, description, active) VALUES('test','test','test user', true);
+
+
 INSERT INTO modul_value(name, description) VALUES('installed', 'installed but not active');
 INSERT INTO modul_value(name, description) VALUES('active', 'installed and active');
 INSERT INTO modul_value(name, description) VALUES('not installed', 'the module is not installed');
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'global', 2);
 INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'openvpn', 2);
+INSERT INTO modul(installedbyuid, name, valueid) VALUES(1, 'docker', 3);
 
 INSERT INTO log_level(name, description) VALUES('debug', 'this log is a debug. You may just ignore it');
 INSERT INTO log_level(name, description) VALUES('warning', 'this log is a warning. You may consider to look into it');

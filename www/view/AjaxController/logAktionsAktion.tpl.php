@@ -3,7 +3,9 @@
 <br>
 <table class="aktiontable">
     <tr>
-        <td>Name</td><td>Description</td><td>Module</td><td>
+        <td id="lan">Name</td>
+        <td id="lad">Description</td>
+        <td id="lam">Module</td><td>
     </tr>
     <?php foreach ($akt as $a) { ?>
         <tr>

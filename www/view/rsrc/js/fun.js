@@ -164,3 +164,13 @@ async function userpwChange() {
         input.setAttribute("hidden", "");
     }
 }
+
+function loadInstalledModules() {
+    if(document.getElementById("btnm").innerHTML === "+") {
+        document.getElementsByName("m").forEach(value => value.removeAttribute("hidden"));
+        document.getElementById("btnm").innerHTML = "-";
+    }else {
+        document.getElementsByName("m").forEach(value => value.setAttribute("hidden", ""));
+        document.getElementById("btnm").innerHTML = "+";
+    }
+}

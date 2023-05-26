@@ -206,3 +206,9 @@ function loadSystemUser() {
 function loadNameHitory(uid) {
     loadDocPOST("index.php?controller=ajax&aktion=loadNameHitory" , "uid=" +uid);
 }
+
+function loadModule() {
+    loadDoc("index.php?controller=ajax&aktion=loadModul")
+}
+
+

@@ -125,6 +125,58 @@ h1 {
     width: 3%;
 }
 
+#pid {
+    width: 5%;
+}
+
+#pd {
+    width: 60%;
+}
+
+
+#btnp {
+    min-width: 55%;
+}
+
+/*
+* TAB USER PERMMISIONS
+ */
+#uspeun, #uspepn, #uspect , #uspecbu, #usper {
+    width: 5%;
+}
+
+#usper {
+
+}
+
+
+
+/*
+* TAB LOG ACTIONS
+ */
+
+#lan  {
+    width: 20%;
+}
+
+#lad {
+    width: 75%;
+}
+
+/*
+* TAL LOG LEVEL
+ */
+
+#lln {
+    width: 20%;
+}
+
+#btnln {
+    width: 80%;
+
+}
+
+
 /*
 * TAB LOGS
  */
@@ -144,8 +196,60 @@ h1 {
     width: 43%;
 }
 
+/*
+* SUB MODULES
+ */
 
 
+.navmodule {
+    width: 100%;
+
+}
+
+.navmodule:hover {
+    color: var(--navbg);
+}
+
+
+
+.submodlules {
+    width: 60%;
+    list-style: none;
+
+}
+
+.submodlules > li  {
+    background: var(--bg);
+    border: var(--navbg) solid 2px;
+    margin-left: -40%;
+
+}
+
+.submodlules > li:last-child {
+    margin-bottom: 2%;
+}
+
+
+
+.submodlules > li + li  {
+    width: 158%;
+}
+
+.submodlules:hover {
+    color: var(--navbg);
+}
+
+.submodlules > li:hover {
+    color: var(--acent);
+}
+
+.loadsubmodules {
+    width: 24%;
+    text-align: center;
+    margin-left: -35%;
+    background: var(--bg);
+    border: var(--navbg) solid 2px;
+}
 
 
 
@@ -167,6 +271,29 @@ h1 {
 .btnunc {
     border-style: none;
 }
+
+/*
+* TAB MODULES
+ */
+
+#mttr {
+
+}
+
+#mv, #ma, #mi  {
+    width: 20%;
+}
+
+#mn, #mu {
+    width: 26%;
+}
+.btnm {
+    width: 40%;
+}
+.btnm2 {
+    width: 100%;
+}
+
 
 
 

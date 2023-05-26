@@ -2,11 +2,13 @@
 <br>
 <table class="permissiontable">
     <tr>
-        <td>Name</td><td>Description</td><td>User</td>
+        <td id="pid">Name</td>
+        <td id="pd">Description</td>
     </tr>
     <?php foreach ($perms as $p) { ?>
     <tr>
-        <td><button onclick="loadUserPermissionsByBerechtigungsName('<?=$p->getName()?>')"><?=$p->getName()?></button></td><td><?=$p->getDescription()?></td>
+        <td><button id="btnp" onclick="loadUserPermissionsByBerechtigungsName('<?=$p->getName()?>')"><?=$p->getName()?></button></td>
+        <td><?=$p->getDescription()?></td>
     </tr>
     <?php  } ?>
 

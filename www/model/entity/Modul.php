@@ -95,5 +95,8 @@ class Modul
     public function getValue(){
         return Modul_value::finde($this->valueid);
     }
+    public function findeUser() {
+       return Qser::finde($this->installedbyuid);
+    }
 
 }

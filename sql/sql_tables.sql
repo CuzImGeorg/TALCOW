@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS qser(
     id serial PRIMARY KEY,
-    name varchar(63),
+    name varchar(63) unique,
     password varchar(63),
     description varchar(255),
     createdate timestamp default now(),
