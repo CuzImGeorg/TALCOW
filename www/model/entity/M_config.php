@@ -120,5 +120,12 @@ class M_config
         return $abfrage->fetchAll();
     }
 
+    public static function getByName(string $name){
+        $sql = "SELECT * FROM m_config WHERE name = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'm_config');
+        return $abfrage->fetch();
+    }
+
 
 }

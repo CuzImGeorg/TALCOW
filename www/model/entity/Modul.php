@@ -96,4 +96,11 @@ class Modul
         return Modul_value::finde($this->valueid);
     }
 
+    public static function getByName(string $name){
+        $sql = "SELECT * FROM modul WHERE name = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul');
+        return $abfrage->fetch();
+    }
+
 }

@@ -159,6 +159,13 @@ class Log
         return $abfrage->fetchAll();
     }
 
+    public  static function  findeLogByNamed(string $name) {
+        $sql = "SELECT * FROM aptlist WHERE name = '$name'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'aptlist');
+        return $a->fetch();
+    }
+
 
 
 

@@ -75,6 +75,13 @@ class Modul_value
         return $abfrage->fetchAll();
     }
 
+    public static function getByName(string $name){
+        $sql = "SELECT * FROM modul_values WHERE name = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'modul_values');
+        return $abfrage->fetch();
+    }
+
 
 
 }
