@@ -95,6 +95,11 @@ class M_openvpn
        return Qser::finde($this->uid);
     }
 
-
+    public static function getByName(string $name){
+        $sql = "SELECT * FROM m_openvpn WHERE name = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'm_openvpn');
+        return $abfrage->fetch();
+    }
 
 }

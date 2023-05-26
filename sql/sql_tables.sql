@@ -110,3 +110,21 @@ CREATE TABLE IF NOT EXISTS  m_config(
     FOREIGN KEY(uid) REFERENCES qser(id),
     FOREIGN KEY(modul) REFERENCES modul(id)
 );
+
+CREATE TABLE IF NOT EXISTS  berechtigungsgruppe(
+    id serial PRIMARY KEY,
+    name varchar(63),
+    description varchar(255),
+    createuser int,
+    FOREIGN KEY(createuser) REFERENCES qser(id),
+   );
+
+CREATE TABLE IF NOT EXISTS  berechtigungsgruppe_berechtigung(
+    id int PRIMARY KEY,
+    bid int;
+    bgid int;
+    useredit int;
+    FOREIGN KEY(bid) REFERENCES berechtigung(id),
+    FOREIGN KEY(bgid) REFERENCES berechtigungsgruppe_berechtigung(id),
+    FOREIGN KEY(useredit) REFERENCES qser(id),
+    );

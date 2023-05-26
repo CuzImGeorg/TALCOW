@@ -103,6 +103,13 @@ class Aptlist
         return Qser::finde($this->uid);
     }
 
+    public  static function  findeAptlistByNamed(string $name) {
+        $sql = "SELECT * FROM aptlist WHERE name = '$name'";
+        $a = Db::getDB()->query($sql);
+        $a->setFetchMode(PDO::FETCH_CLASS, 'aptlist');
+        return $a->fetch();
+    }
+
 
 
 
