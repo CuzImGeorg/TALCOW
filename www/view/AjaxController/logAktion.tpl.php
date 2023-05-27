@@ -13,13 +13,13 @@
 
 <?php } ?>
         <tr>
-        <td id="ltun">User Name</td>
-        <td id="ltan">Action Name</td>
-        <td id="ltl"> Level</td>
-        <td id="ltd">Description</td>
-        <td id="ltt">Time</td>
+        <th id="ltun">User Name</th>
+        <th id="ltan">Action Name</th>
+        <th id="ltl"> Level</th>
+        <th id="ltd">Description</th>
+        <th id="ltt">Time</th>
         <?php if($this->hasPermission("deletelog") || $this->hasPermission("sudo")) { ?>
-            <td>Delete</td>
+            <th>Delete</th>
         <?php } ?>
     </tr>
     <?php foreach ($logs as $l) { ?>

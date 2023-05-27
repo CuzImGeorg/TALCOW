@@ -2,20 +2,22 @@
 <datalist id="dl" ></datalist>
 <datalist id="dl2" ></datalist>
 
-<table class="userpermissiontable">
-    <tr><td><button class="btnnewUserPermission"  id="btnup" onclick="newUserPermission()">+</button></td></tr>
-    <tr class="newUserPermission">
+<button class="btnnewUserPermission"  id="btnup" onclick="newUserPermission()">+</button>
+<div class="newUserPermission">
+    <input type="text" id="upun" list="dl" onclick="updateUsernameList()" hidden   placeholder="Name">
+    <input type="text" list="dl2" id="upp" onclick="updatePermissionList()" hidden placeholder="Permission">
+    <button hidden="hidden" type="button"  id="btnsub" onclick="btnAddUserBerechtigung()"  >Submit</button>
+</div>
 
-        <td><input type="text" id="upun" list="dl" onclick="updateUsernameList()" hidden   placeholder="Name"></td>
-        <td><input type="text" list="dl2" id="upp" onclick="updatePermissionList()" hidden placeholder="Permission"></td>
-        <td><button hidden="hidden" type="button"  id="btnsub" onclick="btnAddUserBerechtigung()"  >Submit</button</td>
+
+<table class="userpermissiontable">
+
     <tr>
-    <tr>
-        <td id="uspeun">User Name</td>
-        <td id="uspepn">Permission Name</td>
-        <td id="uspect">Create Time</td>
-        <td id="uspecbu">Created By User </td>
-        <td id="usper">Remove</td>
+        <th id="uspeun">User Name</th>
+        <th id="uspepn">Permission Name</th>
+        <th id="uspect">Create Time</th>
+        <th id="uspecbu">Created By User </th>
+        <th id="usper">Remove</th>
     </tr>
     <?php foreach ($perms as $p) { ?>
     <tr>

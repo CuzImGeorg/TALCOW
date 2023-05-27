@@ -10,7 +10,7 @@ BEGIN
 
         INSERT INTO log(uid,description, action, level) VALUES(OLD.id,'changed the username from ' || OLD.name || ' to ' || NEW.name, (SELECT id FROM log_action WHERE name = 'namehistory') ,1);
         INSERT INTO unhistory(uid, oldname, newname, changetime) VALUES (OLD.ID, OLD.name, NEW.name, now());
-END IF;
+    END IF;
 
 
 

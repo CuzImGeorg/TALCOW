@@ -121,6 +121,18 @@ class ExecuteController extends AbstractBase {
 
     }
 
+    public function dropdb() {
+        if($_POST["name"] != "talcow") {
+            $info = DB::getDB()->query("DROP DATABASE")->fetch();
+        }else {
+            $info = "U Cant Delete This Database";
+        }
+        $this->addContext("info", $info);
+        $this->setTemplate("info");
+
+
+    }
+
 
 
 

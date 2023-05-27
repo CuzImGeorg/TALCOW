@@ -3,8 +3,8 @@
 <br>
 <table class="logleveltable">
     <tr>
-        <td id="lln">Name</td>
-        <td id="lld">Description</td>
+        <th id="lln">Name</th>
+        <th id="lld">Description</th>
     </tr>
     <?php foreach ($logs as $l) { ?>
         <tr>

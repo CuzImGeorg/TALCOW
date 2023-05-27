@@ -13,11 +13,11 @@
     <tr>
     <?php } ?>
 <tr>
-    <td>Name</td>
-    <td>Description</td>
-    <td>Create Date</td>
-    <td>Active</td>
-    <td>Name History</td>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Create Date</th>
+    <th>Active</th>
+    <th>Name History</th>
 
     <?php if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) { ?>
         <td>Permissions</td>

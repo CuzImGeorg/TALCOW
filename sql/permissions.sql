@@ -14,4 +14,19 @@ INSERT INTO berechtigung(name, description)  VALUES ('showsysuser','the user has
 INSERT INTO berechtigung(name, description)  VALUES ('showuser','the user has the rights to see users logs.');
 INSERT INTO berechtigung(name, description)  VALUES ('showterminal','the user has the rights to use the webterminal logs.');
 
+INSERT INTO berechtigung(name, description)  VALUES ('showpgdatabases','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('droppgdataabse','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('createdatabses','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('showpgtables','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('droppgtables','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('droppgtablescascase','the user has the rights to delete logs.');
+
 INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
+
+
+

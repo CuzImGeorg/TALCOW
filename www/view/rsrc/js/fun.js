@@ -200,15 +200,29 @@ async function changesysuserpw(un, index) {
        input.setAttribute("hidden", "");
     }
 }
+function dropdb(name) {
+    loadDocWithElementIDPOST("index.php?controller=execute&aktion=dropdb", "infopopup", "name=" +name);
+    document.getElementById("infopopup").removeAttribute("hidden");
+}
 
 function databasetablehideshow(index) {
     let table =  document.getElementById("mpgschematable"+index);
     if(table.hasAttribute("hidden")){
-        document.getElementsByName("mpgschematable").forEach(value => value.setAttribute("hidden", ""))
+        document.getElementsByName("mpgschematable").forEach(value => value.setAttribute("hidden", ""));
+        document.getElementsByName("database").forEach(value => value.setAttribute("hidden", ""));
+        document.getElementById("database"+index).removeAttribute("hidden");
+        document.getElementById("btntable"+index).innerHTML = "Close";
         table.removeAttribute("hidden");
+
     }else {
         table.setAttribute("hidden", "");
+        document.getElementsByName("database").forEach(value => value.removeAttribute("hidden", ""));
+        document.getElementById("btntable"+index).innerHTML = "Select";
+
+
     }
+
+
 }
 
 
