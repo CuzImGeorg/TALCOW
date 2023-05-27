@@ -1,13 +1,12 @@
 CREATE TABLE IF NOT EXISTS qser(
-
-                                   id serial PRIMARY KEY,
-                                   name varchar(63),
+    id serial PRIMARY KEY,
+    name varchar(63),
     password varchar(63),
     description varchar(255),
     createdate timestamp default now(),
     active boolean
 
-    );
+);
 
 CREATE TABLE IF NOT EXISTS unhistory(
     id serial PRIMARY KEY,
@@ -48,7 +47,7 @@ CREATE TABLE IF NOT EXISTS  m_openvpn(
 
 CREATE TABLE IF NOT EXISTS  berechtigung(
     id serial PRIMARY KEY,
-    name varchar(63),
+    name varchar(63) unique,
     description varchar(255)
 );
 

@@ -74,31 +74,35 @@ class ExecuteController extends AbstractBase {
 
     public function addServiceMontor()
     {
-        $m = new M_servicemonitor();
-        $m->setServicename($_POST["name"]);
-        $m->setDescription($_POST["desc"]);
-        $m->setUid($_SESSION["userid"]);
-        $m->setServicetype($_POST["st"]);
-        $m->speichere();
-        $this->setTemplate("info");
+        if($this->hasPermission("addservicemonitor") || $this->hasPermission("sudo")) {
 
+            $m = new M_servicemonitor();
+            $m->setServicename($_POST["name"]);
+            $m->setDescription($_POST["desc"]);
+            $m->setUid($_SESSION["userid"]);
+            $m->setServicetype($_POST["st"]);
+            $m->speichere();
+            $this->setTemplate("info");
+        }
     }
 
 
 
     public function dluser(){
-        $o = shell_exec("deluser " . $_POST['name']);
-        $this->addContext("info", $o);
-        $this->setTemplate("info");
-
+        if($this->hasPermission("deleteuser") || $this->hasPermission("sudo")) {
+            $o = shell_exec("deluser " . $_POST['name']);
+            $this->addContext("info", $o);
+            $this->setTemplate("info");
+        }
     }
 
     public function changeUserName() {
-        $u = Qser::finde($_POST["uid"]);
-        $u->setName($_POST["name"]);
-        $u->speichere();
-        $this->setTemplate("info");
-
+        if($this->hasPermission("changeusername") || $this->hasPermission("sudo")) {
+            $u = Qser::finde($_POST["uid"]);
+            $u->setName($_POST["name"]);
+            $u->speichere();
+            $this->setTemplate("info");
+        }
     }
     public function changeUserpw() {
         $u = Qser::finde($_POST["uid"]);
@@ -108,28 +112,35 @@ class ExecuteController extends AbstractBase {
     }
 
     public function changeSystemUserName() {
-        shell_exec("usermod -l " . $_POST["name"] . " " . Qser::finde($_POST["uid"]->getName()));
-        $this->setTemplate("info");
+        if($this->hasPermission("changesysusername") || $this->hasPermission("sudo")) {
+
+            shell_exec("usermod -l " . $_POST["name"] . " " . Qser::finde($_POST["uid"]->getName()));
+            $this->setTemplate("info");
+        }
     }
 
     public function changesysuserpw() {
-        $cmd = sprintf("echo '%s:%s' | sudo chpasswd",
-            escapeshellarg($_POST["un"]),
-            escapeshellarg($_POST["pwd"]));
-        shell_exec( $cmd);
-        $this->setTemplate("info");
+        if($this->hasPermission("changesysuserpw") || $this->hasPermission("sudo")) {
 
+            $cmd = sprintf("echo '%s:%s' | sudo chpasswd",
+                escapeshellarg($_POST["un"]),
+                escapeshellarg($_POST["pwd"]));
+            shell_exec($cmd);
+            $this->setTemplate("info");
+        }
     }
 
     public function dropdb() {
-        if($_POST["name"] != "talcow") {
-            $info = DB::getDB()->query("DROP DATABASE")->fetch();
-        }else {
-            $info = "U Cant Delete This Database";
-        }
-        $this->addContext("info", $info);
-        $this->setTemplate("info");
+        if($this->hasPermission("droppgdatabase") || $this->hasPermission("sudo")) {
 
+            if ($_POST["name"] != "talcow") {
+                $info = DB::getDB()->query("DROP DATABASE")->fetch();
+            } else {
+                $info = "U Cant Delete This Database";
+            }
+            $this->addContext("info", $info);
+            $this->setTemplate("info");
+        }
 
     }
 

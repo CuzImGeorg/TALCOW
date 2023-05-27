@@ -49,7 +49,7 @@
         </tr>
         <?php foreach ($database["tables"] as $index => $table) { ?>
             <tr>
-                <td><button id="tablemoreless<?=$index?>" onclick="tablemoreless(<?=$index?>)">More</button></td>
+                <td><button id="tablemoreless<?=$index?>" onclick="tablemoreless(<?=$index?>,'<?=$table["tablename"]?>')">More</button></td>
                 <td><?=$table["tablename"]?></td>
 
                 <td><button>DROP</button></td>

@@ -250,11 +250,17 @@ function closeout(index) {
 
 let tables = {};
 function loadTableColumns() {
-    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=tablecolumns", "" );
+    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=getTables", "tablecolumns", "" );
 }
 
-function tablemoreless(index){
+function tablemoreless(index, name){
+    if(true) {
+        tables.push(name);
+    }else {
+    }
 
+
+    loadTableColumns();
 }
 
 

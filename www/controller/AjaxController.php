@@ -7,29 +7,30 @@ class AjaxController extends AbstractBase {
 
 
     public function sysInfo() {
+        if($this->hasPermission("showsysinfo") || $this->hasPermission("sudo")) {
 
-        $date = date( "d.m.Y" ,time());
-        $time = date( "H:i:s" ,time());
-        $hn = gethostname();
-        $up = $this->upTime();
-        $this->addContext("date", $date);
-        $this->addContext("time", $time);
-        $this->addContext("hostname", $hn);
-        $this->addContext("uptime", $up);
-
-
+            $date = date("d.m.Y", time());
+            $time = date("H:i:s", time());
+            $hn = gethostname();
+            $up = $this->upTime();
+            $this->addContext("date", $date);
+            $this->addContext("time", $time);
+            $this->addContext("hostname", $hn);
+            $this->addContext("uptime", $up);
+        }
     }
 
 
 
     public function mgruser() {
-        if(isset($_POST["uid"])) {
-            $user = array(Qser::finde((int) $_POST["uid"]));
+        if($this->hasPermission("showuser") || $this->hasPermission("sudo")) {
+            if (isset($_POST["uid"])) {
+                $user = array(Qser::finde((int)$_POST["uid"]));
+            } else {
+                $user = Qser::findeALL();
+            }
+            $this->addContext("user", $user);
         }
-        else {
-            $user = Qser::findeALL();
-        }
-        $this->addContext("user", $user);
     }
 
     private function upTime() {
@@ -47,64 +48,69 @@ class AjaxController extends AbstractBase {
     }
 
     public function loadPermissions() {
+        if($this->hasPermission("viewpermission") || $this->hasPermission("sudo")) {
 
-        if(isset($_GET["uid"])) {
-            $permissions = Berechtigung::findBerechtigungByUserID($_GET["uid"]);
-        } else {
-            $permissions = Berechtigung::findeALL();
+            if (isset($_GET["uid"])) {
+                $permissions = Berechtigung::findBerechtigungByUserID($_GET["uid"]);
+            } else {
+                $permissions = Berechtigung::findeALL();
+            }
+            $this->addContext("perms", $permissions);
         }
-        $this->addContext("perms", $permissions);
-
 
     }
     public function loadUserPermissions() {
+        if($this->hasPermission("viewuserpermissions") || $this->hasPermission("sudo")) {
 
-        if(isset($_POST["uid"])) {
-            $permissions = Qser_hat_berechtigung::findByUid($_POST["uid"]);
-        } else if (isset($_POST["bname"])) {
-            $permissions = Qser_hat_berechtigung::findeUserByBerechtigungName($_POST["bname"]);
+            if (isset($_POST["uid"])) {
+                $permissions = Qser_hat_berechtigung::findByUid($_POST["uid"]);
+            } else if (isset($_POST["bname"])) {
+                $permissions = Qser_hat_berechtigung::findeUserByBerechtigungName($_POST["bname"]);
+            } else {
+                $permissions = Qser_hat_berechtigung::findeALL();
+            }
+            $this->addContext("perms", $permissions);
         }
-        else {
-            $permissions = Qser_hat_berechtigung::findeALL();
-        }
-        $this->addContext("perms", $permissions);
-
-
     }
 
     public function logLevel() {
-        $logs = Log_level::findeALL();
-        $this->addContext("logs", $logs);
+        if($this->hasPermission("readlog") || $this->hasPermission("sudo")) {
+
+            $logs = Log_level::findeALL();
+            $this->addContext("logs", $logs);
+        }
     }
 
     public function log() {
-        if(isset($_POST['uid'])){
-            $logs = Log::findLogByUserID($_POST['uid']);
-        }elseif (isset($_POST['lvl'])){
-            $bits = $_POST['lvl'];
-            $subSql = "";
-            $subSql .= $bits[0] == 1 ? "'debug' OR name LIKE " : "";
-            $subSql .= $bits[1] == 1 ? "'warning' OR name LIKE " : "";
-            $subSql .= $bits[2] == 1 ? "'error' OR name LIKE " : "";
-            $subSql .= $bits[3] == 1 ? "'critical'" : "''";
+        if($this->hasPermission("readlog") || $this->hasPermission("sudo")) {
+            if (isset($_POST['uid'])) {
+                $logs = Log::findLogByUserID($_POST['uid']);
+            } elseif (isset($_POST['lvl'])) {
+                $bits = $_POST['lvl'];
+                $subSql = "";
+                $subSql .= $bits[0] == 1 ? "'debug' OR name LIKE " : "";
+                $subSql .= $bits[1] == 1 ? "'warning' OR name LIKE " : "";
+                $subSql .= $bits[2] == 1 ? "'error' OR name LIKE " : "";
+                $subSql .= $bits[3] == 1 ? "'critical'" : "''";
 
-            $logs = Log::fineLogsByLogAnyLevel($subSql);
-        }else  if(isset($_POST['name'])){
-            $logs = Log::findLogByLog_ActionName($_POST['name']);
+                $logs = Log::fineLogsByLogAnyLevel($subSql);
+            } else if (isset($_POST['name'])) {
+                $logs = Log::findLogByLog_ActionName($_POST['name']);
+            } else {
+                $logs = Log::findeALL();
+            }
+            $this->addContext("logs", $logs);
         }
-        else {
-            $logs = Log::findeALL();
-        }
-        $this->addContext("logs", $logs);
-
 
     }
 
 
     public function logAktions() {
-        $akt = Log_action::findeALL();
-        $this->addContext("akt", $akt);
+        if($this->hasPermission("readlog") || $this->hasPermission("sudo")) {
 
+            $akt = Log_action::findeALL();
+            $this->addContext("akt", $akt);
+        }
     }
 
 
@@ -127,77 +133,81 @@ class AjaxController extends AbstractBase {
 
 
 
+    //I think this is needed IDK for what
     public function demonMonitor() {
-
+        
     }
 
     public function loadServiceMonitor() {
-        $srvs = M_servicemonitor::findeALL();
-        $monitor = array();
-        foreach ($srvs as $srv) {
-            $rs = "ihassphp";
-            if($srv->isServicetype()) {
-               $rs = shell_exec("systemctl status ". $srv->getServicename());
-                $active = "geathnetxD";
-                $color = "#fff";
-                $btn = "Error567";
-                if(str_contains($rs, "Active: active")) {
-                    $active = "running";
-                    $color = "#128a20";
-                    $btn = "Stop";
-                }else if(str_contains($rs, "Active: inactive")){
-                    $active = "inactive";
-                    $color = "#d97914";
-                    $btn = "Start";
-                } else if(str_contains($rs, "Active: activating")) {
-                    $active = "activating";
-                    $color = "#71ad58";
-                    $btn = "Stop";
-                } else  if(str_contains($rs, "Active: deactivating")) {
-                    $active = "deactivating";
-                    $color = "#ba4141";
-                    $btn = "Start";
+        if($this->hasPermission("servicemonitor") || $this->hasPermission("sudo")) {
 
-                } else  if(str_contains($rs, "Active: failed")) {
-                    $active = "failed";
-                    $color = "#5e5757";
-                    $btn = "Start";
+            $srvs = M_servicemonitor::findeALL();
+            $monitor = array();
+            foreach ($srvs as $srv) {
+                $rs = "ihassphp";
+                if ($srv->isServicetype()) {
+                    $rs = shell_exec("systemctl status " . $srv->getServicename());
+                    $active = "geathnetxD";
+                    $color = "#fff";
+                    $btn = "Error567";
+                    if (str_contains($rs, "Active: active")) {
+                        $active = "running";
+                        $color = "#128a20";
+                        $btn = "Stop";
+                    } else if (str_contains($rs, "Active: inactive")) {
+                        $active = "inactive";
+                        $color = "#d97914";
+                        $btn = "Start";
+                    } else if (str_contains($rs, "Active: activating")) {
+                        $active = "activating";
+                        $color = "#71ad58";
+                        $btn = "Stop";
+                    } else if (str_contains($rs, "Active: deactivating")) {
+                        $active = "deactivating";
+                        $color = "#ba4141";
+                        $btn = "Start";
 
-                } else  if(str_contains($rs, "Active: not-found")) {
-                    $active = "not-found";
-                    $color = "#403a3a";
-                    $btn = "N/A";
-                } else  if(str_contains($rs, "Active: dead")) {
-                    $active = "dead";
-                    $color = "#5e5757";
-                    $btn = "N/A";
+                    } else if (str_contains($rs, "Active: failed")) {
+                        $active = "failed";
+                        $color = "#5e5757";
+                        $btn = "Start";
+
+                    } else if (str_contains($rs, "Active: not-found")) {
+                        $active = "not-found";
+                        $color = "#403a3a";
+                        $btn = "N/A";
+                    } else if (str_contains($rs, "Active: dead")) {
+                        $active = "dead";
+                        $color = "#5e5757";
+                        $btn = "N/A";
+                    }
+                } else {
+                    $rs = shell_exec("service status " . $srv->getServicename());
                 }
-            }else {
-                $rs = shell_exec("service status ". $srv->getServicename());
+
+
+                $monitor[] = array("service" => $srv, "active" => $active, "color" => $color, "btn" => $btn);
+
             }
-
-
-            $monitor[] = array("service" => $srv, "active" => $active, "color" => $color, "btn" => $btn );
-
+            $this->addContext("monitors", $monitor);
         }
-        $this->addContext("monitors", $monitor);
-
 
     }
 
     public function loadSystemUser() {
-        $handle = fopen("/etc/passwd", "r");
-        if ($handle) {
-            while (($line = fgets($handle)) !== false) {
-                $un = explode(":", $line)[0];
-                if(file_exists("/home/".$un)){ //str_contains($line, "/home/") && str_contains($line,"/bin/")
-                    $users[] = $un;
+        if($this->hasPermission("showsysuser") || $this->hasPermission("sudo")) {
+            $handle = fopen("/etc/passwd", "r");
+            if ($handle) {
+                while (($line = fgets($handle)) !== false) {
+                    $un = explode(":", $line)[0];
+                    if (file_exists("/home/" . $un)) { //str_contains($line, "/home/") && str_contains($line,"/bin/")
+                        $users[] = $un;
+                    }
                 }
+                fclose($handle);
             }
-            fclose($handle);
+            $this->addContext("users", $users);
         }
-        $this->addContext("users", $users);
-
     }
 
     public function loadDockerPsMinusA() {
@@ -215,35 +225,52 @@ class AjaxController extends AbstractBase {
     }
 
     public function loadNameHitory() {
-        $unh = Unhistory::findeByUserid($_POST["uid"]);
-        $user = Qser::finde($_POST["uid"]);
-        $this->addContext("unh", $unh);
-        $this->addContext("user", $user);
-
+        if($this->hasPermission("shownamehistory") || $this->hasPermission("sudo")) {
+            $unh = Unhistory::findeByUserid($_POST["uid"]);
+            $user = Qser::finde($_POST["uid"]);
+            $this->addContext("unh", $unh);
+            $this->addContext("user", $user);
+        }
     }
 
     public function loadModul(){
-        $m = Modul::findeALL();
-        $this->addContext("moduls", $m);
+        if($this->hasPermission("managemodules") || $this->hasPermission("sudo")) {
+
+            $m = Modul::findeALL();
+            $this->addContext("moduls", $m);
+        }
     }
 
     public function loadPostgreSQL() {
-       $databases = M_postgresql::findeALL();
-       foreach ($databases as $database) {
-           $dbs[]  = array( "db" => $database, "tables" => $database->getDB()->query(" SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'")->fetchALL());
-       }
-       $this->addContext("databases", $dbs);
+        if($this->hasPermission("showpgdatabases") || $this->hasPermission("sudo")) {
 
+            $databases = M_postgresql::findeALL();
+            foreach ($databases as $database) {
+                $dbs[] = array("db" => $database, "tables" => $database->getDB()->query(" SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'")->fetchALL());
+            }
+            $this->addContext("databases", $dbs);
+        }
     }
     public function sqlquery() {
-        $db = M_postgresql::finde($_POST["did"]);
-        $res = $db->getDB()->query($_POST["sql"])->fetchAll();
-        $this->addContext("res", $res);
+        if($this->hasPermission("execSQL") || $this->hasPermission("sudo")) {
+            $db = M_postgresql::finde($_POST["did"]);
+            $res = $db->getDB()->query($_POST["sql"])->fetchAll();
+            $log = new Log();
+            $log->setUid($_SESSION["userid"]);
+            $log->setDescription("Query Executed" . $_POST["sql"]);
+            $log->setAction(Log_action::findeByName("sql")->getId());
+            $log->setLevel(Log_level::getByName("debug")->getId());
+            $log->setTimestamp(date("Y-m-d H:i:s"));
+            $log->speichere();
+            $this->addContext("res", $res);
+        }
     }
     public function getTables() {
-        $sql = "SELECT table_name, column_name, data_type, character_maximum_length, is_nullable, column_default FROM information_schema.columns WHERE table_name  = '". $_POST["name"] . "' ORDER BY table_name";
-        $result = DB::getDB()->query($sql)->fetchAll();
-        $this->addContext("$result", $result);
+        if($this->hasPermission("showdatabasetables") || $this->hasPermission("sudo")) {
+            $sql = "SELECT table_name, column_name, data_type, character_maximum_length, is_nullable, column_default FROM information_schema.columns WHERE table_name  = '" . $_POST["name"] . "' ORDER BY table_name";
+            $result = DB::getDB()->query($sql)->fetchAll();
+            $this->addContext("result", $result);
+        }
 
     }
 
