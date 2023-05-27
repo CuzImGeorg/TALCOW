@@ -329,6 +329,25 @@ h1 {
     width: 20%;
 }
 
+.slqinput {
+    margin-left: 5%;
+    width: 60%;
+}
+
+.sqloutput {
+    margin-left: 5%;
+    margin-top: 5px;
+    background: white;
+    font-size: 12px;
+    width: 60%;
+}
+
+.closeout {
+    margin-left: 5%;
+    margin-top: 2px;
+
+}
+
 
 
 

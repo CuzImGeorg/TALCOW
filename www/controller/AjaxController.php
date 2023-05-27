@@ -235,6 +235,18 @@ class AjaxController extends AbstractBase {
        $this->addContext("databases", $dbs);
 
     }
+    public function sqlquery() {
+        $db = M_postgresql::finde($_POST["did"]);
+        $res = $db->getDB()->query($_POST["sql"])->fetchAll();
+        $this->addContext("res", $res);
+    }
+    public function getTables() {
+        $sql = "SELECT table_name, column_name, data_type, character_maximum_length, is_nullable, column_default FROM information_schema.columns WHERE table_name  = '". $_POST["name"] . "' ORDER BY table_name";
+        $result = DB::getDB()->query($sql)->fetchAll();
+        $this->addContext("$result", $result);
+
+    }
+
 
 
 }

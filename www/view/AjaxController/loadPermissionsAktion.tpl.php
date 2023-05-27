@@ -2,8 +2,8 @@
 <br>
 <table class="permissiontable">
     <tr>
-        <td id="pid">Name</td>
-        <td id="pd">Description</td>
+        <th id="pid">Name</th>
+        <th id="pd">Description</th>
     </tr>
     <?php foreach ($perms as $p) { ?>
     <tr>

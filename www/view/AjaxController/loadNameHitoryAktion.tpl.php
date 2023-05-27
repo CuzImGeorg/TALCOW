@@ -2,16 +2,15 @@
 <br>
 <table class="permissiontable">
     <tr>
-        <td>Old Name</td>
-        <td>New Name</td>
-        <td>Time</td>
+        <th>Old Name</th>
+        <th>New Name</th>
+        <th>Time</th>
     </tr>
     <?php foreach ($unh as $un) { ?>
         <tr>
             <td><?=$un->getOldname()?></td>
             <td><?=$un->getNewname()?></td>
             <td><?=$un->getChangetime()?></td>
-
         </tr>
     <?php  } ?>
 

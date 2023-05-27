@@ -2,12 +2,11 @@
 <table class="modultable" id="modultable">
 
     <tr id="mttr">
-        <td id="mn">Name</td>
-        <td id="mu">Installed By User</td>
-        <td id="mv">Value</td>
-        <td id="ma">Activate</td>
-        <td id="mi">Install</td>
-
+        <th id="mn">Name</th>
+        <th id="mu">Installed By User</th>
+        <th id="mv">Value</th>
+        <th id="ma">Activate</th>
+        <th id="mi">Install</th>
     </tr>
     <?php foreach ($moduls as $m) { ?>
     <tr>

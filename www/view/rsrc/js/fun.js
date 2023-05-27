@@ -210,19 +210,52 @@ function databasetablehideshow(index) {
     if(table.hasAttribute("hidden")){
         document.getElementsByName("mpgschematable").forEach(value => value.setAttribute("hidden", ""));
         document.getElementsByName("database").forEach(value => value.setAttribute("hidden", ""));
+        document.getElementsByName("closeout").forEach(value => value.setAttribute("hidden", ""));
         document.getElementById("database"+index).removeAttribute("hidden");
         document.getElementById("btntable"+index).innerHTML = "Close";
+        document.getElementById("sqlinput"+index).removeAttribute("hidden");
+        document.getElementById("btnsqlinput"+index).removeAttribute("hidden");
+        document.getElementsByName("sqloutput").forEach(value => value.setAttribute("hidden", ""))
         table.removeAttribute("hidden");
 
     }else {
         table.setAttribute("hidden", "");
         document.getElementsByName("database").forEach(value => value.removeAttribute("hidden", ""));
+        document.getElementsByName("sqloutput").forEach(value => value.setAttribute("hidden", ""));
         document.getElementById("btntable"+index).innerHTML = "Select";
+        document.getElementById("sqlinput"+index).setAttribute("hidden", "");
+        document.getElementById("btnsqlinput"+index).setAttribute("hidden", "");
+        document.getElementById("sqloutput"+index).innerHTML ="";
+        document.getElementById("sqlinput"+index).innerHTML ="";
+        document.getElementById("closeout"+index).setAttribute("hidden", "");
+
+
 
 
     }
+}
+function execSQL(index, id) {
+    document.getElementById("sqloutput"+index).removeAttribute("hidden");
+    document.getElementById("closeout"+index).removeAttribute("hidden");
+    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=sqlquery", "sqloutput"+index, "did=" + id +"&sql=" +  document.getElementById("sqlinput"+index).value);
+}
 
+function closeout(index) {
+    document.getElementById("sqloutput"+index).innerHTML ="";
+    document.getElementById("sqloutput"+index).setAttribute("hidden","");
+    document.getElementById("closeout"+index).setAttribute("hidden","");
 
 }
+
+
+let tables = {};
+function loadTableColumns() {
+    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=tablecolumns", "" );
+}
+
+function tablemoreless(index){
+
+}
+
 
 

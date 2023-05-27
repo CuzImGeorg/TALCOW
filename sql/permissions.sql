@@ -20,8 +20,8 @@ INSERT INTO berechtigung(name, description)  VALUES ('createdatabses','the user 
 INSERT INTO berechtigung(name, description)  VALUES ('showpgtables','the user has the rights to delete logs.');
 INSERT INTO berechtigung(name, description)  VALUES ('droppgtables','the user has the rights to delete logs.');
 INSERT INTO berechtigung(name, description)  VALUES ('droppgtablescascase','the user has the rights to delete logs.');
+INSERT INTO berechtigung(name, description)  VALUES ('execSQL','the user has the rights to delete logs.');
 
-INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
 INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
 INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');
 INSERT INTO berechtigung(name, description)  VALUES ('deletelog','the user has the rights to delete logs.');

@@ -30,6 +30,15 @@
 <div style="min-height: 20px"><br></div>
 
 <?php foreach ($databases as $index => $database) { ?>
+    <?php if(($this->hasPermission("execSQL") || $this->hasPermission("sudo")) && $database["db"]->getPghost() == "localhost" ) {?>
+        <input type="text" hidden  placeholder="SQL" id="sqlinput<?=$index?>" name="mpgschematable" class="slqinput" >
+        <button type="button" hidden name="mpgschematable" onclick="execSQL(<?=$index?>, <?=$database["db"]->getId()?>)" class="btnsqlinput" id="btnsqlinput<?=$index?>">Execute</button>
+        <br/>
+        <div hidden="" name="sqloutput" class="sqloutput" id="sqloutput<?=$index?>"></div>
+        <button type="button" hidden onclick="closeout(<?=$index?>)" id="closeout<?=$index?>" name="closeout" class="closeout">Close Output</button>
+
+    <?php } ?>
+
     <table style="width: 70%" hidden id="mpgschematable<?=$index?>" name="mpgschematable" class="mpgschematable">
         <caption><h2 style="margin-bottom: 5px; margin-top: 5px">Tables for <?=$database["db"]->getPgdatabase()?></h2></caption>
         <tr>
@@ -38,17 +47,19 @@
             <th id="pgd">DROP</th>
             <th id="pgdc">DROP CASCADE</th>
         </tr>
-
-
-        <?php foreach ($database["tables"] as $table) { ?>
+        <?php foreach ($database["tables"] as $index => $table) { ?>
             <tr>
-                <td><button>Select</button></td>
+                <td><button id="tablemoreless<?=$index?>" onclick="tablemoreless(<?=$index?>)">More</button></td>
                 <td><?=$table["tablename"]?></td>
 
                 <td><button>DROP</button></td>
                 <td><button>DROP CASCADE</button></td>
-
             </tr>
         <?php } ?>
     </table>
 <?php } ?>
+
+<div id="tablecolumns"></div>
+
+
+
