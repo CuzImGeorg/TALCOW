@@ -302,7 +302,12 @@ function addConnection() {
         pw.value = "";
         description.value = "";
     }
+    loadServiceMonitor();
+
 }
 
-
+function removeSrvMon(name) {
+    execPost("index.php?controller=execute&aktion=removeSrvMon","name=" +name);
+    loadServiceMonitor();
+}
 

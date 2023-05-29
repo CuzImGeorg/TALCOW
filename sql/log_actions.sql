@@ -9,7 +9,9 @@ INSERT INTO log_action(name, description, modul) VALUES('ua', 'a User was added!
 INSERT INTO log_action(name, description, modul) VALUES('module update', 'a module was installed/deinstalled!', 1);
 INSERT INTO log_action(name, description, modul) VALUES('reboot', 'reboot syste,', 1);
 INSERT INTO log_action(name, description, modul) VALUES('sql', 'User Performed a Query,', 1);
-
+INSERT INTO log_action(name, description, modul) VALUES('user', 'User Performed a Query,', 1);
+INSERT INTO log_action(name, description, modul) VALUES('srvmon', 'User Performed a Query,', 1);
+INSERT INTO log_action(name, description, modul) VALUES('db', 'User Performed a Query,', 1);
 
 
 
