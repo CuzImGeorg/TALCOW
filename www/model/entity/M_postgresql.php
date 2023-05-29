@@ -147,22 +147,26 @@ class M_postgresql {
         return Qser::finde($this->getUseredit());
     }
 
-    private  $db = null;
 
+    /**
+     * @throws Exception
+     */
     public  function getDB() {
-
-        if($this->db == null) {
-            try {
-                $this->db = new PDO('pgsql:host=localhost;port=5432;dbname=talcow;', 'postgres', "adm");
-                $this->db = new PDO('pgsql:host=' . $this->pghost .  ';port='. $this->pgport .';dbname='. $this->pgdatabase .";", $this->pguser, $this->pgpw);
-                $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            }catch (PDOException $e) {
-                echo $e->getMessage();
-            }
-
-
+        $db = null;
+        try {
+            $db = new PDO('pgsql:host=' . $this->pghost .  ';port='. $this->pgport .';dbname='. $this->pgdatabase .";", $this->pguser, $this->pgpw);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }catch (PDOException $e) {
+            throw new Exception("d");
         }
-        return $this->db;
+        return $db;
+    }
+
+    public  static function findeByName(string $name) {
+        $sql = "SELECT * FROM m_postgresql WHERE pgdatabase = '$name'";
+        $abfrage = DB::getDB()->query($sql);
+        $abfrage->setFetchMode(PDO::FETCH_CLASS, 'm_postgresql');
+        return $abfrage->fetch();
     }
 
 

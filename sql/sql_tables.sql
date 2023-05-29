@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS  berechtigungsgruppe_berechtigung(
 
 CREATE TABLE IF NOT EXISTS m_postgresql(
    id serial  PRIMARY KEY,
-   pgdatabase varchar(63),
+   pgdatabase varchar(63) unique,
    pguser varchar(63),
    pghost varchar(255),
    pgport int,

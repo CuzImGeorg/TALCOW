@@ -134,13 +134,36 @@ class ExecuteController extends AbstractBase {
         if($this->hasPermission("droppgdatabase") || $this->hasPermission("sudo")) {
 
             if ($_POST["name"] != "talcow") {
-                $info = DB::getDB()->query("DROP DATABASE")->fetch();
-            } else {
-                $info = "U Cant Delete This Database";
+                M_postgresql::findeByName($_POST["name"])->loesche();
+                DB::getDB()->exec("DROP DATABASE " . $_POST["name"]);
             }
-            $this->addContext("info", $info);
             $this->setTemplate("info");
         }
+
+    }
+
+    public function dropTable(){
+        $db = M_postgresql::findeByName($_POST["db"])->getDB();
+        if($_POST["cas"]) {
+            $db->exec("DROP TABLE " . $_POST["name"] . " CASCADE");
+        }else {
+            $db->exec("DROP TABLE " . $_POST["name"]);
+        }
+        $this->setTemplate("info");
+
+    }
+
+    public function addConnection() {
+        $m = new M_postgresql();
+        $m->setPgdatabase($_POST["name"]);
+        $m->setPguser($_POST["user"]);
+        $m->setPghost($_POST["host"]);
+        $m->setPgport($_POST["port"]);
+        $m->setPgpw($_POST["pw"]);
+        $m->setDescription($_POST["desc"]);
+        $m->setUseredit($_SESSION["userid"]);
+        $m->speichere();
+        $this->setTemplate("info");
 
     }
 

@@ -246,7 +246,15 @@ class AjaxController extends AbstractBase {
 
             $databases = M_postgresql::findeALL();
             foreach ($databases as $database) {
-                $dbs[] = array("db" => $database, "tables" => $database->getDB()->query(" SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'")->fetchALL());
+                try {
+                    $db = array("db" => $database, "tables" => $database->getDB()->query(" SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'")->fetchALL());
+                    $dbs[] = $db;
+
+                }catch (Exception $e) {
+                    $db = array("db" => $database, "tables" => null );
+                    $dbs[] = $db;
+
+                }
             }
             $this->addContext("databases", $dbs);
         }
@@ -267,8 +275,8 @@ class AjaxController extends AbstractBase {
     }
     public function getTables() {
         if($this->hasPermission("showdatabasetables") || $this->hasPermission("sudo")) {
-            $sql = "SELECT table_name, column_name, data_type, character_maximum_length, is_nullable, column_default FROM information_schema.columns WHERE table_name  = '" . $_POST["name"] . "' ORDER BY table_name";
-            $result = DB::getDB()->query($sql)->fetchAll();
+            $sql = "SELECT table_name, column_name, data_type, character_maximum_length, column_default FROM information_schema.columns WHERE " . $_POST["name"] . " ORDER BY table_name";
+            $result = M_postgresql::findeByName($_POST["db"])->getDB()->query($sql)->fetchAll();
             $this->addContext("result", $result);
         }
 

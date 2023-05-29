@@ -201,8 +201,8 @@ async function changesysuserpw(un, index) {
     }
 }
 function dropdb(name) {
-    loadDocWithElementIDPOST("index.php?controller=execute&aktion=dropdb", "infopopup", "name=" +name);
-    document.getElementById("infopopup").removeAttribute("hidden");
+    execPost("index.php?controller=execute&aktion=dropdb","name=" +name);
+    loadPostgreSQL();
 }
 
 function databasetablehideshow(index) {
@@ -248,19 +248,60 @@ function closeout(index) {
 }
 
 
-let tables = {};
-function loadTableColumns() {
-    loadDocWithElementIDPOST("index.php?controller=ajax&aktion=getTables", "tablecolumns", "" );
+let tables = [];
+function loadTableColumns(db) {
+
+
+    let sql = "";
+    sql += " table_name = \'" + tables[0] +"\'";
+    let i = true;
+    for (let a of tables) {
+        if(i) {
+            i = false;
+        }else {
+            sql += "OR table_name = \'" + a +"\'";
+        }
+    }
+    console.log(sql);
+loadDocWithElementIDPOST("index.php?controller=ajax&aktion=getTables", "tablecolumns", "name=" +sql + "&db=" +db);
 }
 
-function tablemoreless(index, name){
-    if(true) {
+function tablemoreless(index, name, db){
+    let btn = document.getElementById("tablemoreless"+index);
+    if(btn.innerHTML=== "More") {
+        btn.innerHTML = "Less";
         tables.push(name);
     }else {
+        btn.innerHTML = "More";
+        delete tables[tables.indexOf(name)];
     }
 
 
-    loadTableColumns();
+    loadTableColumns(db);
+}
+
+function dropTable(db, name, cascade) {
+    execPost("index.php?controller=execute&aktion=dropTable","db=" + db+ "&name=" +name +"&cas=" + cascade);
+    loadPostgreSQL();
+}
+
+function addConnection() {
+    let name = document.getElementById("name");
+    let host = document.getElementById("host");
+    let port = document.getElementById("port");
+    let user = document.getElementById("user");
+    let pw = document.getElementById("pw");
+    let description = document.getElementById("desc");
+
+    if(name.value.length > 0 && host.value.length > 0 && port.value.length > 0 && user.value.length > 0 && description.value.length > 0 && pw.value.length > 0) {
+        execPost("index.php?controller=execute&aktion=addConnection", "name=" +name.value + "&host=" + host.value + "&port=" + port.value + "&desc="  + description.value + "&pw=" +pw.value + "&user=" + user.value);
+        name.value = "";
+        host.value = "";
+        port.value = "";
+        user.value = "";
+        pw.value = "";
+        description.value = "";
+    }
 }
 
 
