@@ -1,76 +1,120 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-  <meta charset="utf-8">
+
   <title>Interactive Terminal</title>
-  <link rel="stylesheet" href="xterm.css" />
+
   <style>
-    #terminal-container {
-      width: 800px;
-      height: 600px;
-      background-color: black;
-      color: white;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 14px;
-      padding: 10px;
+
+    body {
+
+      margin: 0;
+
+      padding: 0;
+
     }
 
-    .xterm-viewport {
-      overflow-x: hidden;
-      overflow-y: auto;
+
+
+    #terminal {
+
+      width: 100%;
+
+      height: 100vh;
+
+      overflow-y: scroll;
+
+      font-family: monospace;
+
+      white-space: pre;
+
+      padding: 0;
+
+      margin: 0;
+
+      line-height: 1;
+
+      background-color: transparent;
+
     }
+
   </style>
+
 </head>
+
 <body>
-<div id="terminal-container"></div>
-<script src="xterm.js"></script>
-<script>
-  // Create a new terminal instance
-  const term = new Terminal();
 
-  // Attach the terminal to the DOM element
-  term.open(document.getElementById('terminal-container'));
+  <div id="terminal"></div>
 
-  // Create a new WebSocket connection
-  const socket = new WebSocket('ws://localhost:3000');
 
-  // Handle incoming data from the WebSocket
-  socket.addEventListener('message', (event) => {
-    term.write(event.data);
-  });
 
-  let command = '';
+  <script>
 
-  // Handle user input and send it through the WebSocket
-  term.onKey((e) => {
-    const printable = !e.domEvent.altKey && !e.domEvent.ctrlKey && !e.domEvent.metaKey;
+    const terminal = document.getElementById('terminal');
 
-    if (e.domEvent.key === 'Enter') {
-      socket.send(command);
-      term.write('\r\n');
-      command = '';
-    } else if (e.domEvent.key === 'Backspace') {
-      if (term._core.buffer.x > 2) {
-        term.write('\b \b');
-        command = command.slice(0, -1);
+    const inputField = document.createElement('input');
+
+
+
+    const socket = new WebSocket('ws://localhost:3000'); // Replace with your server URL
+
+
+
+    socket.addEventListener('open', () => {
+
+      terminal.innerHTML = 'Connected to server\n';
+
+    });
+
+
+
+    socket.addEventListener('message', (event) => {
+
+      terminal.innerHTML += event.data + '\n';
+
+      terminal.scrollTop = terminal.scrollHeight;
+
+    });
+
+
+
+    const inputListener = (event) => {
+
+      if (event.key === 'Enter') {
+
+        const command = event.target.value;
+
+        event.target.value = '';
+
+
+
+        socket.send(command);
+
+        terminal.innerHTML += '> ' + command + '\n';
+
+        terminal.scrollTop = terminal.scrollHeight;
+
+
+
+        event.preventDefault();
+
       }
-    } else if (printable) {
-      term.write(e.key);
-      command += e.key;
-    }
-  });
 
-  // Attach custom key event handler for the WebSocket
-  term.attachCustomKeyEventHandler((e) => {
-    // Prevent the terminal from processing certain key combinations (e.g., Ctrl+C)
-    // Adjust this logic based on your specific needs
-    if (e.ctrlKey && e.key === 'c') {
-      // Custom handling for Ctrl+C (optional)
-      // Example: socket.send('SIGINT');
-      return false; // Prevent default terminal behavior
-    }
-    return true; // Allow default terminal behavior
-  });
-</script>
+    };
+
+
+
+    inputField.addEventListener('keydown', inputListener);
+
+    document.body.appendChild(inputField);
+
+    inputField.focus();
+
+  </script>
+
 </body>
+
 </html>
+
