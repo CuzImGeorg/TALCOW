@@ -1,0 +1,20 @@
+Georg 	ca 40:00
+	UML DB;
+	Alle Controller
+	Alle View außer webTerminal
+	Großteil der CSS (außer Hintergrund und SystemInfo)
+	Alle Javascript 
+	index
+	readme
+	50% der SQL
+	30% der Beziehungen
+	
+	
+
+
+
+
+Patrick ca  20:00
+	Klassen
+	70% der Beziehungen
+	Web Terminal

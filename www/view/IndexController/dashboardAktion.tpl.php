@@ -1,8 +1,4 @@
-<?php
 
-    $_SESSION["userid"] = $user->getID();
-
-?>
 <!DOCTYPE html>
 <html>
 
