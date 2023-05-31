@@ -1,41 +1,78 @@
 const WebSocket = require('ws');
+
 const { exec } = require('child_process');
+
+
 
 const wss = new WebSocket.Server({ port: 3000 });
 
+
+
 wss.on('connection', (ws) => {
-    let childProcess;
 
-    ws.on('message', (command) => {
-        if (childProcess && !childProcess.killed) {
-            childProcess.kill();
-        }
+  let output = '';
 
-        try {
-            const commandString = command.toString();
-            childProcess = exec(commandString, { shell: '/bin/bash' });
 
-            childProcess.stdout.on('data', (data) => {
-                ws.send(data.toString());
-            });
 
-            childProcess.stderr.on('data', (data) => {
-                ws.send(data.toString());
-            });
+  ws.on('message', (command) => {
 
-            childProcess.on('close', (code) => {
-                ws.send(`Command execution completed with code ${code}`);
-            });
-        } catch (error) {
-            ws.send(`Error executing command: ${error.message}`);
-        }
+    executeCommand(command.toString(), ws);
+
+  });
+
+
+
+  function executeCommand(command, ws) {
+
+    const childProcess = exec(command, { shell: '/bin/bash' }, (error, stdout, stderr) => {
+
+      if (error) {
+
+        output += `Error executing command: ${error.message}\n`;
+
+      } else if (stderr) {
+
+        output += `${stderr.trim()}\n`;
+
+      } else {
+
+        output += `${stdout.trim()}\n`;
+
+      }
+
+      ws.send(output);
+
     });
 
-    ws.on('close', () => {
-        if (childProcess && !childProcess.killed) {
-            childProcess.kill();
-        }
+
+
+    childProcess.on('exit', (code) => {
+
+      output += `\nCommand execution completed with code ${code}\n`;
+
+      ws.send(output);
+
+      output = ''; // Clear the output
+
     });
+
+
+
+    childProcess.stdout.on('data', (data) => {
+
+      output += data;
+
+    });
+
+
+
+    childProcess.stderr.on('data', (data) => {
+
+      output += data;
+
+    });
+
+  }
+
 });
-
 
