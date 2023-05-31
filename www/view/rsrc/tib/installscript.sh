@@ -6,13 +6,7 @@ apt upgrade
 apt install apache2 -y
 apt install npm -y
 
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
+cd /
 
 cd var/www/html/
 
