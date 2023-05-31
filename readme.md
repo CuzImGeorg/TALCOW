@@ -10,9 +10,3 @@
  * Service Montor 
    * start/stop/restart/monitor systemctl Services 
  * Logging
-
-
-
-
-ZUSÄTZLICH:
-Ticket System zum kontaktieren des Admins.
