@@ -11,7 +11,7 @@
         <title>Dashboard</title>
         <link rel="stylesheet" href="view/rsrc/css/dashboard.css">
         <link rel="stylesheet" href="view/rsrc/css/popup.css">
-
+        <link rel="icon" type="image/x-icon" href="view/rsrc/icon.png">
         <script src="view/rsrc/js/dashboard.js"></script>
         <script src="view/rsrc/js/fun.js"></script>
 
@@ -59,10 +59,6 @@
         <li class="navmodule" style="border: none;background-color: rgba(0, 0, 0, 0);">
             <ul class="submodlules">
                 <li class="loadsubmodules" id="btnm" onclick="loadInstalledModules()">+</li>
-                <li hidden name="m">Config</li>
-                <li hidden name="m">VPN</li>
-                <li hidden name="m">Docker</li>
-
                 <?php if($this->hasPermission("showpgdatabases") || $this->hasPermission("sudo")) {?>
                     <li hidden onclick="loadPostgreSQL()" name="m">PostgreSQL</li>
                 <?php } ?>
