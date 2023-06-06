@@ -20,7 +20,7 @@ class IndexController extends AbstractBase {
    }
 
    public function dashboard() {
-       $_SESSION["userid"] = $user->getID();
+
 
    }
 

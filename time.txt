@@ -8,6 +8,7 @@ Georg 	ca 40:00
 	readme
 	50% der SQL
 	30% der Beziehungen
+
 	
 	
 
