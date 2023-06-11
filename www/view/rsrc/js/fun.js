@@ -302,7 +302,7 @@ function addConnection() {
         pw.value = "";
         description.value = "";
     }
-    loadServiceMonitor();
+    loadPostgreSQL();
 
 }
 
