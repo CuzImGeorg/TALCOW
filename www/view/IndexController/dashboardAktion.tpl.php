@@ -64,6 +64,7 @@ $_SESSION["userid"] = $user->getID();
                 <?php } ?>
             </ul>
         </li>
+            <li onclick="loadWebTerminal()">WebTerminal</li>
         <?php } ?>
 
 

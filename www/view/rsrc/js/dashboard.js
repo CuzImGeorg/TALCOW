@@ -215,4 +215,8 @@ function loadPostgreSQL() {
     loadDoc("index.php?controller=ajax&aktion=loadPostgreSQL");
 }
 
+function loadWebTerminal() {
+    loadDoc("index.php?controller=ajax&aktion=webTerminal");
+}
+
 
